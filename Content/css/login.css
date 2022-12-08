@@ -1,0 +1,39 @@
+﻿body {
+    font-family: Ubuntu, sans-serif;
+    /*background-image: url('/Content/img/bg/thumb-1920-686545.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover*/
+}
+
+
+.form-control {
+    color: #495057;
+    background-color: #fff0;
+}
+
+label {
+    color: white;
+}
+
+.font {
+    font-family: 'La Belle Aurore', cursive !important;
+    font-size: 3rem;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgb(255 255 255);
+}
+.card {
+    background-color: #fff0;
+}
+.login-card-body, .register-card-body {
+    background-color: #ffffff8c;
+    border-top: 0;
+    color: #000;
+    padding: 20px;
+}

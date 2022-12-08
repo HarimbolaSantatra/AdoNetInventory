@@ -1,0 +1,82 @@
+﻿@model AppInventaire.Models.Raspberry
+
+@{
+    ViewBag.Title = "Supprimer";
+}
+@section style{}
+<h2>Supprimer</h2>
+
+<h3>Confirmer la suppression ?</h3>
+<div>
+    <h4>Raspberry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rasp_Version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rasp_Version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Screen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Screen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accessories)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accessories)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-danger" /> |
+            @Html.ActionLink("Retour", "Index")
+        </div>
+    }
+</div>
+@section scripts{}

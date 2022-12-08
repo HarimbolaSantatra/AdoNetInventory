@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "APP IVENTAIRE";
+    Layout = "~/Views/Shared/_Layout_login.cshtml";
+}
+
+@section style{}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#">APP. INVENTAIRE smartlight@gmail.com</a>
+    </div>
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Connectez-vous pour démarrer votre session</p>
+            @using (@Html.BeginForm())
+            {
+                <div class="input-group mb-3">
+                    <input type="text" id="inputEmail" class="form-control form-control-lg" name="inputEmail" placeholder="Identifiant">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control form-control-lg" placeholder="Mot de passe" id="inputPassword" name="inputPassword">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-auth-links text-center mb-3">
+                    <button type="submit" class="btn btn-block btn-primary btn-lg">
+                        <i class="fa-solid fa-circle-right mr-2"></i> Connexion
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts{}
+
+
+
+
+
+
+
+
+

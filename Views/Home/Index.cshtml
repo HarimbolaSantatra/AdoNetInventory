@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Accueil";
+}
+
+@section style{}
+
+<style>
+    .btn-action {
+        width: 150px
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-4 mx-auto d-block">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Rechercher" id="btn-search">
+            <div class="input-group-append">
+                <span class="input-group-text" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>Utilisateurs</h3>
+                <p class="invisible">----</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-people"></i>
+            </div>
+            <a href="/User/Index" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-primary">
+            <div class="inner">
+                <h3>Ordinateurs</h3>
+                <p class="invisible">----</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-android-desktop"></i>
+            </div>
+            <a href="/Computer/Index" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>Raspberry</h3>
+                <p class="invisible">----</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-toggle-filled"></i>
+            </div>
+            <a href="/Raspberry/Index" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>Accessoires</h3>
+                <p class="invisible">----</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cube"></i>
+            </div>
+            <a href="/Item/Index" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{} 
