@@ -79,6 +79,13 @@ namespace AppInventaire.Models
                 $"VALUES (\"{type}\", \"{brand}\", \"{model}\", \"{serialnumber}\",  {quantity}, \"{comment}\")";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
+            cmd.Parameters.AddWithValue("@type", type);
+            cmd.Parameters.AddWithValue("@brand", brand);
+            cmd.Parameters.AddWithValue("@model", model);
+            cmd.Parameters.AddWithValue("@serialnumber", serialnumber);
+            Validation.Parameter_AddWithValue_ForInt(cmd, "@quantity", quantity);
+            cmd.Parameters.AddWithValue("@comment", comment);
+
             cmd.ExecuteNonQuery();
             
             // Close Connection
@@ -90,6 +97,14 @@ namespace AppInventaire.Models
             string cmd_string = $"UPDATE item SET type=\"{type}\", brand=\"{brand}\", model=\"{model}\", " +
                 $"serialnumber=\"{serialnumber}\", quantity={quantity}, comment=\"{comment}\" WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@type", type);
+            Validation.Parameter_AddWithValue_ForInt(cmd, "@brand", brand);
+            cmd.Parameters.AddWithValue("@model", model);
+            Validation.Parameter_AddWithValue_ForInt(cmd, "@serialnumber", serialnumber);
+            cmd.Parameters.AddWithValue("@quantity", quantity);
+            cmd.Parameters.AddWithValue("@comment", comment);
+
             cmd.ExecuteNonQuery();
             CloseConnection();
         }

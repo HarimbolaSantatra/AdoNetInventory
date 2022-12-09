@@ -27,12 +27,12 @@ namespace AppInventaire.Models
         public string Processor { get; set; }
 
         [Display(Name = "RAM (Go)")]
-        public float RamGB{ get; set; }
+        public float? RamGB{ get; set; }
 
         [Display(Name = "Carte Graphique")]
         public string GraphCard{ get; set; }
 
         [Display(Name = "Mémoire Carte Graphique(Go)")]
-        public float GraphCardGB{ get; set; }
+        public float? GraphCardGB{ get; set; }
     }
 }

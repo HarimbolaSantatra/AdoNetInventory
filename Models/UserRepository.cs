@@ -64,9 +64,15 @@ namespace AppInventaire.Models
 
         public void AddUser(string firstname, string lastname, string email, string password)
         {
+            // string that begin with @ are SqlParameter
             string cmd_string = $"INSERT INTO User(firstname, lastname, email, password) " +
-                $"VALUES (\"{firstname}\", \"{lastname}\", \"{email}\", \"{password}\")";
+                $"VALUES (@firstname, @lastname, @email, @password)";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@firstname", firstname);
+            cmd.Parameters.AddWithValue("@lastname", lastname);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@password", password);
 
             cmd.ExecuteNonQuery();
             CloseConnection();
@@ -74,9 +80,15 @@ namespace AppInventaire.Models
 
         public void EditUser(int id, string firstname, string lastname, string email, string password)
         {
-            string cmd_string = $"UPDATE User SET firstname=\"{firstname}\", lastname=\"{lastname}\", " +
-                $"email=\"{email}\", password=\"{password}\" WHERE ID={id}";
+            string cmd_string = $"UPDATE User SET firstname=@firstname, lastname=@lastname, " +
+                $"email=@email, password=@password WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@firstname", firstname);
+            cmd.Parameters.AddWithValue("@lastname", lastname);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@password", password);
+
             cmd.ExecuteNonQuery();
             CloseConnection();
         }

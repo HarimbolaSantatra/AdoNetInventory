@@ -76,17 +76,34 @@ namespace AppInventaire.Models
         public void AddRaspberry(string version, string os, string screen, string client, string accessories, string comment)
         {
             string cmd_string = $"INSERT INTO Raspberry(version, os, screen, client, accessories, comment)" +
-                $"VALUES ({version}, \"{os}\", {screen}, \"{client}\", \"{accessories}\", \"{comment}\")";
+                $"VALUES (@version, @os, @screen, @client, @accessories, @comment)";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@version", version);
+            Validation.Parameter_AddWithValue_ForInt(cmd, "@version", version );
+            cmd.Parameters.AddWithValue("@os", os);
+            Validation.Parameter_AddWithValue_ForInt(cmd, "@screen", screen);
+            cmd.Parameters.AddWithValue("@client", client);
+            cmd.Parameters.AddWithValue("@accessories", accessories);
+            cmd.Parameters.AddWithValue("@comment", comment);
+
             cmd.ExecuteNonQuery();
             CloseConnection();
         }
 
         public void EditRaspberry(int id, string version, string os, string screen, string client, string accessories, string comment)
         {
-            string cmd_string = $"UPDATE Raspberry SET version=\"{version}\", os=\"{os}\", screen={screen}, client=\"{client}\"," +
-                $"accessories=\"{accessories}\", comment=\"{comment}\" WHERE ID={id}";
+            string cmd_string = $"UPDATE Raspberry SET version=@version, os=@os, screen=@screen, client=@client," +
+                $"accessories=@accessories, comment=@comment WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            Validation.Parameter_AddWithValue_ForInt(cmd, "@version", version);
+            cmd.Parameters.AddWithValue("@os", os);
+            Validation.Parameter_AddWithValue_ForInt(cmd, "@screen", screen);
+            cmd.Parameters.AddWithValue("@client", client);
+            cmd.Parameters.AddWithValue("@accessories", accessories);
+            cmd.Parameters.AddWithValue("@comment", comment);
+
             cmd.ExecuteNonQuery();
             CloseConnection();
         }
