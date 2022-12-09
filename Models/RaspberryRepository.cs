@@ -79,7 +79,6 @@ namespace AppInventaire.Models
                 $"VALUES (@version, @os, @screen, @client, @accessories, @comment)";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
-            cmd.Parameters.AddWithValue("@version", version);
             Validation.Parameter_AddWithValue_ForInt(cmd, "@version", version );
             cmd.Parameters.AddWithValue("@os", os);
             Validation.Parameter_AddWithValue_ForInt(cmd, "@screen", screen);
