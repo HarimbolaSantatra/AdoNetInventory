@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime; // For pdf type file: MediaTypeNames.Application.Pdf
 using System.Web;
 using System.Web.Mvc;
 using AppInventaire.Models;

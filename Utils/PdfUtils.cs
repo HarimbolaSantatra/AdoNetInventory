@@ -24,16 +24,6 @@ namespace AppInventaire.Utils
                $"<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css\"/>" +
                $"</head>";
 
-        public static void StringToPdf(string str, string dest)
-        {
-            PdfWriter writer = new PdfWriter(dest); // Creer un writer pour pouvoir ouvrir un document en mode écriture
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
-            Paragraph page = new Paragraph(str);
-            document.Add(page);
-            document.Close();
-        }
-
         public static string GenerateHtmlDetails(List<String> col_value_list, List<String> col_name_list)
         {
             string TitleHtml = "<h1> Detail </h1><div>";
@@ -47,7 +37,7 @@ namespace AppInventaire.Utils
             return HeadHtml + TitleHtml + BodyHtml;
         }
 
-        public static string GenerateHtmlTable(List<Computer> ComputerList, List<String> col_name_list)
+        public static string GenerateHtmlTable(List<Object> ObjectList, List<String> col_name_list)
         {
             string outputHtml = "<table class=\"table table-striped\"><thead class=\"thead-dark\"><tr>";
             foreach(string col_name in col_name_list)
@@ -55,22 +45,39 @@ namespace AppInventaire.Utils
                 outputHtml += $"<th>{col_name}</th>";
             }
             outputHtml += "</tr></thead><tbody>";
-            foreach (var computer in ComputerList)
+            foreach (var obj in ObjectList)
             {
-                outputHtml += $"<tr><th>{computer.ID}</th>" +
-                    $"<td> {computer.Hostname}</td>" +
-                    $"<td> {computer.Brand}</td>" +
-                    $"<td> {computer.Model} </td>" +
-                    $"<td> {computer.OS} </td>" +
-                    $"<td> {computer.Processor}</td>" +
-                    $"<td> {computer.RamGB}</td>" +
-                    $"<td> {computer.GraphCard}</td>" +
-                    $"<td> {computer.GraphCardGB}</td><td></td></tr>";
+                outputHtml += $"<tr>";
+                foreach (var col in col_name_list)
+                {
+                    outputHtml += $"<th>{obj.col}</th>";
+                }
+                outputHtml += "</tr>";
             }
             outputHtml += "</tbody></table>";
             return HeadHtml + outputHtml;
         }
-        
+
+        public static string GenerateHtmlTable(List<User> UserList, List<String> col_name_list)
+        {
+            string outputHtml = "<table class=\"table table-striped\"><thead class=\"thead-dark\"><tr>";
+            foreach (string col_name in col_name_list)
+            {
+                outputHtml += $"<th>{col_name}</th>";
+            }
+            outputHtml += "</tr></thead><tbody>";
+            foreach (var user in UserList)
+            {
+                outputHtml += $"<tr><th> {user.ID} </th>" +
+                    $"<td> {user.FirstName} </td>" +
+                    $"<td> {user.LastName} </td>" +
+                    $"<td> {user.Email} </td>" +
+                    $"</tr>";
+            }
+            outputHtml += "</tbody></table>";
+            return HeadHtml + outputHtml;
+        }
+
         public static void CreatePdf(string html_string, string destination_path)
         {
             // Create File

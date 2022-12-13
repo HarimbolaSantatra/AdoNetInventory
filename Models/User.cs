@@ -16,12 +16,6 @@ namespace AppInventaire.Models
         [Display(Name = "Nom")]
         public string LastName { get; set; }
 
-        [Display(Name = "Nom Complet")]
-        public string FullName()
-        { 
-            return FirstName + " " + LastName;
-        }
-
         [Display(Name = "Adresse Mail")]
         [Required(ErrorMessage = "Veuillez entrer une adresse mail valide !")]
         [EmailAddress(ErrorMessage = "Une adresse mail est requis!")]
