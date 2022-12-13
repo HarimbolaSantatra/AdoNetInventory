@@ -131,12 +131,12 @@ namespace AppInventaire.Controllers
 
         public ActionResult PrintDetails(int id)
         {
-            Computer computer = _rep.FetchSingle(id);
+            Item item = _rep.FetchSingle(id);
             _rep.CloseConnection();
 
             // Get value and name of each property
-            List<String> value_list = ModelUtils.GetModelPropertiesValue(computer);
-            List<String> fields = ModelUtils.GetModelPropertiesName(computer);
+            List<String> value_list = ModelUtils.GetModelPropertiesValue(item);
+            List<String> fields = ModelUtils.GetModelPropertiesName(item);
 
             string html_string = PdfUtils.GenerateHtmlDetails(value_list, fields);
             PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);

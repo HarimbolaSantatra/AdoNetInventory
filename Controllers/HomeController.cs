@@ -13,8 +13,6 @@ namespace AppInventaire.Controllers
         {
             if (Session["Email"] == null)
             {
-                string hello = "Hello, \"Santatra\"";
-                string abc = @"Hello, ""Santatra""";
                 return RedirectToAction("Login", "Home");
             }
 
