@@ -34,5 +34,7 @@ namespace AppInventaire.Models
 
         [Display(Name = "Mémoire Carte Graphique(Go)")]
         public float? GraphCardGB{ get; set; }
+
+
     }
 }
