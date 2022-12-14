@@ -32,5 +32,12 @@ namespace AppInventaire.Models
         [Display(Name = "Date de Création")]
         public DateTime CreationDate { get; set; }
 
+        public static List<string> GetPropertiesInFrench()
+        {
+            return new List<string> {
+                "ID", "Version", "OS", "Ecran", "Client", "Accessoires","Commentaire","Date de Création"
+            };
+        }
+
     }
 }

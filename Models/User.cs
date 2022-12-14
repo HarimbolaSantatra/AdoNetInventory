@@ -24,5 +24,14 @@ namespace AppInventaire.Models
         [Display(Name = "Mot De Passe")]
         [Required(ErrorMessage = "Un mot de passe valide est requis !")]
         public string Password { get; set; }
+
+
+        public static List<string> GetPropertiesInFrench()
+        {
+            return new List<string> { 
+                "ID", "Prénom", "Nom", "E-Mail"
+            };
+        }
+
     }
 }

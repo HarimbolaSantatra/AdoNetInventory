@@ -31,5 +31,13 @@ namespace AppInventaire.Models
         [Display(Name = "Commentaire")]
         public string Comment { get; set; }
 
+        public static List<string> GetPropertiesInFrench()
+        {
+            return new List<string> {
+                "ID", "Type", "Marque", "Modèle", "Numero de Serie", "Date de création",
+                "Quantité", "Commentaire"
+            };
+        }
+
     }
 }
