@@ -20,7 +20,7 @@ namespace AppInventaire.Utils
 {
     public class PdfUtils
     {
-        static string HeadHtml = $"<head><link rel=\"stylesheet\" type=\"text/css\" href=\"~/Content/css/style.css\"/>" +
+        static string HeadHtml = $"<head>" +
                $"<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css\"/>" +
                $"<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css\"/>" +
                $"<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css\"/>" +
@@ -38,7 +38,8 @@ namespace AppInventaire.Utils
             string BodyHtml = "<ul class=\"list-group\">";
             for(int i=0; i<col_value_list.Count; i++)
             {
-                BodyHtml += $"<li class=\"list-group-item\">{property_list[i]} :\t{col_value_list[i]}</li>";
+                //BodyHtml += $"<li class=\"list-group-item\">{property_list[i]} :\t{col_value_list[i]}</li>";
+                BodyHtml += $"<li>Hello, Error!</li>";
             };
             BodyHtml += "</ul></div>";
             return HeadHtml + TitleHtml + BodyHtml;

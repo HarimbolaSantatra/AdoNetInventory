@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
 using System.Web;
 
@@ -7,7 +8,7 @@ namespace AppInventaire.Utils
 {
     public class ModelUtils
     {
-        public static System.Reflection.PropertyInfo[] GetModelProperties(Object cObject)
+        public static PropertyInfo[] GetModelProperties(Object cObject)
         {
             return cObject.GetType().GetProperties();
         }
@@ -17,7 +18,7 @@ namespace AppInventaire.Utils
             List<String> properties_names = new List<String>();
             if (cObject != null)
             {
-                foreach (var prop in cObject.GetType().GetProperties())
+                foreach (PropertyInfo prop in cObject.GetType().GetProperties())
                 {
                     properties_names.Add(prop.Name);
                 }
@@ -30,9 +31,9 @@ namespace AppInventaire.Utils
             List<String> property_values = new List<string>();
             if (cObject != null)
             {
-                foreach (var prop in cObject.GetType().GetProperties())
+                foreach (PropertyInfo prop in cObject.GetType().GetProperties())
                 {
-                    property_values.Add(prop.GetValue(cObject).ToString());
+                    property_values.Add(prop.GetValue(cObject, null).ToString());
                 }
             }
             return property_values;
