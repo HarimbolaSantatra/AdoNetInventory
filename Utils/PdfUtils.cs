@@ -10,6 +10,7 @@ using AppInventaire.Utils;
 
 // iText7 Namespace
 using iText.Kernel.Pdf;
+using iText.Kernel.Font;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
@@ -32,6 +33,177 @@ namespace AppInventaire.Utils
             // Create File
             HtmlConverter.ConvertToPdf(html_string, new FileStream(destination_path, FileMode.Create), converterProperties);
         }
+
+        /// <summary>
+        /// Create a PDF file which contains a table.
+        /// </summary>
+        /// <param name="ComputerList"> List of object </param>
+        /// <param name="float_parameter"> Define the width of the table relative to the available width of the page</param>
+        /// <returns> A PDF File. </returns>
+        public static void CreateTablePdf(List<Computer> ComputerList, float[] float_parameter)
+        {
+
+            // A writer takes a destination file (location of saved PDF) as parameter
+            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var pdf = new PdfDocument(writer);
+
+            // Create a document
+            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            document.SetMargins(20, 20, 20, 20);
+
+            // Fonts
+            var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
+            var bold = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA_BOLD);
+
+            Table table = new Table(float_parameter);
+
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            // Print Header (name of model's property)
+            Paragraph par;
+            foreach (String colname in Computer.GetPropertiesInFrench())
+            {
+                par = new Paragraph(colname);
+                table.AddHeaderCell(new Cell().Add(par).SetFont(bold));
+            }
+
+            // Print each row
+            foreach (Computer computer in ComputerList)
+            {
+                foreach (string value in ModelUtils.GetModelPropertiesValue(computer))
+                {
+                    par = new Paragraph(value);
+                    table.AddCell(new Cell().Add(par).SetFont(font));
+                }
+            }
+
+            document.Add(table);
+            document.Close(); // Close and save document
+        }
+
+        public static void CreateTablePdf(List<Item> ItemList, float[] float_parameter)
+        {
+
+            // A writer takes a destination file (location of saved PDF) as parameter
+            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var pdf = new PdfDocument(writer);
+
+            // Create a document
+            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            document.SetMargins(20, 20, 20, 20);
+
+            // Fonts
+            var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
+            var bold = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA_BOLD);
+
+            Table table = new Table(float_parameter);
+
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            // Print Header (name of model's property)
+            Paragraph par;
+            foreach (String colname in Computer.GetPropertiesInFrench())
+            {
+                par = new Paragraph(colname);
+                table.AddHeaderCell(new Cell().Add(par).SetFont(bold));
+            }
+
+            // Print each row
+            foreach (Item item in ItemList)
+            {
+                foreach (string value in ModelUtils.GetModelPropertiesValue(item))
+                {
+                    par = new Paragraph(value);
+                    table.AddCell(new Cell().Add(par).SetFont(font));
+                }
+            }
+
+            document.Add(table);
+            document.Close(); // Close and save document
+        }
+
+        public static void CreateTablePdf(List<Raspberry> RaspberryList, float[] float_parameter)
+        {
+
+            // A writer takes a destination file (location of saved PDF) as parameter
+            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var pdf = new PdfDocument(writer);
+
+            // Create a document
+            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            document.SetMargins(20, 20, 20, 20);
+
+            // Fonts
+            var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
+            var bold = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA_BOLD);
+
+            Table table = new Table(float_parameter);
+
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            // Print Header (name of model's property)
+            Paragraph par;
+            foreach (String colname in Computer.GetPropertiesInFrench())
+            {
+                par = new Paragraph(colname);
+                table.AddHeaderCell(new Cell().Add(par).SetFont(bold));
+            }
+
+            // Print each row
+            foreach (Raspberry raspberry in RaspberryList)
+            {
+                foreach (string value in ModelUtils.GetModelPropertiesValue(raspberry))
+                {
+                    par = new Paragraph(value);
+                    table.AddCell(new Cell().Add(par).SetFont(font));
+                }
+            }
+
+            document.Add(table);
+            document.Close(); // Close and save document
+        }
+
+        public static void CreateTablePdf(List<User> UserList, float[] float_parameter)
+        {
+
+            // A writer takes a destination file (location of saved PDF) as parameter
+            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var pdf = new PdfDocument(writer);
+
+            // Create a document
+            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            document.SetMargins(20, 20, 20, 20);
+
+            // Fonts
+            var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
+            var bold = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA_BOLD);
+
+            Table table = new Table(float_parameter);
+
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+
+            // Print Header (name of model's property)
+            Paragraph par;
+            foreach (String colname in Computer.GetPropertiesInFrench())
+            {
+                par = new Paragraph(colname);
+                table.AddHeaderCell(new Cell().Add(par).SetFont(bold));
+            }
+
+            // Print each row
+            foreach (User user in UserList)
+            {
+                foreach (string value in ModelUtils.GetModelPropertiesValue(user))
+                {
+                    par = new Paragraph(value);
+                    table.AddCell(new Cell().Add(par).SetFont(font));
+                }
+            }
+
+            document.Add(table);
+            document.Close(); // Close and save document
+        }
+
         public static string GenerateHtmlDetails(List<String> col_value_list, List<String> property_list)
         {
             string BodyHtml = "<h1> <b> Detail </b></h1><div>";
@@ -44,122 +216,6 @@ namespace AppInventaire.Utils
             BodyHtml += "</div>";
             return HeadHtml + BodyHtml;
         }
-
-
-        public static string GenerateHtmlTable(List<Computer> ComputerList)
-        {
-            PropertyInfo[] property_info_list = ModelUtils.GetModelProperties(ComputerList.First());
-
-            string outputHtml = "<table class=\"table table-striped\"><thead class=\"thead-dark\"><tr>";
-
-            // Table Header
-            foreach (PropertyInfo propty in property_info_list)
-            {
-                outputHtml += $"<th>{propty.Name}</th>";
-            }
-            outputHtml += "</tr></thead><tbody>";
-
-            // Table Body
-            foreach (Computer computer in ComputerList)
-            {
-                outputHtml += $"<tr>";
-                foreach(PropertyInfo propty in property_info_list)
-                {
-                    string current_value = propty.GetValue(computer, null).ToString();
-                    outputHtml += $"<td>{current_value}</td>";
-                }
-                
-                outputHtml += "</tr>";
-
-            }
-            outputHtml += "</tbody></table>";
-            return HeadHtml + outputHtml;
-        }
-
-        public static string GenerateHtmlTable(List<Item> ItemList)
-        {
-            PropertyInfo[] property_info_list = ModelUtils.GetModelProperties(ItemList.First());
-
-            string outputHtml = "<table class=\"table table-striped\"><thead class=\"thead-dark\"><tr>";
-
-            // Table Header
-            foreach (PropertyInfo propty in property_info_list)
-            {
-                outputHtml += $"<th>{propty.Name}</th>";
-            }
-            outputHtml += "</tr></thead><tbody>";
-
-            // Table Body
-            foreach (Object obj in ItemList)
-            {
-                outputHtml += $"<tr>";
-                foreach (PropertyInfo propty in property_info_list)
-                {
-                    string current_value = propty.GetValue(obj, null).ToString();
-                    outputHtml += $"<td>{current_value}</td>";
-                }
-                outputHtml += "</tr>";
-            }
-            outputHtml += "</tbody></table>";
-            return HeadHtml + outputHtml;
-        }
-
-        public static string GenerateHtmlTable(List<Raspberry> RaspberryList)
-        {
-            PropertyInfo[] property_info_list = ModelUtils.GetModelProperties(RaspberryList.First());
-
-            string outputHtml = "<table class=\"table table-striped\"><thead class=\"thead-dark\"><tr>";
-
-            // Table Header
-            foreach (PropertyInfo propty in property_info_list)
-            {
-                outputHtml += $"<th>{propty.Name}</th>";
-            }
-            outputHtml += "</tr></thead><tbody>";
-
-            // Table Body
-            foreach (Object obj in RaspberryList)
-            {
-                outputHtml += $"<tr>";
-                foreach (PropertyInfo propty in property_info_list)
-                {
-                    string current_value = propty.GetValue(obj, null).ToString();
-                    outputHtml += $"<td>{current_value}</td>";
-                }
-                outputHtml += "</tr>";
-            }
-            outputHtml += "</tbody></table>";
-            return HeadHtml + outputHtml;
-        }
-
-        public static string GenerateHtmlTable(List<User> UserList)
-        {
-            PropertyInfo[] property_info_list = ModelUtils.GetModelProperties(UserList.First());
-
-            string outputHtml = "<table class=\"table table-striped\"><thead class=\"thead-dark\"><tr>";
-
-            // Table Header
-            foreach (PropertyInfo propty in property_info_list)
-            {
-                outputHtml += $"<th>{propty.Name}</th>";
-            }
-            outputHtml += "</tr></thead><tbody>";
-
-            // Table Body
-            foreach (Object obj in UserList)
-            {
-                outputHtml += $"<tr>";
-                foreach (PropertyInfo propty in property_info_list)
-                {
-                    string current_value = propty.GetValue(obj, null).ToString();
-                    outputHtml += $"<td>{current_value}</td>";
-                }
-                outputHtml += "</tr>";
-            }
-            outputHtml += "</tbody></table>";
-            return HeadHtml + outputHtml;
-        }
-       
 
     }
 }

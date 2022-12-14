@@ -9,7 +9,7 @@ namespace AppInventaire.Utils
 {
     public class ProjectVariables
     {
-        // C:\Program FIles (x86)\IIS Express: "E:\\Santatra\\ASP.NET\\AppInventaire\\Results\\temp_pdf.pdf"
+        // C:\Program FIles (x86)\IIS Express: "E:\\Santatra\\ASP.NET\\AppInventaire\\Results\\iText.pdf"
         public static string PDF_DEST = HostingEnvironment.MapPath("\\Results\\temp_pdf.pdf");
     }
 }

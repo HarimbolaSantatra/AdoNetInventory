@@ -128,8 +128,7 @@ namespace AppInventaire.Controllers
             // fields: list of name of column
             List<String> fields = ModelUtils.GetModelPropertiesName(ComputerList.First());
 
-            string html_string = PdfUtils.GenerateHtmlTable(ComputerList);
-            PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);
+            PdfUtils.CreateTablePdf(ComputerList, new float[] {1, 1, 1, 2, 2, 3, 1, 3, 1 });
 
             return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
         }

@@ -18,7 +18,7 @@ namespace AppInventaire.Utils
             List<String> properties_names = new List<String>();
             if (cObject != null)
             {
-                foreach (PropertyInfo prop in cObject.GetType().GetProperties())
+                foreach (PropertyInfo prop in GetModelProperties(cObject))
                 {
                     if (prop.Name == "Password" || prop.Name == "password")
                     {
@@ -36,7 +36,7 @@ namespace AppInventaire.Utils
             List<String> property_values = new List<string>();
             if (cObject != null)
             {
-                foreach (PropertyInfo prop in cObject.GetType().GetProperties())
+                foreach (PropertyInfo prop in GetModelProperties(cObject))
                 {
                     if(prop.Name == "Password" || prop.Name == "password")
                     {

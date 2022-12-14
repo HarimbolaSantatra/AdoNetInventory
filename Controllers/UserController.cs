@@ -106,8 +106,8 @@ namespace AppInventaire.Controllers
             List<User> UserList = _rep.Fetch();
             _rep.CloseConnection();
 
-            string html_string = PdfUtils.GenerateHtmlTable(UserList);
-            PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);
+            float[] float_param = new float[] { 1, 3, 4, 3};
+            PdfUtils.CreateTablePdf(UserList, float_param);
 
             return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
         }
