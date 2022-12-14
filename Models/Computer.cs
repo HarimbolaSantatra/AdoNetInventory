@@ -34,5 +34,15 @@ namespace AppInventaire.Models
 
         [Display(Name = "Mémoire Carte Graphique(Go)")]
         public float? GraphCardGB{ get; set; }
+
+        public static List<string> GetPropertiesInFrench()
+        {
+            return new List<string> {
+                "ID", "Marque", "Modèle", "OS", "Nom d'hôte",
+                "Processeur", "RAM (Go)", "Carte Graphique", "Mémoire CG (Go)"
+            };
+        }
+
+
     }
 }

@@ -2,15 +2,20 @@
 @{
     ViewBag.Title = "Ordinateur";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 @section style{}
 
 <div class="d-flex justify-content-end">
     <div>
-        <a href="/Computer/Create" class="btn btn-info">AJOUTER</a>
+        <a href="/Computer/Create" class="btn btn-info mx-1">AJOUTER</a>
+    </div>
+    <div>
+        <a href="/Computer/PrintList/" class="btn btn-info mx-1">EXPORTER PDF</a>
     </div>
 </div>
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -59,7 +64,7 @@
                             </svg>
                         </a>
 
-                        <a type="button" class="btn btn-default" href="#">
+                        <a type="button" class="btn btn-default" href="/Computer/PrintDetails/@Computer.ID">
                             <!-- Print Icon -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
                                 <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />

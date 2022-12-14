@@ -16,12 +16,6 @@ namespace AppInventaire.Models
         [Display(Name = "Nom")]
         public string LastName { get; set; }
 
-        [Display(Name = "Nom Complet")]
-        public string FullName()
-        { 
-            return FirstName + " " + LastName;
-        }
-
         [Display(Name = "Adresse Mail")]
         [Required(ErrorMessage = "Veuillez entrer une adresse mail valide !")]
         [EmailAddress(ErrorMessage = "Une adresse mail est requis!")]
@@ -30,5 +24,14 @@ namespace AppInventaire.Models
         [Display(Name = "Mot De Passe")]
         [Required(ErrorMessage = "Un mot de passe valide est requis !")]
         public string Password { get; set; }
+
+
+        public static List<string> GetPropertiesInFrench()
+        {
+            return new List<string> { 
+                "ID", "Prénom", "Nom", "E-Mail"
+            };
+        }
+
     }
 }

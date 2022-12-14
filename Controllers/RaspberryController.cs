@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime; // For pdf type file: MediaTypeNames.Application.Pdf
 using System.Web;
 using System.Web.Mvc;
 using AppInventaire.Models;
@@ -105,6 +106,35 @@ namespace AppInventaire.Controllers
                 return RedirectToAction("Index");
             }
             return View(single_Raspberry);
+        }
+
+        public ActionResult PrintList(List<Raspberry> Raspberrys)
+        {
+            List<Raspberry> RaspberryList = _rep.Fetch();
+            _rep.CloseConnection();
+
+            // fields: list of name of column
+            List<String> fields = ModelUtils.GetModelPropertiesName(RaspberryList.First());
+
+            string html_string = PdfUtils.GenerateHtmlTable(RaspberryList);
+            PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);
+
+            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
+        }
+
+        public ActionResult PrintDetails(int id)
+        {
+            Raspberry raspberry = _rep.FetchSingle(id);
+            _rep.CloseConnection();
+
+            // Get value and name of each property
+            List<String> value_list = ModelUtils.GetModelPropertiesValue(raspberry);
+            List<String> fields = Raspberry.GetPropertiesInFrench();
+
+            string html_string = PdfUtils.GenerateHtmlDetails(value_list, fields);
+            PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);
+
+            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
         }
     }
 }
