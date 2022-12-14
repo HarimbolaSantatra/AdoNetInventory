@@ -28,21 +28,21 @@ namespace AppInventaire.Utils
 
         public static void CreatePdf(string html_string, string destination_path)
         {
+            ConverterProperties converterProperties = new ConverterProperties();
             // Create File
-            HtmlConverter.ConvertToPdf(html_string, new FileStream(destination_path, FileMode.Create));
-
+            HtmlConverter.ConvertToPdf(html_string, new FileStream(destination_path, FileMode.Create), converterProperties);
         }
         public static string GenerateHtmlDetails(List<String> col_value_list, List<String> property_list)
         {
-            string TitleHtml = "<h1> Detail </h1><div>";
-            string BodyHtml = "<ul class=\"list-group\">";
-            for(int i=0; i<col_value_list.Count; i++)
+            string BodyHtml = "<h1> <b> Detail </b></h1><div>";
+            for (int i = 0; i < col_value_list.Count; i++)
             {
-                //BodyHtml += $"<li class=\"list-group-item\">{property_list[i]} :\t{col_value_list[i]}</li>";
-                BodyHtml += $"<li>Hello, Error!</li>";
+                // We should use a list here but there's an issue with the iText7 library when using some tag like <li>
+                // See: https://stackoverflow.com/questions/65721048/itext-7-object-reference-not-set-to-an-instance-of-an-object
+                BodyHtml += $"</br><span class=\"font-weight-bold\">• {property_list[i]} </span> : \t {col_value_list[i]}";
             };
-            BodyHtml += "</ul></div>";
-            return HeadHtml + TitleHtml + BodyHtml;
+            BodyHtml += "</div>";
+            return HeadHtml + BodyHtml;
         }
 
 
