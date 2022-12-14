@@ -65,7 +65,7 @@ namespace AppInventaire.Utils
                 outputHtml += $"<tr>";
                 foreach(PropertyInfo propty in property_info_list)
                 {
-                    string current_value = propty.GetValue(computer, null) as string;
+                    string current_value = propty.GetValue(computer, null).ToString();
                     outputHtml += $"<td>{current_value}</td>";
                 }
                 
