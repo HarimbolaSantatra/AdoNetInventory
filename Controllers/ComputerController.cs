@@ -141,7 +141,7 @@ namespace AppInventaire.Controllers
 
             // Get value and name of each property
             List<String> value_list = ModelUtils.GetModelPropertiesValue(computer);
-            List<String> fields = ModelUtils.GetModelPropertiesName(computer);
+            List<String> fields = Computer.GetPropertiesInFrench();
 
             string html_string = PdfUtils.GenerateHtmlDetails(value_list, fields);
             PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);

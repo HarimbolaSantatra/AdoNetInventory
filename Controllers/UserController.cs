@@ -116,10 +116,10 @@ namespace AppInventaire.Controllers
         {
             User user= _rep.FetchSingle(id);
             _rep.CloseConnection();
-
+            
             // Get value and name of each property
             List<String> value_list = ModelUtils.GetModelPropertiesValue(user);
-            List<String> fields = ModelUtils.GetModelPropertiesName(user);
+            List<String> fields = Models.User.GetPropertiesInFrench();
 
             string html_string = PdfUtils.GenerateHtmlDetails(value_list, fields);
             PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);
