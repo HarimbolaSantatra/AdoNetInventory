@@ -76,7 +76,7 @@ namespace AppInventaire.Utils
             return HeadHtml + outputHtml;
         }
 
-        public static string GenerateHtmlTable(List<Item> ItemList, List<String> property_list)
+        public static string GenerateHtmlTable(List<Item> ItemList)
         {
             PropertyInfo[] property_info_list = ModelUtils.GetModelProperties(ItemList.First());
 
@@ -90,12 +90,12 @@ namespace AppInventaire.Utils
             outputHtml += "</tr></thead><tbody>";
 
             // Table Body
-            foreach (Item item in ItemList)
+            foreach (Object obj in ItemList)
             {
                 outputHtml += $"<tr>";
                 foreach (PropertyInfo propty in property_info_list)
                 {
-                    string current_value = propty.GetValue(item, null) as string;
+                    string current_value = propty.GetValue(obj, null) as string;
                     outputHtml += $"<td>{current_value}</td>";
                 }
                 outputHtml += "</tr>";
@@ -132,21 +132,29 @@ namespace AppInventaire.Utils
             return HeadHtml + outputHtml;
         }
 
-        public static string GenerateHtmlTable(List<User> UserList, List<String> property_list)
+        public static string GenerateHtmlTable(List<User> UserList)
         {
+            PropertyInfo[] property_info_list = ModelUtils.GetModelProperties(UserList.First());
+
             string outputHtml = "<table class=\"table table-striped\"><thead class=\"thead-dark\"><tr>";
-            foreach (string col_name in property_list)
+
+            // Table Header
+            foreach (PropertyInfo propty in property_info_list)
             {
-                outputHtml += $"<th>{col_name}</th>";
+                outputHtml += $"<th>{propty.Name}</th>";
             }
             outputHtml += "</tr></thead><tbody>";
-            foreach (var user in UserList)
+
+            // Table Body
+            foreach (Object obj in UserList)
             {
-                outputHtml += $"<tr><th> {user.ID} </th>" +
-                    $"<td> {user.FirstName} </td>" +
-                    $"<td> {user.LastName} </td>" +
-                    $"<td> {user.Email} </td>" +
-                    $"</tr>";
+                outputHtml += $"<tr>";
+                foreach (PropertyInfo propty in property_info_list)
+                {
+                    string current_value = propty.GetValue(obj, null) as string;
+                    outputHtml += $"<td>{current_value}</td>";
+                }
+                outputHtml += "</tr>";
             }
             outputHtml += "</tbody></table>";
             return HeadHtml + outputHtml;
