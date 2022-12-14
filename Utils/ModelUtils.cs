@@ -20,7 +20,12 @@ namespace AppInventaire.Utils
             {
                 foreach (PropertyInfo prop in cObject.GetType().GetProperties())
                 {
-                    properties_names.Add(prop.Name);
+                    if (prop.Name == "Password" || prop.Name == "password")
+                    {
+                        continue;
+                    }
+                    else
+                        properties_names.Add(prop.Name);
                 }
             }
             return properties_names;
@@ -33,7 +38,14 @@ namespace AppInventaire.Utils
             {
                 foreach (PropertyInfo prop in cObject.GetType().GetProperties())
                 {
-                    property_values.Add(prop.GetValue(cObject, null).ToString());
+                    if(prop.Name == "Password" || prop.Name == "password")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        property_values.Add(prop.GetValue(cObject, null).ToString());
+                    }
                 }
             }
             return property_values;
