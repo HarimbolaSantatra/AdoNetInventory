@@ -96,6 +96,30 @@ namespace AppInventaire.Models
             return output;
         }
 
+        public List<ItemType> FetchType()
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM item_type", _con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            List<ItemType> output = null;
+            if (reader.HasRows)
+            {
+                output = new List<ItemType>();
+
+                while (reader.Read())
+                {
+                    ItemType current_brand = new ItemType
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        Type = reader["Type"].ToString()
+                    };
+                    output.Add(current_brand);
+                }
+            }
+            reader.Close();
+            return output;
+        }
+
         public void AddItem(string type, string brand, string model, string serialnumber, string quantity, string comment)
         {
             // SQL Command

@@ -54,6 +54,22 @@ namespace AppInventaire.Models
             };
             return BrandSelectListItem;
         }
+        
+        public List<SelectListItem> GetTypeSelectListItems()
+        {
+            ItemRepository _rep = new ItemRepository();
+            List<SelectListItem> GetTypeSelectListItems = new List<SelectListItem>();
+            List<ItemType> ItemBrands = _rep.FetchType();
+            foreach (ItemType cb in ItemBrands)
+            {
+                GetTypeSelectListItems.Add(new SelectListItem()
+                {
+                    Text = $"{cb.Type}",
+                    Value = $"{cb.Type}"
+                });
+            };
+            return GetTypeSelectListItems;
+        }
 
     }
 }
