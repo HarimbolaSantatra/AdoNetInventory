@@ -264,7 +264,7 @@ namespace AppInventaire.Utils
             document.Close(); 
         }
 
-        public static string GenerateHtmlDetails(List<String> col_value_list, List<String> property_list)
+        public static string GenerateDetails(List<String> col_value_list, List<String> property_list)
         {
             string BodyHtml = "<h1> <b> Detail </b></h1><div>";
             for (int i = 0; i < col_value_list.Count; i++)

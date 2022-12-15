@@ -142,7 +142,7 @@ namespace AppInventaire.Controllers
             List<String> value_list = ModelUtils.GetModelPropertiesValue(computer);
             List<String> fields = Computer.GetPropertiesInFrench();
 
-            string html_string = PdfUtils.GenerateHtmlDetails(value_list, fields);
+            string html_string = PdfUtils.GenerateDetails(value_list, fields);
             PdfUtils.CreatePdf(html_string, ProjectVariables.PDF_DEST);
 
             return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
