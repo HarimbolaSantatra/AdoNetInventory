@@ -264,17 +264,47 @@ namespace AppInventaire.Utils
             document.Close(); 
         }
 
-        public static string GenerateDetails(List<String> col_value_list, List<String> property_list)
+        public static void GenerateDetails(List<String> col_value_list, List<String> property_list)
         {
-            string BodyHtml = "<h1> <b> Detail </b></h1><div>";
+
+            // A writer takes a destination file (location of saved PDF) as parameter
+            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var pdf = new PdfDocument(writer);
+
+            // Create a document
+            PageSize ps = PageSize.A4.Rotate();
+            var document = new Document(pdf, ps);
+            document.SetMargins(20, 20, 20, 20);
+
+            // Fonts
+            var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
+            var bold = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFonts.HELVETICA_BOLD);
+
+            // Logo
+            Image logo = GenerateSmartlightLogo(ps);
+
+            // HEADER: Logo & Title
+            Paragraph par = new Paragraph();
+            par.Add(logo).SetTextAlignment(TextAlignment.RIGHT);
+            document.Add(par);
+            par = new Paragraph().Add("DETAIL").SetFont(bold).SetFontSize(30);
+            document.Add(par);
+
+            // Body
+            List list = new List()
+                .SetSymbolIndent(12)
+                .SetListSymbol("•")
+                .SetFont(font);
             for (int i = 0; i < col_value_list.Count; i++)
             {
-                // We should use a list here but there's an issue with the iText7 library when using some tag like <li>
-                // See: https://stackoverflow.com/questions/65721048/itext-7-object-reference-not-set-to-an-instance-of-an-object
-                BodyHtml += $"</br><span class=\"font-weight-bold\">• {property_list[i]} </span> : \t {col_value_list[i]}";
-            };
-            BodyHtml += "</div>";
-            return HeadHtml + BodyHtml;
+                list.Add(new ListItem($"{property_list[i]}:\t {col_value_list[i]}"));
+            }
+
+            // Footer
+            AddNumberOfPages(document, pdf, ps);
+
+            document.Add(list);
+            document.Close();
         }
 
         public static Image GenerateSmartlightLogo(PageSize ps)
