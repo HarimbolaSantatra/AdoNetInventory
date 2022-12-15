@@ -11,5 +11,6 @@ namespace AppInventaire.Utils
     {
         // C:\Program FIles (x86)\IIS Express: "E:\\Santatra\\ASP.NET\\AppInventaire\\Results\\iText.pdf"
         public static string PDF_DEST = HostingEnvironment.MapPath("\\Results\\temp_pdf.pdf");
+        public static string LOGO_DEST = HostingEnvironment.MapPath("\\Content\\img\\logo_dark.png");
     }
 }

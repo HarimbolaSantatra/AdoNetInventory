@@ -15,6 +15,8 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.Html2pdf;
+using iText.Kernel.Geom;
+using iText.IO.Image;
 
 
 namespace AppInventaire.Utils
@@ -48,7 +50,7 @@ namespace AppInventaire.Utils
             var pdf = new PdfDocument(writer);
 
             // Create a document
-            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            var document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
 
             // Fonts
@@ -59,8 +61,17 @@ namespace AppInventaire.Utils
 
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
-            // Print Header (name of model's property)
-            Paragraph par;
+            // Logo
+            Image logo = GenerateSmartlightLogo();
+
+            // HEADER: Logo & Title
+            Paragraph par = new Paragraph();
+            par.Add(logo).SetTextAlignment(TextAlignment.RIGHT);
+            document.Add(par);
+            par = new Paragraph().Add("LISTE ORDINATEUR").SetFont(bold).SetFontSize(30);
+            document.Add(par);
+
+            // Print Table header (name of model's property)
             foreach (String colname in Computer.GetPropertiesInFrench())
             {
                 par = new Paragraph(colname);
@@ -89,7 +100,7 @@ namespace AppInventaire.Utils
             var pdf = new PdfDocument(writer);
 
             // Create a document
-            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            var document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
 
             // Fonts
@@ -100,8 +111,17 @@ namespace AppInventaire.Utils
 
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
-            // Print Header (name of model's property)
-            Paragraph par;
+            // Logo
+            Image logo = GenerateSmartlightLogo();
+
+            // HEADER: Logo & Title
+            Paragraph par = new Paragraph();
+            par.Add(logo).SetTextAlignment(TextAlignment.RIGHT);
+            document.Add(par);
+            par = new Paragraph().Add("LISTE ACCESSOIRES").SetFont(bold).SetFontSize(30);
+            document.Add(par);
+
+            // Print Table header (name of model's property)
             foreach (String colname in Item.GetPropertiesInFrench())
             {
                 par = new Paragraph(colname);
@@ -130,7 +150,7 @@ namespace AppInventaire.Utils
             var pdf = new PdfDocument(writer);
 
             // Create a document
-            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            var document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
 
             // Fonts
@@ -141,8 +161,17 @@ namespace AppInventaire.Utils
 
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
-            // Print Header (name of model's property)
-            Paragraph par;
+            // Logo
+            Image logo = GenerateSmartlightLogo();
+
+            // HEADER: Logo & Title
+            Paragraph par = new Paragraph();
+            par.Add(logo).SetTextAlignment(TextAlignment.RIGHT);
+            document.Add(par);
+            par = new Paragraph().Add("LISTE RASPBERRY").SetFont(bold).SetFontSize(30);
+            document.Add(par);
+
+            // Print Table header (name of model's property)
             foreach (String colname in Raspberry.GetPropertiesInFrench())
             {
                 par = new Paragraph(colname);
@@ -171,7 +200,7 @@ namespace AppInventaire.Utils
             var pdf = new PdfDocument(writer);
 
             // Create a document
-            var document = new Document(pdf, iText.Kernel.Geom.PageSize.A4.Rotate());
+            var document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
 
             // Fonts
@@ -182,8 +211,17 @@ namespace AppInventaire.Utils
 
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
-            // Print Header (name of model's property)
-            Paragraph par;
+            // Logo
+            Image logo = GenerateSmartlightLogo();
+
+            // HEADER: Logo & Title
+            Paragraph par = new Paragraph();
+            par.Add(logo).SetTextAlignment(TextAlignment.RIGHT);
+            document.Add(par);
+            par = new Paragraph().Add("LISTE UTILISATEUR").SetFont(bold).SetFontSize(30);
+            document.Add(par);
+
+            // Print Table header (name of model's property)
             foreach (String colname in User.GetPropertiesInFrench())
             {
                 par = new Paragraph(colname);
@@ -215,6 +253,14 @@ namespace AppInventaire.Utils
             };
             BodyHtml += "</div>";
             return HeadHtml + BodyHtml;
+        }
+
+        public static Image GenerateSmartlightLogo()
+        {
+            string logo_dest = ProjectVariables.LOGO_DEST;
+            PageSize ps = PageSize.A4.Rotate();
+            float logo_width = ps.GetWidth() / 4;
+            return new Image(ImageDataFactory.Create(logo_dest)).SetWidth(logo_width);
         }
 
     }
