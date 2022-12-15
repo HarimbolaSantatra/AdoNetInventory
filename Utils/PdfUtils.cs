@@ -102,7 +102,7 @@ namespace AppInventaire.Utils
 
             // Print Header (name of model's property)
             Paragraph par;
-            foreach (String colname in Computer.GetPropertiesInFrench())
+            foreach (String colname in Item.GetPropertiesInFrench())
             {
                 par = new Paragraph(colname);
                 table.AddHeaderCell(new Cell().Add(par).SetFont(bold));
@@ -143,7 +143,7 @@ namespace AppInventaire.Utils
 
             // Print Header (name of model's property)
             Paragraph par;
-            foreach (String colname in Computer.GetPropertiesInFrench())
+            foreach (String colname in Raspberry.GetPropertiesInFrench())
             {
                 par = new Paragraph(colname);
                 table.AddHeaderCell(new Cell().Add(par).SetFont(bold));
@@ -184,7 +184,7 @@ namespace AppInventaire.Utils
 
             // Print Header (name of model's property)
             Paragraph par;
-            foreach (String colname in Computer.GetPropertiesInFrench())
+            foreach (String colname in User.GetPropertiesInFrench())
             {
                 par = new Paragraph(colname);
                 table.AddHeaderCell(new Cell().Add(par).SetFont(bold));

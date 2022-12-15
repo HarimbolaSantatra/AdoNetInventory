@@ -116,7 +116,7 @@ namespace AppInventaire.Controllers
             // fields: list of name of column
             List<String> fields = ModelUtils.GetModelPropertiesName(RaspberryList.First());
 
-            float[] float_param = new float[] { 1, 1, 3, 1, 1, 4, 2 };
+            float[] float_param = new float[] { 1, 1, 2, 1, 2, 3, 3, 2 };
             PdfUtils.CreateTablePdf(RaspberryList, float_param);
 
             return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");

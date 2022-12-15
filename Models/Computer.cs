@@ -42,7 +42,5 @@ namespace AppInventaire.Models
                 "Processeur", "RAM (Go)", "Carte Graphique", "Mémoire CG (Go)"
             };
         }
-
-
     }
 }
