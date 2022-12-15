@@ -52,6 +52,7 @@ namespace AppInventaire.Utils
             // Create a document
             var document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
+            PageSize ps = PageSize.A4.Rotate();
 
             // Fonts
             var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
@@ -62,7 +63,7 @@ namespace AppInventaire.Utils
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
             // Logo
-            Image logo = GenerateSmartlightLogo();
+            Image logo = GenerateSmartlightLogo(ps);
 
             // HEADER: Logo & Title
             Paragraph par = new Paragraph();
@@ -89,6 +90,10 @@ namespace AppInventaire.Utils
             }
 
             document.Add(table);
+
+            // Pagination
+            AddNumberOfPages(document, pdf, ps);
+
             document.Close(); // Close and save document
         }
 
@@ -102,6 +107,7 @@ namespace AppInventaire.Utils
             // Create a document
             var document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
+            PageSize ps = PageSize.A4.Rotate();
 
             // Fonts
             var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
@@ -112,7 +118,7 @@ namespace AppInventaire.Utils
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
             // Logo
-            Image logo = GenerateSmartlightLogo();
+            Image logo = GenerateSmartlightLogo(ps);
 
             // HEADER: Logo & Title
             Paragraph par = new Paragraph();
@@ -139,7 +145,12 @@ namespace AppInventaire.Utils
             }
 
             document.Add(table);
-            document.Close(); // Close and save document
+
+            // Pagination
+            AddNumberOfPages(document, pdf, ps);
+            
+            // Close and save document
+            document.Close();
         }
 
         public static void CreateTablePdf(List<Raspberry> RaspberryList, float[] float_parameter)
@@ -152,6 +163,7 @@ namespace AppInventaire.Utils
             // Create a document
             var document = new Document(pdf, PageSize.A4.Rotate());
             document.SetMargins(20, 20, 20, 20);
+            PageSize ps = PageSize.A4.Rotate();
 
             // Fonts
             var font = PdfFontFactory.CreateFont(iText.IO.Font.Constants.StandardFontFamilies.HELVETICA);
@@ -162,7 +174,7 @@ namespace AppInventaire.Utils
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
             // Logo
-            Image logo = GenerateSmartlightLogo();
+            Image logo = GenerateSmartlightLogo(ps);
 
             // HEADER: Logo & Title
             Paragraph par = new Paragraph();
@@ -189,6 +201,10 @@ namespace AppInventaire.Utils
             }
 
             document.Add(table);
+
+            // Pagination
+            AddNumberOfPages(document, pdf, ps);
+
             document.Close(); // Close and save document
         }
 
@@ -200,7 +216,8 @@ namespace AppInventaire.Utils
             var pdf = new PdfDocument(writer);
 
             // Create a document
-            var document = new Document(pdf, PageSize.A4.Rotate());
+            PageSize ps = PageSize.A4.Rotate();
+            var document = new Document(pdf, ps);
             document.SetMargins(20, 20, 20, 20);
 
             // Fonts
@@ -212,7 +229,7 @@ namespace AppInventaire.Utils
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
             // Logo
-            Image logo = GenerateSmartlightLogo();
+            Image logo = GenerateSmartlightLogo(ps);
 
             // HEADER: Logo & Title
             Paragraph par = new Paragraph();
@@ -239,7 +256,12 @@ namespace AppInventaire.Utils
             }
 
             document.Add(table);
-            document.Close(); // Close and save document
+
+            // Pagination
+            AddNumberOfPages(document, pdf, ps);
+
+            // Close and save document
+            document.Close(); 
         }
 
         public static string GenerateHtmlDetails(List<String> col_value_list, List<String> property_list)
@@ -255,12 +277,30 @@ namespace AppInventaire.Utils
             return HeadHtml + BodyHtml;
         }
 
-        public static Image GenerateSmartlightLogo()
+        public static Image GenerateSmartlightLogo(PageSize ps)
         {
             string logo_dest = ProjectVariables.LOGO_DEST;
-            PageSize ps = PageSize.A4.Rotate();
             float logo_width = ps.GetWidth() / 4;
             return new Image(ImageDataFactory.Create(logo_dest)).SetWidth(logo_width);
+        }
+
+        /// <summary>
+        /// Loop to every pages of a finished PDF and add a paragraph at the footer of each one at an absolute position.
+        /// </summary>
+        /// <param name="document"> iText.Layout.Document object </param>
+        /// <param name="pdf_document"> iText.Kernel.Pdf.PdfDocument object </param>
+        /// <param name="ps"> iText.Kernel.Geom.PageSize object </param>
+        public static void AddNumberOfPages(Document doc, PdfDocument pdf_document, PageSize ps)
+        {
+            int nb_pages = pdf_document.GetNumberOfPages();
+            float x_position = ps.GetWidth() / 2;
+            float y_position = ps.GetHeight() / 64 ;
+            Paragraph footer;
+            for (int i = 1; i <= nb_pages; i++)
+            {
+                footer = new Paragraph($"Page {i} sur {nb_pages}");
+                doc.ShowTextAligned(footer, x_position, y_position, i, TextAlignment.CENTER, VerticalAlignment.MIDDLE, 0);
+            }
         }
 
     }
