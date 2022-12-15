@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations; // Pour validation
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace AppInventaire.Models
 {
@@ -37,6 +37,22 @@ namespace AppInventaire.Models
                 "ID", "Type", "Marque", "Modèle", "Numero de Serie", "Date de création",
                 "Quantité", "Commentaire"
             };
+        }
+
+        public List<SelectListItem> GetBrandSelectListItems()
+        {
+            ItemRepository _rep = new ItemRepository();
+            List<SelectListItem> BrandSelectListItem = new List<SelectListItem>();
+            List<ItemBrand> ItemBrands = _rep.FetchBrand();
+            foreach (ItemBrand cb in ItemBrands)
+            {
+                BrandSelectListItem.Add(new SelectListItem()
+                {
+                    Text = $"{cb.Brand}",
+                    Value = $"{cb.Brand}"
+                });
+            };
+            return BrandSelectListItem;
         }
 
     }

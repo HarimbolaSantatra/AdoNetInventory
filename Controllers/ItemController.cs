@@ -54,7 +54,7 @@ namespace AppInventaire.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View();
+            return View(item_instance);
         }
 
         public ActionResult Details(int id)

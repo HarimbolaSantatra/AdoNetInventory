@@ -72,6 +72,30 @@ namespace AppInventaire.Models
             return output.First();
         }
 
+        public List<ItemBrand> FetchBrand()
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM Item_brand", _con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            List<ItemBrand> output = null;
+            if (reader.HasRows)
+            {
+                output = new List<ItemBrand>();
+
+                while (reader.Read())
+                {
+                    ItemBrand current_brand = new ItemBrand
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        Brand = reader["Brand"].ToString()
+                    };
+                    output.Add(current_brand);
+                }
+            }
+            reader.Close();
+            return output;
+        }
+
         public void AddItem(string type, string brand, string model, string serialnumber, string quantity, string comment)
         {
             // SQL Command

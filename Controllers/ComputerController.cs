@@ -39,13 +39,13 @@ namespace AppInventaire.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            ComputerRepository Computer_repo = new ComputerRepository();
+            ComputerRepository _rep = new ComputerRepository();
 
             if (Request.HttpMethod == "POST")
             {
                 if(ModelState.IsValid)
                 {
-                    Computer_repo.AddComputer(
+                    _rep.AddComputer(
                         collection["Brand"].ToString(),
                         Validation.StringOrNull(collection["Model"].ToString()),
                         Validation.StringOrNull(collection["OS"].ToString()),
@@ -58,8 +58,9 @@ namespace AppInventaire.Controllers
                     _rep.CloseConnection();
                     return RedirectToAction("Index");
                 }
-            }
-            return View();
+            }            
+            return View(computer_instance);
+            
         }
 
         public ActionResult Details(int id)

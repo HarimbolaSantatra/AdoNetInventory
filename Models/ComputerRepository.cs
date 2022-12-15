@@ -72,6 +72,30 @@ namespace AppInventaire.Models
             return output.First(); 
         }
 
+        public List<ComputerBrand> FetchBrand()
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM computer_brand", _con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            List<ComputerBrand> output = null;
+            if (reader.HasRows)
+            {
+                output = new List<ComputerBrand>();
+
+                while (reader.Read())
+                {
+                    ComputerBrand current_brand = new ComputerBrand
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        Brand = reader["Brand"].ToString()
+                    };
+                    output.Add(current_brand);
+                }
+            }
+            reader.Close();
+            return output;
+        }
+
         public void AddComputer(string brand, string model, string os, string hostname, string processor, string RamGB, string GraphCard, string GraphCardGB)
         {
             string cmd_string = $"INSERT INTO Computer(brand, model, os, hostname, processor, ramgb, graphcard, graphcardgb)" +
@@ -120,5 +144,7 @@ namespace AppInventaire.Models
             cmd.ExecuteNonQuery();
             CloseConnection();
         }
+
+        
     }
 }

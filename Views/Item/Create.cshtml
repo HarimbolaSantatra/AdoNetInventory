@@ -3,8 +3,10 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Ajouter";
+    List<SelectListItem> brandSelectList = Model.GetBrandSelectListItems();
 }
 @section style{}
+
 <h2>Ajouter</h2>
 
 @using (Html.BeginForm())
@@ -27,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --")
                 @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -230,8 +230,10 @@
     <Compile Include="Models\BaseRepository.cs" />
     <Compile Include="Controllers\ComputerController.cs" />
     <Compile Include="Models\Computer.cs" />
+    <Compile Include="Models\ComputerBrand.cs" />
     <Compile Include="Models\ComputerRepository.cs" />
     <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ItemBrand.cs" />
     <Compile Include="Models\ItemRepository.cs" />
     <Compile Include="Models\Raspberry.cs" />
     <Compile Include="Models\RaspberryRepository.cs" />
