@@ -120,6 +120,32 @@ namespace AppInventaire.Models
             return output;
         }
 
+        public void AddBrand(string brand)
+        {
+            string cmd_string = $"INSERT INTO item_brand(brand) VALUES (@brand)";
+
+            MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@brand", brand);
+
+            cmd.ExecuteNonQuery();
+
+            CloseConnection();
+        }
+
+        public void AddType(string type)
+        {
+            string cmd_string = $"INSERT INTO item_type(type) VALUES (@type)";
+
+            MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@type", type);
+
+            cmd.ExecuteNonQuery();
+
+            CloseConnection();
+        }
+
         public void AddItem(string type, string brand, string model, string serialnumber, string quantity, string comment)
         {
             // SQL Command

@@ -44,7 +44,7 @@ namespace AppInventaire.Controllers
             if (Request.HttpMethod == "POST")
             {
 
-                if(collection["brandInput"] != null)
+                if(collection["brandInput"] != null && !String.IsNullOrWhiteSpace(collection["brandInput"]))
                 {
                     _rep.AddComputerBrand(collection["brandInput"].ToString());
                 }
@@ -93,7 +93,7 @@ namespace AppInventaire.Controllers
             if (Request.HttpMethod == "POST")
             {
 
-                if (collection["brandInput"] != null)
+                if (collection["brandInput"] != null && !String.IsNullOrWhiteSpace(collection["brandInput"]))
                 {
                     _rep.AddComputerBrand(collection["brandInput"].ToString());
                     return RedirectToAction("Edit", new { id=id });

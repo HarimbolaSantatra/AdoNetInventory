@@ -41,8 +41,22 @@ namespace AppInventaire.Controllers
             // Appeler la fonction AddItem pour ajouter un element dans la table MySql
             if(Request.HttpMethod == "POST") // Si qqch est entré sur la forme
             {
+
+                bool brandInputValid = collection["brandInput"] != null && !String.IsNullOrWhiteSpace(collection["brandInput"]);
+                bool typeInputValid = collection["typeInput"] != null && !String.IsNullOrWhiteSpace(collection["typeInput"]);
+
+                if (brandInputValid)
+                {
+                    _rep.AddBrand(collection["brandInput"].ToString());
+                }
+
+                if (typeInputValid)
+                {
+                    _rep.AddType(collection["typeInput"].ToString());
+                }
+
                 // Form validation
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && !typeInputValid && !brandInputValid)
                 {
                     string type = Validation.StringOrNull(collection["Type"]);
                     string brand = Validation.StringOrNull(collection["Brand"]);
@@ -80,8 +94,24 @@ namespace AppInventaire.Controllers
             Item single_item = items.Single(i => i.ID == id);
             if (Request.HttpMethod == "POST")
             {
+
+                bool brandInputValid = collection["brandInput"] != null && !String.IsNullOrWhiteSpace(collection["brandInput"]);
+                bool typeInputValid = collection["typeInput"] != null && !String.IsNullOrWhiteSpace(collection["typeInput"]);
+
+                if (brandInputValid)
+                {
+                    _rep.AddBrand(collection["brandInput"].ToString());
+                    return RedirectToAction("Edit", new { id = id });
+                }
+
+                if (typeInputValid)
+                {
+                    _rep.AddType(collection["typeInput"].ToString());
+                    return RedirectToAction("Edit", new { id = id });
+                }
+
                 // Form validation
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && !brandInputValid && !typeInputValid)
                 {
                     ItemRepository item_repo = new ItemRepository();
                     string type = Validation.StringOrNull(collection["Type"]);

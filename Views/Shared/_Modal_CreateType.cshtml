@@ -1,15 +1,15 @@
 ﻿<!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-info my-1" data-toggle="modal" data-target="#brandModal">
-    Ajouter une marque
+<button type="button" class="btn btn-outline-info my-1" data-toggle="modal" data-target="#typeModal">
+    Ajouter un type
 </button>
 
 <!-- Add Computer Brand Modal -->
-<div class="modal fade" id="brandModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="typeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">@ViewBag.Title_Modal_CreateBrand</h5>
+                <h5 class="modal-title" id="modalLabel">@ViewBag.Title_Modal_CreateType</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -19,9 +19,9 @@
             <form method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="brandInput">Marque</label>
-                        <input class="form-control" id="brandInput" name="brandInput"
-                               aria-describedby="brandHelp" placeholder="Nom de la marque">
+                        <label for="typeInput">Marque</label>
+                        <input class="form-control" id="typeInput" name="typeInput"
+                               aria-describedby="brandHelp" placeholder="Nom du type">
                         <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
                     </div>
                     <div class="modal-footer">

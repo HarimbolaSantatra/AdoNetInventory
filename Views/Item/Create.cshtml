@@ -3,6 +3,9 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Ajouter";
+    ViewBag.Title_Modal_CreateBrand = "Ajout - Marque Accessoire";
+    ViewBag.Title_Modal_CreateType = "Ajout - Type Accessoire";
+
     List<SelectListItem> brandSelectList = Model.GetBrandSelectListItems();
     List<SelectListItem> typeSelectList = Model.GetTypeSelectListItems();
 
@@ -20,19 +23,23 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    <!-- TYPE -->
     <div class="form-group">
         @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Type, typeSelectList, "-- Choisir Marque --")
-            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Type, typeSelectList, "-- Choisir Type --",
+                new { @class = "form-control" })
+            @Html.Partial("_Modal_CreateType")
         </div>
     </div>
 
+    <!-- BRAND -->
     <div class="form-group">
         @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --")
-            @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --",
+                new { @class = "form-control" })
+            @Html.Partial("_Modal_CreateBrand")
         </div>
     </div>
 
