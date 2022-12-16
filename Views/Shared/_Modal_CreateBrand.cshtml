@@ -1,0 +1,31 @@
+﻿<!-- Add Computer Brand Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">@ViewBag.ModalTitle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- CHAMP AJOUT -->
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="brandInput">Marque</label>
+                        <input class="form-control" id="brandInput" name="brandInput"
+                               aria-describedby="brandHelp" placeholder="Nom de la marque">
+                        <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary"> Ajouter </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
