@@ -14,14 +14,11 @@
 <!-- SEARCH BAR -->
 <div class="row">
     <div class="col-md-4 mx-auto d-block">
-        <div class="input-group mb-3">
-            <form method="get">
-                <input type="text" class="form-control" placeholder="Rechercher" id="btn-search" name="searchInput">
-                <div class="input-group-append">
-                    <span class="input-group-text" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></span>
-                </div>
-            </form>
-        </div>
+        <form class="input-group mb-3" method="post">
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher ..." aria-label="Search"
+                  name="searchInput" >
+            <button class="input-group-text" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
     </div>
 </div>
 

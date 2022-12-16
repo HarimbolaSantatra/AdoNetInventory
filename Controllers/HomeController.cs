@@ -9,14 +9,25 @@ namespace AppInventaire.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(FormCollection collection)
         {
             if (Session["Email"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-
-            return View();
+            List<Search> searchResult = null;
+            if(Request.HttpMethod == "POST")
+            {
+                if (collection["searchInput"] != null && !String.IsNullOrWhiteSpace(collection["searchInput"]))
+                {
+                    SearchRepository _rep = new SearchRepository();
+                    string searchQuery = collection["searchInput"];
+                    searchResult = _rep.FetchResult(searchQuery);
+                    return View("Search", searchResult);
+                }
+            }
+            
+            return View(searchResult);
         }
 
         public ActionResult About()
@@ -79,16 +90,5 @@ namespace AppInventaire.Controllers
             return View();
         }
 
-        public ActionResult Search(FormCollection collection)
-        {
-            SearchRepository _rep = new SearchRepository();
-            List<Search> searchResult = null;
-            if (Request.HttpMethod == "GET")
-            {
-                string searchQuery = collection["searchInput"];
-                searchResult = _rep.FetchResult(searchQuery);
-            }
-            return View(searchResult);
-        }
     }
 }

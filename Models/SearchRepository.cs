@@ -33,6 +33,7 @@ namespace AppInventaire.Models
                             searchResults.Add(searchResult);
                         }
                     }
+                    reader.Close();
                 }
             }
             return searchResults;
@@ -51,6 +52,7 @@ namespace AppInventaire.Models
                     columns.Add(reader["Field"].ToString());
                 }
             }
+            reader.Close();
             return columns;
         }
     }
