@@ -117,6 +117,19 @@ namespace AppInventaire.Models
             CloseConnection();
         }
 
+        public void AddComputerBrand(string brand)
+        {
+            string cmd_string = $"INSERT INTO computer_brand(brand) VALUES (@brand)";
+
+            MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@brand", brand);
+
+            cmd.ExecuteNonQuery();
+
+            CloseConnection();
+        }
+
         public void EditComputer(int id, string brand, string model, string os, string hostname, string processor, string RamGB, string GraphCard, string GraphCardGB)
         {
             string cmd_string = $"UPDATE Computer SET brand=@brand, model=@model, " +

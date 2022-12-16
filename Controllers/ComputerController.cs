@@ -43,6 +43,12 @@ namespace AppInventaire.Controllers
 
             if (Request.HttpMethod == "POST")
             {
+
+                if(collection["brandInput"] != null)
+                {
+                    _rep.AddComputerBrand(collection["brandInput"].ToString());
+                }
+
                 if(ModelState.IsValid)
                 {
                     _rep.AddComputer(
