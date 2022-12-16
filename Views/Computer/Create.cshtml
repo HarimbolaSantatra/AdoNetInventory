@@ -27,7 +27,7 @@
         @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --",
-                new { @class = "form-select my-3" }
+                new { @class = "form-control" }
            )
         </div>
     </div>
@@ -36,7 +36,7 @@
     <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
         Ajouter une marque
     </button>
-    @Html.Partial("_Modal_CreateBrand");
+    @Html.Partial("_Modal_CreateBrand")
 
     <div class="form-group">
         @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
