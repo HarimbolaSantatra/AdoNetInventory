@@ -7,14 +7,28 @@
 
 @section style{}
 
-<div class="d-flex justify-content-end">
-    <div>
-        <a href="/Computer/Create" class="btn btn-info mx-1">AJOUTER</a>
+<!-- SEARCH BAR -->
+<div class="row">
+    <div class="col-md-4 mx-auto d-block">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Rechercher" id="btn-search">
+            <div class="input-group-append">
+                <span class="input-group-text" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="/Computer/PrintList/" class="btn btn-info mx-1">EXPORTER PDF</a>
+
+    <div class="d-flex justify-content-end">
+        <div>
+            <a href="/Computer/Create" class="btn btn-info mx-1">AJOUTER</a>
+        </div>
+        <div>
+            <a href="/Computer/PrintList/" class="btn btn-info mx-1">EXPORTER PDF</a>
+        </div>
     </div>
+
 </div>
+
 
 <table class="table">
     <thead class="thead-dark">
