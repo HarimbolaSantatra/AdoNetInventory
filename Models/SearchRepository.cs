@@ -27,7 +27,8 @@ namespace AppInventaire.Models
                             Search searchResult = new Search
                             {
                                 ID = int.Parse(reader["ID"].ToString()),
-                                ModelType = table
+                                ModelType = table,
+                                Column = column
                             };
                             searchResults.Add(searchResult);
                         }
@@ -47,7 +48,7 @@ namespace AppInventaire.Models
             {
                 while (reader.Read())
                 {
-                    
+                    columns.Add(reader["Field"].ToString());
                 }
             }
             return columns;

@@ -82,12 +82,13 @@ namespace AppInventaire.Controllers
         public ActionResult Search(FormCollection collection)
         {
             SearchRepository _rep = new SearchRepository();
+            List<Search> searchResult = null;
             if (Request.HttpMethod == "GET")
             {
                 string searchQuery = collection["searchInput"];
-                List<Search> searchResult = _rep.FetchResult(searchQuery);
+                searchResult = _rep.FetchResult(searchQuery);
             }
-            return View();
+            return View(searchResult);
         }
     }
 }
