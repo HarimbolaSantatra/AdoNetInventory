@@ -101,13 +101,11 @@ namespace AppInventaire.Controllers
                 if (brandInputValid)
                 {
                     _rep.AddBrand(collection["brandInput"].ToString());
-                    return RedirectToAction("Edit", new { id = id });
                 }
 
                 if (typeInputValid)
                 {
                     _rep.AddType(collection["typeInput"].ToString());
-                    return RedirectToAction("Edit", new { id = id });
                 }
 
                 // Form validation
