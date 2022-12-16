@@ -78,5 +78,16 @@ namespace AppInventaire.Controllers
             }
             return View();
         }
+
+        public ActionResult Search(FormCollection collection)
+        {
+            SearchRepository _rep = new SearchRepository();
+            if (Request.HttpMethod == "GET")
+            {
+                string searchQuery = collection["searchInput"];
+                List<Search> searchResult = _rep.FetchResult(searchQuery);
+            }
+            return View();
+        }
     }
 }

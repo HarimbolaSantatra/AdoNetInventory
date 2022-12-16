@@ -238,6 +238,8 @@
     <Compile Include="Models\ItemType.cs" />
     <Compile Include="Models\Raspberry.cs" />
     <Compile Include="Models\RaspberryRepository.cs" />
+    <Compile Include="Models\Search.cs" />
+    <Compile Include="Models\SearchRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -352,6 +354,7 @@
     <Content Include="Views\Shared\_Layout_login.cshtml" />
     <Content Include="Views\Shared\_Modal_CreateBrand.cshtml" />
     <Content Include="Views\Shared\_Modal_CreateType.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
