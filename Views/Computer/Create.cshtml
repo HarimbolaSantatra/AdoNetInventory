@@ -2,12 +2,10 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ModalTitle = "Ajout - Marque Ordinateur";
     ViewBag.Title = "Ajouter";
 
     List<SelectListItem> brandSelectList = Model.GetBrandSelectListItems();
-
-    ViewBag.ModalTitle = "Ajout - Marque Ordinateur";
-
 }
 
 @section style{
@@ -28,14 +26,9 @@
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --",
                 new { @class = "form-control" }
-           )
+                )
         </div>
     </div>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
-        Ajouter une marque
-    </button>
     @Html.Partial("_Modal_CreateBrand")
 
     <div class="form-group">
