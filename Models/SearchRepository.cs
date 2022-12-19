@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using AppInventaire.Utils;
+using static AppInventaire.Utils.ModelUtils;
 using System.Linq;
 using System.Web;
 
@@ -35,7 +36,8 @@ namespace AppInventaire.Models
                                 ID = int.Parse(reader["ID"].ToString()),
                                 ModelType = table,
                                 Column = column,
-                                ColumnValue = Validation.StringOrEmpty(reader[column].ToString())
+                                ColumnValue = Validation.StringOrEmpty(reader[column].ToString()),
+                                ColumnInFrench = null
                             };
                             searchResults.Add(searchResult);
                         }

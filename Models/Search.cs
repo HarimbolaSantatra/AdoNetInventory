@@ -11,5 +11,6 @@ namespace AppInventaire.Models
         public string ModelType {get; set; }
         public string Column { get; set; }
         public string ColumnValue { get; set; } // Get an excerpt (extrait) of the result
+        public string ColumnInFrench { get; set; }
     }
 }

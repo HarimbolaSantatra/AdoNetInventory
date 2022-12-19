@@ -9,6 +9,7 @@ namespace AppInventaire.Controllers
 {
     public class HomeController : Controller
     {
+        // INDEX + SEARCH
         public ActionResult Index(FormCollection collection)
         {
             if (Session["Email"] == null)
