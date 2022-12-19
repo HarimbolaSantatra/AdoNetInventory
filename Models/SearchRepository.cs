@@ -34,7 +34,8 @@ namespace AppInventaire.Models
                             {
                                 ID = int.Parse(reader["ID"].ToString()),
                                 ModelType = table,
-                                Column = column
+                                Column = column,
+                                ColumnValue = Validation.StringOrEmpty(reader[column].ToString())
                             };
                             searchResults.Add(searchResult);
                         }

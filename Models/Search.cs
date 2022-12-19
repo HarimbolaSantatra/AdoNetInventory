@@ -10,5 +10,6 @@ namespace AppInventaire.Models
         public int ID { get; set; }
         public string ModelType {get; set; }
         public string Column { get; set; }
+        public string ColumnValue { get; set; } // Get an excerpt (extrait) of the result
     }
 }
