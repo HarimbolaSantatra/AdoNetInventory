@@ -160,5 +160,7 @@ namespace AppInventaire.Controllers
 
             return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
         }
+
+
     }
 }

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AppInventaire.Models.Search>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Recherche";
+}
+
+<h2>Résultat de recherche: @ViewBag.searchQuery</h2>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th> Table </th>
+            <th> Identifiant dans la table </th>
+            <th> Colonne contenant mot clé</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var search in Model)
+        {
+            <tr>
+                <td> <a href="@search.ModelType/Details/@search.ID"> @Html.DisplayFor(model => search.ModelType) </a> </td>
+                <td> @Html.DisplayFor(model => search.ID) </td>
+                <td> @Html.DisplayFor(model => search.Column): @Html.DisplayFor(model => search.ColumnValue) </td>
+            </tr>
+        }
+    </tbody>
+</table>

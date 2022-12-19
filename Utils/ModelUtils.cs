@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using AppInventaire.Models;
 using System.Linq;
 using System.Web;
 
@@ -49,6 +50,50 @@ namespace AppInventaire.Utils
                 }
             }
             return property_values;
+        }
+
+        public static List<String> GetModelPropertiesInFrench(string modelName)
+        {
+            switch (modelName.ToLower())
+            {
+
+                case "computer":
+                    return Computer.GetPropertiesInFrench();
+
+                case "item":
+                    return Item.GetPropertiesInFrench();
+
+                case "raspberry":
+                    return Raspberry.GetPropertiesInFrench();
+
+                case "user":
+                    return User.GetPropertiesInFrench();
+
+                default:
+                    return new List<String> { null };
+            }  
+        }
+
+        public static Type GetModelType(string modelName)
+        {
+            switch (modelName.ToLower())
+            {
+
+                case "computer":
+                    return typeof(Computer);
+
+                case "item":
+                    return typeof(Item);
+
+                case "raspberry":
+                    return typeof(Raspberry);
+
+                case "user":
+                    return typeof(User);
+
+                default:
+                    return null;
+            }
         }
     }
 }
