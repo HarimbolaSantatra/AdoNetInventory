@@ -21,6 +21,10 @@ namespace AppInventaire.Models
         [EmailAddress(ErrorMessage = "Une adresse mail est requis!")]
         public string Email { get; set; }
 
+        // Role: primary key
+        public Role userRole;
+        
+        // Password
         [Display(Name = "Mot De Passe")]
         [Required(ErrorMessage = "Un mot de passe valide est requis !")]
         public string Password { get; set; }

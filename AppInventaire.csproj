@@ -324,6 +324,7 @@
     <Compile Include="Models\ItemType.cs" />
     <Compile Include="Models\Raspberry.cs" />
     <Compile Include="Models\RaspberryRepository.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Search.cs" />
     <Compile Include="Models\SearchRepository.cs" />
     <Compile Include="Models\User.cs" />

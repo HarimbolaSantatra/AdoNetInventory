@@ -72,6 +72,7 @@ namespace AppInventaire.Controllers
 
         public ActionResult Login()
         {
+            FormsAuthentication.SignOut();
             return View();
         }
 
