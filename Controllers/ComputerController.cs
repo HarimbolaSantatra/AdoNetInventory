@@ -20,12 +20,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Index()
         {
-            // Session check
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             List<Computer> Computers = _rep.Fetch();
             _rep.CloseConnection();
             return View(Computers);
@@ -33,12 +27,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Create(Computer computer_instance, FormCollection collection)
         {
-            // Session check
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             ComputerRepository _rep = new ComputerRepository();
 
             if (Request.HttpMethod == "POST")
@@ -71,11 +59,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Details(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             Computer single_computer = _rep.FetchSingle(id);
             _rep.CloseConnection();
             return View(single_computer);
@@ -83,11 +66,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Edit(int id, Computer computer_instance, FormCollection collection)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             Computer single_computer = _rep.FetchSingle(id);
 
             if (Request.HttpMethod == "POST")
@@ -120,11 +98,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Delete(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             Computer single_computer = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {

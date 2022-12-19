@@ -12,10 +12,6 @@ namespace AppInventaire.Controllers
         // INDEX + SEARCH
         public ActionResult Index(FormCollection collection)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
             List<Search> searchResult = null;
             if(Request.HttpMethod == "POST")
             {
@@ -34,11 +30,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult About()
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -46,11 +37,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Contact()
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -58,12 +44,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Login(FormCollection collection)
         {
-
-            if(Session["Email"] != null)
-            {
-                Session.Clear(); // Close Session = Logout
-            }
-
             if (Request.HttpMethod == "POST")
             {
                 // Save info

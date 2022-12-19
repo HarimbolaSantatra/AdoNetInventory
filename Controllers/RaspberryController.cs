@@ -20,11 +20,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Index()
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             // Extraire les Raspberrys
             List<Raspberry> Raspberrys = _rep.Fetch();
             return View(Raspberrys);
@@ -33,11 +28,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Create(Raspberry rasp_instance, FormCollection collection )
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             if (Request.HttpMethod == "POST")
             {
                 if(ModelState.IsValid)
@@ -57,22 +47,12 @@ namespace AppInventaire.Controllers
 
         public ActionResult Details(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             Raspberry single_Raspberry = _rep.FetchSingle(id);
             return View(single_Raspberry);
         }
 
         public ActionResult Edit(Raspberry rasp_instance, int id, FormCollection collection)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             Raspberry single_Raspberry = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
@@ -93,11 +73,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Delete(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             List<Raspberry> Raspberrys = _rep.Fetch();
             Raspberry single_Raspberry = Raspberrys.Single(i => i.ID == id);
             if (Request.HttpMethod == "POST")

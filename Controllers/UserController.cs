@@ -20,22 +20,12 @@ namespace AppInventaire.Controllers
 
         public ActionResult Index()
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             List<User> Users = _rep.Fetch();
             return View(Users);
         }
 
         public ActionResult Create(User user_instance, FormCollection collection)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             if (Request.HttpMethod == "POST")
             {
                 if (ModelState.IsValid)
@@ -53,22 +43,12 @@ namespace AppInventaire.Controllers
 
         public ActionResult Details(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             User single_User = _rep.FetchSingle(id);
             return View(single_User);
         }
 
         public ActionResult Edit(User user_instance, int id, FormCollection collection)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             User single_User = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
@@ -87,11 +67,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Delete(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             User single_User = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {

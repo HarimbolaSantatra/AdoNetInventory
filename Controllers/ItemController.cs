@@ -20,22 +20,12 @@ namespace AppInventaire.Controllers
 
         public ActionResult Index()
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             List<Item> items = _rep.Fetch();
                 return View(items);
         }
 
         public ActionResult Create(Item item_instance, FormCollection collection)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             ItemRepository item_repo = new ItemRepository();
 
             // Appeler la fonction AddItem pour ajouter un element dans la table MySql
@@ -73,11 +63,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Details(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             List<Item> items = _rep.Fetch();
             Item single_item = items.Single(i => i.ID == id);
             return View(single_item);
@@ -85,11 +70,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Edit(Item item_instance, int id, FormCollection collection)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             List<Item> items = _rep.Fetch();
             Item single_item = items.Single(i => i.ID == id);
             if (Request.HttpMethod == "POST")
@@ -127,11 +107,6 @@ namespace AppInventaire.Controllers
 
         public ActionResult Delete(int id)
         {
-            if (Session["Email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
             List<Item> items = _rep.Fetch();
             Item single_item = items.Single(i => i.ID == id);
             if (Request.HttpMethod == "POST")
