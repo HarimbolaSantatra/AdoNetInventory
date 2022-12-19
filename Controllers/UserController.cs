@@ -9,6 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         UserRepository _rep = new UserRepository();

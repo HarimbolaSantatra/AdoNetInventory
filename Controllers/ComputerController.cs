@@ -18,6 +18,7 @@ namespace AppInventaire.Controllers
             ComputerRepository _rep = new ComputerRepository();
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             List<Computer> Computers = _rep.Fetch();
@@ -25,6 +26,7 @@ namespace AppInventaire.Controllers
             return View(Computers);
         }
 
+        [Authorize]
         public ActionResult Create(Computer computer_instance, FormCollection collection)
         {
             ComputerRepository _rep = new ComputerRepository();
@@ -57,6 +59,7 @@ namespace AppInventaire.Controllers
             
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             Computer single_computer = _rep.FetchSingle(id);
@@ -64,6 +67,7 @@ namespace AppInventaire.Controllers
             return View(single_computer);
         }
 
+        [Authorize]
         public ActionResult Edit(int id, Computer computer_instance, FormCollection collection)
         {
             Computer single_computer = _rep.FetchSingle(id);
@@ -96,6 +100,7 @@ namespace AppInventaire.Controllers
             return View(single_computer);
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             Computer single_computer = _rep.FetchSingle(id);
