@@ -22,6 +22,7 @@ namespace AppInventaire.Controllers
                 {
                     SearchRepository _rep = new SearchRepository();
                     string searchQuery = collection["searchInput"];
+                    ViewBag.searchQuery = searchQuery;
                     searchResult = _rep.FetchResult(searchQuery);
                     return View("Search", searchResult);
                 }

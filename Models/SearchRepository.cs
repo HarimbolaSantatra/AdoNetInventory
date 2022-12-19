@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using AppInventaire.Utils;
 using System.Linq;
 using System.Web;
 
@@ -17,8 +18,12 @@ namespace AppInventaire.Models
                 List<string> Columns = FetchColumnNames(table);
                 foreach (String column in Columns)
                 {
-                    string sqlQuery = $"SELECT * FROM {table} WHERE {column} LIKE \'%{searchQuery}%\'";
+                    //string sqlQuery = $"SELECT * FROM {table} WHERE {column} LIKE \'%{searchQuery}%\'";
+                    string sqlQuery = $"SELECT * FROM @table WHERE @column LIKE %@search_query%";
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, _con);
+                    cmd.Parameters.AddWithValue("@table", table);
+                    cmd.Parameters.AddWithValue("@column", column);
+                    cmd.Parameters.AddWithValue("@search_query", searchQuery);
                     MySqlDataReader reader = cmd.ExecuteReader();
                     if(reader.HasRows)
                     {

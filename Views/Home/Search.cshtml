@@ -5,12 +5,12 @@
     ViewBag.Title = "Recherche";
 }
 
-<h2>Résultat de recherch</h2>
+<h2>Résultat de recherche: @ViewBag.searchQuery</h2>
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th> Nom de la table </th>
-            <th> Nom de la colonne </th>
+            <th> Table </th>
+            <th> Colonne de la table</th>
             <th> Identifiant dans la table </th>
         </tr>
     </thead>
@@ -18,7 +18,7 @@
         @foreach (var search in Model)
         {
             <tr>
-                <td> @Html.DisplayFor(model => search.ModelType) </td>
+                <td> <a href="@search.ModelType/Details/@search.ID"> @Html.DisplayFor(model => search.ModelType) </a> </td>
                 <td> @Html.DisplayFor(model => search.Column) </td>
                 <td> @Html.DisplayFor(model => search.ID) </td>
             </tr>
