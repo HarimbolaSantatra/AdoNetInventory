@@ -77,7 +77,7 @@ namespace AppInventaire.Controllers
                     );
                     string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
 
-                    return View("Index", new { controller = "Home" });
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return View();
@@ -89,10 +89,11 @@ namespace AppInventaire.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return View("Index", new { controller = "Computer" });
+            return RedirectToAction("Index", "Computer");
         }
     }
 }
