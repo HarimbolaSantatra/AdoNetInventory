@@ -32,8 +32,6 @@ namespace AppInventaire.Models
 
         public Boolean IsActive { get; set; }
 
-        public virtual ICollection<Role> Roles { get; set; }
-
         public static List<string> GetPropertiesInFrench()
         {
             return new List<string> { 
