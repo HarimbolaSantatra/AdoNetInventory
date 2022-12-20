@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Web;
+using System.Web.Security;
 using System.Web.Routing;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using AppInventaire.Models;
 
 namespace AppInventaire.Utils
 {
-    public class Authorization : AuthorizeAttribute
+    public class AuthorizationUtils : AuthorizeAttribute
     {
         public string UsersConfigKey { get; set; }
         public string RolesConfigKey { get; set; }
@@ -53,6 +54,5 @@ namespace AppInventaire.Utils
             }
 
         }
-
     }
 }
