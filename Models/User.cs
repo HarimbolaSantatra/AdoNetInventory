@@ -30,6 +30,9 @@ namespace AppInventaire.Models
         [Required(ErrorMessage = "Un mot de passe valide est requis !")]
         public string Password { get; set; }
 
+        public Boolean IsActive { get; set; }
+
+        public virtual ICollection<Role> Roles { get; set; }
 
         public static List<string> GetPropertiesInFrench()
         {
