@@ -9,7 +9,6 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
-    [Authorize]
     public class ComputerController : Controller
     {
         ComputerRepository _rep = new ComputerRepository();

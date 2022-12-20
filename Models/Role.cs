@@ -10,6 +10,5 @@ namespace AppInventaire.Models
         public int ID { get; set; }
         public string RoleName { get; set; }
         public bool writePermission { get; set; }
-        public virtual ICollection<User> Users { get; set; }
     }
 }

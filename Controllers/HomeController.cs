@@ -6,8 +6,6 @@ using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Utils;
 using System.Web.Security;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace AppInventaire.Controllers
 {
@@ -68,13 +66,14 @@ namespace AppInventaire.Controllers
                     // Create cookie ticket 
                     FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                         1,
-                        "userName",
+                        LoginEmail,
                         DateTime.Now,
                         DateTime.Now.AddMinutes(30), // value of time out property
                         false,                      // Value of 'IsPersistent' property
                         String.Empty,
                         FormsAuthentication.FormsCookiePath
                     );
+
                     string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
 
                     return RedirectToAction("Index", "Home");
