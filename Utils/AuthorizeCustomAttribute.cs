@@ -20,16 +20,16 @@ namespace AppInventaire.Utils
         {
             if (filterContext.HttpContext.Request.IsAuthenticated)
             {
+                var current_user = HttpContext.Current.User.Identity.Name;
                 if (!String.IsNullOrEmpty(Users))
                 {
-                    // Redirect to error page
-                    filterContext.Result = new RedirectToRouteResult(new
-                        RouteValueDictionary(new { controller = "Error", action = "AccessDenied" }));
-                }
-                else
-                {
-                    filterContext.Result = new RedirectToRouteResult(new
-                        RouteValueDictionary(new { controller = "Item", action = "Index" }));
+                    // Check if user is allowed
+                    if(Users.ToLower() != current_user.ToLower())
+                    {
+                        // Redirect to error page
+                        filterContext.Result = new RedirectToRouteResult(new
+                            RouteValueDictionary(new { controller = "Error", action = "AccessDenied" }));
+                    }
                 }
             }
         }
