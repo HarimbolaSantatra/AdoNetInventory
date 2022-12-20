@@ -93,7 +93,7 @@ namespace AppInventaire.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Computer");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

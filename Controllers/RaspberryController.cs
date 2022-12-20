@@ -9,6 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
+    [Authorize]
     public class RaspberryController : Controller
     {
         RaspberryRepository _rep = new RaspberryRepository();
