@@ -20,17 +20,24 @@ namespace AppInventaire.Utils
         {
             if (filterContext.HttpContext.Request.IsAuthenticated)
             {
-                var current_user = HttpContext.Current.User.Identity.Name;
-                if (!String.IsNullOrEmpty(Users))
+                var user_mail = HttpContext.Current.User.Identity.Name;
+                
+                UserRepository _rep = new UserRepository();
+                User user = _rep.FetchByEmail(user_mail);
+                string user_role = user.userRole.RoleName;
+
+                if (!String.IsNullOrEmpty(Roles))
                 {
                     // Check if user is allowed
-                    if(Users.ToLower() != current_user.ToLower())
+                    if(Roles.ToLower() != user_role)
                     {
                         // Redirect to error page
                         filterContext.Result = new RedirectToRouteResult(new
-                            RouteValueDictionary(new { controller = "Error", action = "AccessDenied" }));
+                            RouteValueDictionary(new { controller = "User", action = "Index" }));
                     }
                 }
+
+                _rep.CloseConnection();
             }
         }
     }

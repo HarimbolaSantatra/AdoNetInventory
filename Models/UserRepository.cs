@@ -17,7 +17,7 @@ namespace AppInventaire.Models
             if (reader.HasRows)
             {
                 output = new List<User>();
-
+                RoleRepository _role_rep = new RoleRepository();
                 while (reader.Read())
                 {
                     User current_user = new User
@@ -26,10 +26,12 @@ namespace AppInventaire.Models
                         FirstName = Validation.StringOrEmpty(reader["FirstName"].ToString()),
                         LastName = Validation.StringOrEmpty(reader["LastName"].ToString()),
                         Email = Validation.StringOrEmpty(reader["Email"].ToString()),
-                        Password = Validation.StringOrEmpty(reader["Password"].ToString())
+                        Password = Validation.StringOrEmpty(reader["Password"].ToString()),
+                        userRole = _role_rep.FetchSingle(int.Parse(reader["role_id"].ToString()))
                     };
                     output.Add(current_user);
                 }
+                _role_rep.CloseConnection();
             }
             reader.Close();
             return output;
@@ -44,7 +46,7 @@ namespace AppInventaire.Models
             if (reader.HasRows)
             {
                 output = new List<User>();
-
+                RoleRepository _role_rep = new RoleRepository();
                 while (reader.Read())
                 {
                     User current_User = new User
@@ -53,12 +55,49 @@ namespace AppInventaire.Models
                         FirstName = Validation.StringOrEmpty(reader["FirstName"].ToString()),
                         LastName = Validation.StringOrEmpty(reader["LastName"].ToString()),
                         Email = Validation.StringOrEmpty(reader["Email"].ToString()),
-                        Password = Validation.StringOrEmpty(reader["Password"].ToString())
+                        Password = Validation.StringOrEmpty(reader["Password"].ToString()),
+                        userRole = _role_rep.FetchSingle(int.Parse(reader["role_id"].ToString()))
                     };
                     output.Add(current_User);
                 }
+                _role_rep.CloseConnection();
             }
             reader.Close();
+            return output.First();
+        }
+
+        public User FetchByEmail(string searchQuery) // MBOLA TSY METY
+        {
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM User WHERE email=@searchQuery", _con);
+            cmd.Parameters.AddWithValue("@searchQuery", searchQuery);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            List<User> output = null;
+            if (reader.HasRows)
+            {
+                output = new List<User>();
+                RoleRepository _role_rep = new RoleRepository();
+                while (reader.Read())
+                {
+                    User current_User = new User
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        FirstName = Validation.StringOrEmpty(reader["FirstName"].ToString()),
+                        LastName = Validation.StringOrEmpty(reader["LastName"].ToString()),
+                        Email = Validation.StringOrEmpty(reader["Email"].ToString()),
+                        Password = Validation.StringOrEmpty(reader["Password"].ToString()),
+                        userRole = _role_rep.FetchSingle(int.Parse(reader["role_id"].ToString()))
+                    };
+                    output.Add(current_User);
+                }
+                _role_rep.CloseConnection();
+            }
+            reader.Close();
+
+            if (output == null)
+            {
+                return new User();
+            }
             return output.First();
         }
 

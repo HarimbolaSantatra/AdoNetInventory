@@ -7,6 +7,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Models
 {
+    [AuthorizeCustom(Roles = "Admin")]
     public class ComputerRepository : BaseRepository
     {
         // Creer un fonction Fetch() qui retourne un liste d'object du model

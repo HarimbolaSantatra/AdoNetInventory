@@ -9,7 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
-    [AuthorizeCustomAttribute(Users = "Smartlight@gmail.com" )]
+    [AuthorizeCustom(Roles = "Admin" )]
     public class ComputerController : Controller
     {
         ComputerRepository _rep = new ComputerRepository();
