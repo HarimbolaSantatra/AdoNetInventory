@@ -1,0 +1,36 @@
+﻿<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-info my-1" data-toggle="modal" data-target="#brandModal">
+    Ajouter un rôle
+</button>
+
+<!-- Add Computer Brand Modal -->
+<div class="modal fade" id="brandModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel"> "Ajout - Rôle" </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- CHAMP AJOUT -->
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="roleInput">Rôle</label>
+                        <input class="form-control" id="brandInput" name="roleInput"
+                               aria-describedby="brandHelp" placeholder="Nom de la marque">
+                        <small id="roleHelp" class="form-text text-muted"> Champ Requis </small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary"> Ajouter </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

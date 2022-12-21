@@ -24,6 +24,7 @@
             <th> Nom </th>
             <th> Prénom </th>
             <th> Adresse Mail </th>
+            <th> Rôle </th>
             <th></th>
         </tr>
     </thead>
@@ -35,6 +36,7 @@
             <td> @Html.DisplayFor(model => User.LastName) </td>
             <td> @Html.DisplayFor(model => User.FirstName) </td>
             <td> @Html.DisplayFor(model => User.Email) </td>
+            <td> @Html.DisplayFor(model => User.userRole.RoleName) </td>
             <td>
                 <!-- BUTTON GROUP -->
                 <div class="btn-group" role="group" aria-label="Action Group">
