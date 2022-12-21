@@ -56,5 +56,14 @@ namespace AppInventaire.Models
             reader.Close();
             return output.First();
         }
+
+        public void AddRole(string rolename)
+        {
+            string cmd_string = $"INSERT INTO role(rolename) VALUES (@rolename)";
+            MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+            cmd.Parameters.AddWithValue("@rolename", rolename);
+            cmd.ExecuteNonQuery();
+            CloseConnection();
+        }
     }
 }

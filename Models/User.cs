@@ -49,9 +49,11 @@ namespace AppInventaire.Models
                 RoleSelectListItem.Add(new SelectListItem()
                 {
                     Text = $"{ro.RoleName}",
-                    Value = $"{ro.RoleName}"
+                    // Value must be a 'Role' object
+                    Value = $"{ro}"
                 });
             };
+            _rep.CloseConnection();
             return RoleSelectListItem;
         }
 

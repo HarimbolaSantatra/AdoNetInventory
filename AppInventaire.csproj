@@ -444,6 +444,7 @@
     <Content Include="Views\Shared\_Modal_CreateBrand.cshtml" />
     <Content Include="Views\Shared\_Modal_CreateType.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\_Modal_CreateRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

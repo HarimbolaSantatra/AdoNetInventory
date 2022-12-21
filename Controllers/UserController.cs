@@ -29,6 +29,13 @@ namespace AppInventaire.Controllers
         {
             if (Request.HttpMethod == "POST")
             {
+                if (collection["roleInput"] != null && !String.IsNullOrWhiteSpace(collection["roleInput"]))
+                {
+                    RoleRepository _role_rep = new RoleRepository();
+                    _role_rep.AddRole(collection["roleInput"].ToString());
+                    _role_rep.CloseConnection();
+                }
+
                 if (ModelState.IsValid)
                 {
                     string FirstName = Validation.StringOrNull(collection["FirstName"]);
@@ -53,6 +60,14 @@ namespace AppInventaire.Controllers
             User single_User = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
+
+                if (collection["roleInput"] != null && !String.IsNullOrWhiteSpace(collection["roleInput"]))
+                {
+                    RoleRepository _role_rep = new RoleRepository();
+                    _role_rep.AddRole(collection["roleInput"].ToString());
+                    _role_rep.CloseConnection();
+                }
+
                 if (ModelState.IsValid)
                 {
                     string FirstName = Validation.StringOrNull(collection["FirstName"]);
