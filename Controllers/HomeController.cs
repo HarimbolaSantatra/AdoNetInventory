@@ -9,9 +9,9 @@ using System.Web.Security;
 
 namespace AppInventaire.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index(FormCollection collection)
         {
             List<Search> searchResult = null;

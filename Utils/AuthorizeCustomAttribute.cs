@@ -33,7 +33,7 @@ namespace AppInventaire.Utils
                     {
                         // Redirect to error page
                         filterContext.Result = new RedirectToRouteResult(new
-                            RouteValueDictionary(new { controller = "User", action = "Index" }));
+                            RouteValueDictionary(new { controller = "Error", action = "AccessDenied" }));
                     }
                 }
 
