@@ -9,7 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
-    [AuthorizeCustom(Roles = "Admin" )]
+    [Authorize]
     public class ComputerController : Controller
     {
         ComputerRepository _rep = new ComputerRepository();
@@ -26,6 +26,7 @@ namespace AppInventaire.Controllers
             return View(Computers);
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Create(Computer computer_instance, FormCollection collection)
         {
             ComputerRepository _rep = new ComputerRepository();
@@ -64,7 +65,8 @@ namespace AppInventaire.Controllers
             _rep.CloseConnection();
             return View(single_computer);
         }
-        
+
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Edit(int id, Computer computer_instance, FormCollection collection)
         {
             Computer single_computer = _rep.FetchSingle(id);
@@ -97,6 +99,7 @@ namespace AppInventaire.Controllers
             return View(single_computer);
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             Computer single_computer = _rep.FetchSingle(id);

@@ -9,6 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
         ItemRepository _rep = new ItemRepository();
@@ -18,7 +19,6 @@ namespace AppInventaire.Controllers
             ItemRepository _rep = new ItemRepository();
         }
 
-        [Authorize]
         public ActionResult Index()
         {
             List<Item> items = _rep.Fetch();
@@ -63,7 +63,6 @@ namespace AppInventaire.Controllers
             return View(item_instance);
         }
 
-        [Authorize]
         public ActionResult Details(int id)
         {
             List<Item> items = _rep.Fetch();

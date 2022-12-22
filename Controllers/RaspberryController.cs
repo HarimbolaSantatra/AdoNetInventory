@@ -9,6 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
+    [Authorize]
     public class RaspberryController : Controller
     {
         RaspberryRepository _rep = new RaspberryRepository();
@@ -18,7 +19,6 @@ namespace AppInventaire.Controllers
             RaspberryRepository _rep = new RaspberryRepository();
         }
 
-        [Authorize]
         public ActionResult Index()
         {
             // Extraire les Raspberrys
@@ -46,12 +46,13 @@ namespace AppInventaire.Controllers
             }
             return View();
         }
-        [Authorize]
+
         public ActionResult Details(int id)
         {
             Raspberry single_Raspberry = _rep.FetchSingle(id);
             return View(single_Raspberry);
         }
+
 
         [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Edit(Raspberry rasp_instance, int id, FormCollection collection)
@@ -73,6 +74,7 @@ namespace AppInventaire.Controllers
             }
             return View(single_Raspberry);
         }
+
 
         [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Delete(int id)

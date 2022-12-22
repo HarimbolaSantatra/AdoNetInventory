@@ -9,6 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
+    [Authorize]
     [AuthorizeCustom(Roles = "Admin")]
     public class UserController : Controller
     {
