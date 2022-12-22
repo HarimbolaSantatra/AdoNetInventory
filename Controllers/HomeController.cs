@@ -77,7 +77,10 @@ namespace AppInventaire.Controllers
                     Session["Email"] = LoginEmail;
 
                     UserRepository _user_rep = new UserRepository();
-                    @Session["userRole"] = _user_rep.FetchByEmail(Session["Email"].ToString()).userRole.RoleName;
+                    User loggedUser = _user_rep.FetchByEmail(Session["Email"].ToString());
+                    Session["userRole"] = loggedUser.userRole.RoleName;
+                    Session["userId"] = loggedUser.ID;
+                    _user_rep.CloseConnection();
                     return RedirectToAction("Index", "Home");
                 }
             }
