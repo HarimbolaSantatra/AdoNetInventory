@@ -68,6 +68,7 @@ namespace AppInventaire.Controllers
                     RoleRepository _role_rep = new RoleRepository();
                     _role_rep.AddRole(collection["roleInput"].ToString());
                     _role_rep.CloseConnection();
+                    return RedirectToAction("Edit", new { id = id });
                 }
 
                 if (ModelState.IsValid)
