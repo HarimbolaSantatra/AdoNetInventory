@@ -101,32 +101,34 @@ namespace AppInventaire.Models
             return output.First();
         }
 
-        public void AddUser(string firstname, string lastname, string email, string password)
+        public void AddUser(string firstname, string lastname, string email, string password, int role_id)
         {
             // string that begin with @ are SqlParameter
-            string cmd_string = $"INSERT INTO User(firstname, lastname, email, password) " +
-                $"VALUES (@firstname, @lastname, @email, @password)";
+            string cmd_string = $"INSERT INTO User(firstname, lastname, email, password, role_id) " +
+                $"VALUES (@firstname, @lastname, @email, @password, @role_id)";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
             cmd.Parameters.AddWithValue("@firstname", firstname);
             cmd.Parameters.AddWithValue("@lastname", lastname);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@role_id", role_id);
 
             cmd.ExecuteNonQuery();
             CloseConnection();
         }
 
-        public void EditUser(int id, string firstname, string lastname, string email, string password)
+        public void EditUser(int id, string firstname, string lastname, string email, string password, int role_id)
         {
             string cmd_string = $"UPDATE User SET firstname=@firstname, lastname=@lastname, " +
-                $"email=@email, password=@password WHERE ID={id}";
+                $"email=@email, password=@password, role_id=@role_id WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
             cmd.Parameters.AddWithValue("@firstname", firstname);
             cmd.Parameters.AddWithValue("@lastname", lastname);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@role_id", role_id);
 
             cmd.ExecuteNonQuery();
             CloseConnection();

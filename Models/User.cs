@@ -50,7 +50,7 @@ namespace AppInventaire.Models
                 {
                     Text = $"{ro.RoleName}",
                     // Value must be a 'Role' object
-                    Value = $"{ro}"
+                    Value = $"{ro.ID}"
                 });
             };
             _rep.CloseConnection();

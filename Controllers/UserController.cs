@@ -42,7 +42,8 @@ namespace AppInventaire.Controllers
                     string LastName = Validation.StringOrNull(collection["LastName"]);
                     string Email = Validation.StringOrNull(collection["Email"]);
                     string Password = Validation.StringOrNull(collection["Password"]);
-                    _rep.AddUser(FirstName, LastName, Email, Password);
+                    int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
+                    _rep.AddUser(FirstName, LastName, Email, Password, userRoleId);
                     return RedirectToAction("Index");
                 }
             }
@@ -74,7 +75,8 @@ namespace AppInventaire.Controllers
                     string LastName = Validation.StringOrNull(collection["LastName"]);
                     string Email = Validation.StringOrNull(collection["Email"]);
                     string Password = Validation.StringOrNull(collection["Password"]);
-                    _rep.EditUser(id, FirstName, LastName, Email, Password);
+                    int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
+                    _rep.EditUser(id, FirstName, LastName, Email, Password, userRoleId);
                     return RedirectToAction("Index");
                 }
             }
