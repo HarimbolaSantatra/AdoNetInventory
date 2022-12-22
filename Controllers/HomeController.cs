@@ -75,7 +75,10 @@ namespace AppInventaire.Controllers
                     );
 
                     string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
+                    Session["Email"] = LoginEmail;
 
+                    UserRepository _user_rep = new UserRepository();
+                    @Session["userRole"] = _user_rep.FetchByEmail(Session["Email"].ToString()).userRole.RoleName;
                     return RedirectToAction("Index", "Home");
                 }
             }

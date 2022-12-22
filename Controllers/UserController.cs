@@ -9,7 +9,7 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
-    [Authorize]
+    [AuthorizeCustom(Roles = "Admin")]
     public class UserController : Controller
     {
         UserRepository _rep = new UserRepository();
@@ -46,7 +46,7 @@ namespace AppInventaire.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View();
+            return View(user_instance);
         }
 
         public ActionResult Details(int id)

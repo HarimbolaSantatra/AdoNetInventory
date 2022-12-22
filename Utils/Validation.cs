@@ -43,6 +43,15 @@ namespace AppInventaire.Utils
             return int.Parse(val.ToString());
         }
 
+        public static int IntOrDefault(string val, int default_value)
+        {
+            if (val == "NULL" || string.IsNullOrWhiteSpace(val) || val == null)
+            {
+                return default_value;
+            }
+            return int.Parse(val.ToString());
+        }
+
         public static string FloatOrNull(string val)
         {
             // Return "NULL" if val is not a float

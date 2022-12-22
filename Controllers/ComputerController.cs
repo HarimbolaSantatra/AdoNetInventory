@@ -64,7 +64,7 @@ namespace AppInventaire.Controllers
             _rep.CloseConnection();
             return View(single_computer);
         }
-
+        
         public ActionResult Edit(int id, Computer computer_instance, FormCollection collection)
         {
             Computer single_computer = _rep.FetchSingle(id);

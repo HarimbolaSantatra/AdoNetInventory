@@ -42,8 +42,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="fa-solid fa-circle-user mr-2"></i>
-                        <!-- Afficher username de l'utilisateur connecté --> 
-                        @HttpContext.Current.User.Identity.Name
+                        <!-- Afficher username de l'utilisateur connecté -->
+                        @Session["email"], @Session["userRole"]
                     </a>
                 </li>
                 <li class="nav-item">

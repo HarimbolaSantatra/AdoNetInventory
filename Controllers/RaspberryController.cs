@@ -9,7 +9,6 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
-    [Authorize]
     public class RaspberryController : Controller
     {
         RaspberryRepository _rep = new RaspberryRepository();
@@ -19,6 +18,7 @@ namespace AppInventaire.Controllers
             RaspberryRepository _rep = new RaspberryRepository();
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             // Extraire les Raspberrys
@@ -27,6 +27,7 @@ namespace AppInventaire.Controllers
 
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Create(Raspberry rasp_instance, FormCollection collection )
         {
             if (Request.HttpMethod == "POST")
@@ -45,13 +46,14 @@ namespace AppInventaire.Controllers
             }
             return View();
         }
-
+        [Authorize]
         public ActionResult Details(int id)
         {
             Raspberry single_Raspberry = _rep.FetchSingle(id);
             return View(single_Raspberry);
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Edit(Raspberry rasp_instance, int id, FormCollection collection)
         {
             Raspberry single_Raspberry = _rep.FetchSingle(id);
@@ -72,6 +74,7 @@ namespace AppInventaire.Controllers
             return View(single_Raspberry);
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             List<Raspberry> Raspberrys = _rep.Fetch();
@@ -84,6 +87,7 @@ namespace AppInventaire.Controllers
             return View(single_Raspberry);
         }
 
+        [Authorize]
         public ActionResult PrintList(List<Raspberry> Raspberrys)
         {
             List<Raspberry> RaspberryList = _rep.Fetch();
@@ -98,6 +102,7 @@ namespace AppInventaire.Controllers
             return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
         }
 
+        [Authorize]
         public ActionResult PrintDetails(int id)
         {
             Raspberry raspberry = _rep.FetchSingle(id);

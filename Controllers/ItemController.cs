@@ -9,7 +9,6 @@ using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
-    [Authorize]
     public class ItemController : Controller
     {
         ItemRepository _rep = new ItemRepository();
@@ -26,6 +25,7 @@ namespace AppInventaire.Controllers
                 return View(items);
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Create(Item item_instance, FormCollection collection)
         {
             ItemRepository item_repo = new ItemRepository();
@@ -63,6 +63,7 @@ namespace AppInventaire.Controllers
             return View(item_instance);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             List<Item> items = _rep.Fetch();
@@ -70,6 +71,7 @@ namespace AppInventaire.Controllers
             return View(single_item);
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Edit(Item item_instance, int id, FormCollection collection)
         {
             List<Item> items = _rep.Fetch();
@@ -107,6 +109,7 @@ namespace AppInventaire.Controllers
             return View(single_item);
         }
 
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             List<Item> items = _rep.Fetch();

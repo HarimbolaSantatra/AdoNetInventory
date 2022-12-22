@@ -27,7 +27,7 @@ namespace AppInventaire.Models
                         LastName = Validation.StringOrEmpty(reader["LastName"].ToString()),
                         Email = Validation.StringOrEmpty(reader["Email"].ToString()),
                         Password = Validation.StringOrEmpty(reader["Password"].ToString()),
-                        userRole = _role_rep.FetchSingle(int.Parse(reader["role_id"].ToString()))
+                        userRole = _role_rep.FetchSingle(Validation.IntOrDefault(reader["role_id"].ToString(), 1))
                     };
                     output.Add(current_user);
                 }
@@ -56,7 +56,7 @@ namespace AppInventaire.Models
                         LastName = Validation.StringOrEmpty(reader["LastName"].ToString()),
                         Email = Validation.StringOrEmpty(reader["Email"].ToString()),
                         Password = Validation.StringOrEmpty(reader["Password"].ToString()),
-                        userRole = _role_rep.FetchSingle(int.Parse(reader["role_id"].ToString()))
+                        userRole = _role_rep.FetchSingle(Validation.IntOrDefault(reader["role_id"].ToString(), 1))
                     };
                     output.Add(current_User);
                 }
@@ -66,10 +66,10 @@ namespace AppInventaire.Models
             return output.First();
         }
 
-        public User FetchByEmail(string searchQuery) // MBOLA TSY METY
+        public User FetchByEmail(string emailQuery) // MBOLA TSY METY
         {
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM User WHERE email=@searchQuery", _con);
-            cmd.Parameters.AddWithValue("@searchQuery", searchQuery);
+            cmd.Parameters.AddWithValue("@searchQuery", emailQuery);
             MySqlDataReader reader = cmd.ExecuteReader();
 
             List<User> output = null;
