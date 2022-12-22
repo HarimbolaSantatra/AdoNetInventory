@@ -28,6 +28,7 @@
                 new { @class = "form-control" }
                 )
         </div>
+        <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
     </div>
     @Html.Partial("_Modal_CreateBrand")
 
@@ -35,7 +36,6 @@
         @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -43,7 +43,6 @@
         @Html.LabelFor(model => model.OS, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.OS, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.OS, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -51,7 +50,6 @@
         @Html.LabelFor(model => model.Hostname, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Hostname, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Hostname, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -59,7 +57,6 @@
         @Html.LabelFor(model => model.Processor, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Processor, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Processor, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -67,7 +64,6 @@
         @Html.LabelFor(model => model.RamGB, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.RamGB, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RamGB, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -75,7 +71,6 @@
         @Html.LabelFor(model => model.GraphCard, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.GraphCard, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GraphCard, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -83,7 +78,6 @@
         @Html.LabelFor(model => model.GraphCardGB, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.GraphCardGB, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GraphCardGB, "", new { @class = "text-danger" })
         </div>
     </div>
 
