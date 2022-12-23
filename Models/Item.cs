@@ -71,5 +71,13 @@ namespace AppInventaire.Models
             return GetTypeSelectListItems;
         }
 
+        public List<List<Item>> FetchSample(int samplePerPage)
+        {
+            ItemRepository _rep = new ItemRepository();
+            List<List<Item>> output = _rep.FetchSample(samplePerPage);
+            _rep.CloseConnection();
+            return output;
+        }
+
     }
 }

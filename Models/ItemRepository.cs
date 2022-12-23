@@ -42,6 +42,28 @@ namespace AppInventaire.Models
             return output;
         }
 
+        public List<List<Item>> FetchSample(int samplePerPage)
+        {
+            // Fetch all instance
+            List<Item> Rows = Fetch();
+            int totalSample = Rows.Count;
+
+            List<List<Item>> output = new List<List<Item>>();
+            List<Item> samples = new List<Item>();
+            int n = 0;
+            while(int )
+            {
+                while (n < samplePerPage)
+                {
+                    samples.Add(Rows[n]);
+                    n++;
+                }
+                output.Add(samples);
+            }
+            return output;
+
+        }
+
         public Item FetchSingle(int id)
         {
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM Item WHERE id={id}", _con);

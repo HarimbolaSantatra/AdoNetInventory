@@ -19,10 +19,13 @@ namespace AppInventaire.Controllers
             ItemRepository _rep = new ItemRepository();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int sample_index=0)
         {
-            List<Item> items = _rep.Fetch();
-                return View(items);
+            List<List<Item>> SItems = _rep.FetchSample(5); // Sampled Items
+            List<Item> ItemsSample = SItems[sample_index];
+            ViewBag.sample_index = sample_index;
+            ViewBag.nbPage = ItemsSample.Count;
+            return View(ItemsSample);
         }
 
         [AuthorizeCustom(Roles = "Admin")]
