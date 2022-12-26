@@ -4,7 +4,7 @@
     ViewBag.Title = "Materiel";
 
     int nbPage = ViewBag.nbPage;
-    int current_page = ViewBag.current_page;
+    int current_index = ViewBag.current_index;
 }
 
 <div class="d-flex justify-content-end">
@@ -87,13 +87,13 @@
     <ul class="pagination">
 
         <li class="page-item">
-            <a class="page-link" href="/Item/Index/@(current_page++)">Precedent</a>
+            <a class="page-link" href="/Item/Index/@(current_index-1)">Precedent</a>
         </li>
 
         @for (int i = 0; i < nbPage; i++)
         {
             string active_class;
-            if (current_page == i)
+            if (current_index == i)
             {
                 active_class = "active";
             }
@@ -102,14 +102,14 @@
                 active_class = String.Empty;
             }
             <li class="page-item">
-                <a class="page-link @active_class" href="/Item/Index/@i">
+                <a class="page-link " href="/Item/Index/@i">
                     @(i+1)
                 </a>
             </li>
         }
 
         <li class="page-item">
-            <a class="page-link" href="/Item/Index/@(current_page++)">Suivant</a>
+            <a class="page-link" href="/Item/Index/@(current_index+1)">Suivant</a>
         </li>
 
     </ul>

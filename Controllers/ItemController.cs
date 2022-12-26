@@ -26,11 +26,11 @@ namespace AppInventaire.Controllers
             int nbRecord = _rep.FetchRecordNumber();
             int nbPage = (int) Math.Ceiling((double)nbRecord / samplePerPage);
 
-            id = Validation.ForceInRange(id, 0, nbPage);
+            int currentIndex = Validation.ForceInRange(id, 0, nbPage);
 
-            List<Item> Items = _rep.FetchSample(samplePerPage, id); // Sampled Items
+            List<Item> Items = _rep.FetchSample(samplePerPage, samplePerPage * currentIndex); // Sampled Items
 
-            ViewBag.current_page = id ;
+            ViewBag.current_index = currentIndex;
             ViewBag.nbPage = nbPage;
 
             _rep.CloseConnection();

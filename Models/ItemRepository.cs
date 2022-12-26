@@ -44,7 +44,7 @@ namespace AppInventaire.Models
 
         public List<Item> FetchSample(int samplePerPage, int offset)
         {
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM item LIMIT {samplePerPage} OFFSET {offset}", _con);
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM item ORDER BY id LIMIT {samplePerPage} OFFSET {offset}", _con);
             MySqlDataReader reader = cmd.ExecuteReader();
             List<Item> output = null;
             if (reader.HasRows)
