@@ -83,7 +83,8 @@
 </table>
 
 <!-- Pagination -->
-<nav aria-label="Page navigation">
+<nav class="col-md-4 mx-auto d-bloc"
+     aria-label="Page navigation">
     <ul class="pagination">
 
         <li class="page-item">
@@ -101,8 +102,8 @@
             {
                 active_class = String.Empty;
             }
-            <li class="page-item">
-                <a class="page-link " href="/Item/Index/@i">
+            <li class="page-item @active_class">
+                <a class="page-link" href="/Item/Index/@i">
                     @(i+1)
                 </a>
             </li>
