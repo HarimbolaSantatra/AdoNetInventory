@@ -27,7 +27,7 @@ namespace AppInventaire.Controllers
                 }
             }
             
-            return View(searchResult);
+            return View();
         }
 
         public ActionResult About()

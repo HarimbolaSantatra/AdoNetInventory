@@ -18,9 +18,11 @@
         @foreach (var search in Model)
         {
             <tr>
-                <td> <a href="@search.ModelType/Details/@search.ID"> @Html.DisplayFor(model => search.ModelType) </a> </td>
-                <td> @Html.DisplayFor(model => search.ID) </td>
-                <td> @Html.DisplayFor(model => search.Column): @Html.DisplayFor(model => search.ColumnValue) </td>
+                <td> 
+                    <a href="~/Item/Details/4"> @search.ModelType </a>
+                </td>
+                <td> @search.ID </td>
+                <td> @search.Column: @search.ColumnValue </td>
             </tr>
         }
     </tbody>
