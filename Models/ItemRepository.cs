@@ -74,7 +74,8 @@ namespace AppInventaire.Models
         {
             // Fetch page number for pagination
             MySqlCommand page_nb_cmd = new MySqlCommand("SELECT COUNT(*) FROM item", _con);
-            return (int) page_nb_cmd.ExecuteScalar();
+            object result = page_nb_cmd.ExecuteScalar();
+            return Convert.ToInt32(result);
         }
 
         public Item FetchSingle(int id)

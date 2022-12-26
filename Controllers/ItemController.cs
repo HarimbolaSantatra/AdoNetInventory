@@ -19,7 +19,7 @@ namespace AppInventaire.Controllers
             ItemRepository _rep = new ItemRepository();
         }
 
-        public ActionResult Index(int sample_index=0)
+        public ActionResult Index(int sample_index)
         {
             int samplePerPage = 5;  // Par exemple
             List<Item> Items = _rep.FetchSample(samplePerPage, sample_index); // Sampled Items
