@@ -26,8 +26,12 @@ namespace AppInventaire.Controllers
             int nbRecord = _rep.FetchRecordNumber();
             int nbPage = (int) Math.Ceiling((double)nbRecord / samplePerPage);
 
-            int currentIndex = Validation.ForceInRange(id, 0, nbPage);
-
+            int currentIndex = id;
+            if (!Validation.IsInRange(id, 0, nbPage-1))
+            {
+                currentIndex = Validation.ForceInRange(id, 0, nbPage - 1);
+                return RedirectToAction("Index", new { id = currentIndex });
+            }
             List<Item> Items = _rep.FetchSample(samplePerPage, samplePerPage * currentIndex); // Sampled Items
 
             ViewBag.current_index = currentIndex;

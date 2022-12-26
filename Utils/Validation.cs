@@ -107,5 +107,14 @@ namespace AppInventaire.Utils
             return input;
         }
 
+        public static bool IsInRange(int input, int min, int max)
+        {
+            if (input > max || input < min)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
