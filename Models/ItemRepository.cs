@@ -46,19 +46,22 @@ namespace AppInventaire.Models
         {
             // Fetch all instance
             List<Item> Rows = Fetch();
-            int totalSample = Rows.Count;
 
             List<List<Item>> output = new List<List<Item>>();
+            int row_i = 0;  // index of the original Rows
             List<Item> samples = new List<Item>();
-            int n = 0;
-            while(int )
+            int sample_i = 0;  // Sample index
+            while (sample_i < samplePerPage)
             {
-                while (n < samplePerPage)
+                while(row_i < Rows.Count)
                 {
-                    samples.Add(Rows[n]);
-                    n++;
+                    samples.Add(Rows[row_i]);
+                    sample_i++;
+                    row_i++;
                 }
                 output.Add(samples);
+                samples = new List<Item>();
+                sample_i = 0;
             }
             return output;
 

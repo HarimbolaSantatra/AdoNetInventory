@@ -24,7 +24,7 @@ namespace AppInventaire.Controllers
             List<List<Item>> SItems = _rep.FetchSample(5); // Sampled Items
             List<Item> ItemsSample = SItems[sample_index];
             ViewBag.sample_index = sample_index;
-            ViewBag.nbPage = ItemsSample.Count;
+            ViewBag.nbPage = SItems.Count;
             return View(ItemsSample);
         }
 

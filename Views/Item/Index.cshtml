@@ -89,13 +89,13 @@
         <li class="page-item disabled">
             <a class="page-link" href="/Item/Index/@(sample_index-1)" tabindex="-1">Previous</a>
         </li>
-
         @for (int i = 0; i < nbPage; i++)
         {
-            <li class="page-item"><a class="page-link" href="/Item/Index/@i"> 
-                @(i+1)
-                @*<span class="sr-only">(current)</span>*@ 
-            </a></li>
+            <li class="page-item">
+                <a class="page-link" href="/Item/Index/@i">
+                    @(i+1)
+                </a>
+            </li>
         }
 
         <li class="page-item">
