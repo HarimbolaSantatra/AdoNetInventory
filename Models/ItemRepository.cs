@@ -42,11 +42,39 @@ namespace AppInventaire.Models
             return output;
         }
 
-        public List<List<Item>> FetchSample(int samplePerPage)
+        public List<Item> FetchSample(int samplePerPage, int offset)
         {
-            // Fetch all instance
-            List<Item> Rows = Fetch();
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM item LIMIT {samplePerPage} OFFSET {offset}", _con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            List<Item> output = null;
+            if (reader.HasRows)
+            {
+                output = new List<Item>();
+                while (reader.Read())
+                {
+                    Item current_item = new Item
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        Type = Validation.StringOrEmpty(reader["Type"].ToString()),
+                        Brand = Validation.StringOrEmpty(reader["Brand"].ToString()),
+                        Model = Validation.StringOrEmpty(reader["Model"].ToString()),
+                        SerialNumber = Validation.StringOrEmpty(reader["SerialNumber"].ToString()),
+                        CreationDate = DateTime.Parse(reader["creation_date"].ToString()),
+                        Quantity = Validation.IntOrZero(reader["Quantity"].ToString()),
+                        Comment = Validation.StringOrEmpty(reader["Comment"].ToString())
+                    };
+                    output.Add(current_item);
+                }
+            }
+            reader.Close(); cmd.Dispose();
+            return output;
+        }
 
+        public int FetchRecordNumber()
+        {
+            // Fetch page number for pagination
+            MySqlCommand page_nb_cmd = new MySqlCommand("SELECT COUNT(*) FROM item", _con);
+            return (int) page_nb_cmd.ExecuteScalar();
         }
 
         public Item FetchSingle(int id)

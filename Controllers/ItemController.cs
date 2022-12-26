@@ -21,11 +21,13 @@ namespace AppInventaire.Controllers
 
         public ActionResult Index(int sample_index=0)
         {
-            List<List<Item>> SItems = _rep.FetchSample(5); // Sampled Items
-            List<Item> ItemsSample = SItems[sample_index];
-            ViewBag.sample_index = sample_index;
-            ViewBag.nbPage = SItems.Count;
-            return View(ItemsSample);
+            int samplePerPage = 5;  // Par exemple
+            List<Item> Items = _rep.FetchSample(samplePerPage, sample_index); // Sampled Items
+            ViewBag.sample_index = sample_index ;
+            int nbRecord = _rep.FetchRecordNumber();
+            ViewBag.nbPage = (int) Math.Ceiling((double) nbRecord / samplePerPage);
+            _rep.CloseConnection();
+            return View(Items);
         }
 
         [AuthorizeCustom(Roles = "Admin")]
