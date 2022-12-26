@@ -19,13 +19,20 @@ namespace AppInventaire.Controllers
             ItemRepository _rep = new ItemRepository();
         }
 
-        public ActionResult Index(int sample_index)
+        public ActionResult Index(int id)
         {
             int samplePerPage = 5;  // Par exemple
-            List<Item> Items = _rep.FetchSample(samplePerPage, sample_index); // Sampled Items
-            ViewBag.sample_index = sample_index ;
+
             int nbRecord = _rep.FetchRecordNumber();
-            ViewBag.nbPage = (int) Math.Ceiling((double) nbRecord / samplePerPage);
+            int nbPage = (int) Math.Ceiling((double)nbRecord / samplePerPage);
+
+            id = Validation.ForceInRange(id, 0, nbPage);
+
+            List<Item> Items = _rep.FetchSample(samplePerPage, id); // Sampled Items
+
+            ViewBag.current_page = id ;
+            ViewBag.nbPage = nbPage;
+
             _rep.CloseConnection();
             return View(Items);
         }
