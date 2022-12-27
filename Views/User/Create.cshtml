@@ -13,7 +13,7 @@
 {
     @Html.AntiForgeryToken()
 
-<form class="form-horizontal">
+<div class="form-horizontal">
     <h4>Utilisateur</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -62,7 +62,7 @@
             <input type="submit" value="Ajouter" class="btn btn-primary" />
         </div>
     </div>
-</form>
+</div>
 }
 
 <div>
