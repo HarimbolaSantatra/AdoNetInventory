@@ -7,11 +7,13 @@ namespace AppInventaire.Utils
 {
     public class Password
     {
-        public string passwd;
-        Password(string passwd)
+        private string passwd;
+        Password(string password)
         {
-            this.passwd = passwd;
+            passwd = password.Trim(); // Remove leading and trailing whitespace
         }
+
+        
         public bool CheckSpecialChar()
         { 
             List<string> special_chars = new List<string>()
@@ -22,10 +24,33 @@ namespace AppInventaire.Utils
             return special_chars.Any(s => passwd.Contains(s));
         }
     
-        public bool CheckLen(string passwd)
+        public bool CheckLen()
         {
             if(passwd.Length >= 8)
             { return true; }
+            return false;
+        }
+
+        public bool CheckInteger()
+        {
+            return passwd.Any(char.IsDigit);
+        }
+
+        /// <summary>
+        /// Check if the password contains a least both a lower case and an upper case.
+        /// </summary>
+        /// <returns> Bool </returns>
+        public bool CheckCase()
+        {
+            return passwd.Any(char.IsUpper) && passwd.Any(char.IsLower);
+        }
+
+        public bool CheckComplete()
+        {
+            if (this.CheckCase() & this.CheckInteger() & this.CheckLen() & this.CheckSpecialChar())
+            {
+                return true;
+            }
             return false;
         }
     }
