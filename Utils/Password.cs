@@ -7,10 +7,10 @@ namespace AppInventaire.Utils
 {
     public class Password
     {
-        private string passwd;
-        Password(string password)
+        public string password_string;
+        public Password(string password)
         {
-            passwd = password.Trim(); // Remove leading and trailing whitespace
+            this.password_string = password.Trim(); // Remove leading and trailing whitespace
         }
 
         
@@ -21,19 +21,19 @@ namespace AppInventaire.Utils
                 "#","+","£", "é", "§", "?", "!",
                 "-", "è", "_", "à", "=", "^"
             };
-            return special_chars.Any(s => passwd.Contains(s));
+            return special_chars.Any(s => this.password_string.Contains(s));
         }
     
         public bool CheckLen()
         {
-            if(passwd.Length >= 8)
+            if(this.password_string.Length >= 8)
             { return true; }
             return false;
         }
 
         public bool CheckInteger()
         {
-            return passwd.Any(char.IsDigit);
+            return this.password_string.Any(char.IsDigit);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace AppInventaire.Utils
         /// <returns> Bool </returns>
         public bool CheckCase()
         {
-            return passwd.Any(char.IsUpper) && passwd.Any(char.IsLower);
+            return this.password_string.Any(char.IsUpper) && this.password_string.Any(char.IsLower);
         }
 
         public bool CheckComplete()
