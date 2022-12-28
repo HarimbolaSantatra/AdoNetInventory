@@ -105,7 +105,7 @@ namespace AppInventaire.Models
         {
             // string that begin with @ are SqlParameter
             string cmd_string = $"INSERT INTO User(firstname, lastname, email, password, role_id) " +
-                $"VALUES (@firstname, @lastname, @email, @password, @role_id)";
+                $"VALUES (@firstname, @lastname, @email, sha(@password), @role_id)";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
             cmd.Parameters.AddWithValue("@firstname", firstname);
@@ -121,7 +121,7 @@ namespace AppInventaire.Models
         public void EditUser(int id, string firstname, string lastname, string email, string password, int role_id)
         {
             string cmd_string = $"UPDATE User SET firstname=@firstname, lastname=@lastname, " +
-                $"email=@email, password=@password, role_id=@role_id WHERE ID={id}";
+                $"email=@email, password=sha(@password), role_id=@role_id WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
             cmd.Parameters.AddWithValue("@firstname", firstname);
