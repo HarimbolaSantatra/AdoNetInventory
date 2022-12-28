@@ -118,17 +118,27 @@ namespace AppInventaire.Models
             CloseConnection();
         }
 
-        public void EditUser(int id, string firstname, string lastname, string email, string password, int role_id)
+        public void EditUser(int id, string firstname, string lastname, string email, int role_id)
         {
             string cmd_string = $"UPDATE User SET firstname=@firstname, lastname=@lastname, " +
-                $"email=@email, password=sha(@password), role_id=@role_id WHERE ID={id}";
+                $"email=@email, role_id=@role_id WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
             cmd.Parameters.AddWithValue("@firstname", firstname);
             cmd.Parameters.AddWithValue("@lastname", lastname);
             cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@password", password);
             cmd.Parameters.AddWithValue("@role_id", role_id);
+
+            cmd.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+        public void EditPassword(int id,string password)
+        {
+            string cmd_string = $"UPDATE User SET password=sha(@password) WHERE ID={id}";
+            MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+
+            cmd.Parameters.AddWithValue("@password", password);
 
             cmd.ExecuteNonQuery();
             CloseConnection();
