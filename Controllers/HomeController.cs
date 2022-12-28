@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -54,41 +56,47 @@ namespace AppInventaire.Controllers
             if ( !(String.IsNullOrWhiteSpace(LoginEmail)) && !(String.IsNullOrWhiteSpace(LoginPassword)) )
             {
                 UserRepository _rep = new UserRepository();
-                List<User> UserList = _rep.Fetch();
 
-                // Check if User exist/is valid
-                bool doUserExist = (UserList.Any(u => u.Email.ToString() == LoginEmail && u.Password.ToString() == LoginPassword));
-                if (doUserExist)
+                // Fetch user by email
+                User loggedUser;
+                loggedUser = _rep.FetchByEmail(LoginEmail);
+                // Check if User exist
+                if (loggedUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(LoginEmail, false);
+                    string HashedPassword = Operation.Sha1Hash(LoginPassword);
 
-                    // Create cookie ticket 
-                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-                        1,
-                        LoginEmail,
-                        DateTime.Now,
-                        DateTime.Now.AddMinutes(30), // value of time out property
-                        false,                      // Value of 'IsPersistent' property
-                        String.Empty,
-                        FormsAuthentication.FormsCookiePath
-                    );
+                    // Check if Password is true
+                    if( String.Equals(loggedUser.Password, HashedPassword) )
+                    {
+                        FormsAuthentication.SetAuthCookie(LoginEmail, false);
 
-                    string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
-                    Session["Email"] = LoginEmail;
+                        // Create cookie ticket 
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                            1,
+                            LoginEmail,
+                            DateTime.Now,
+                            DateTime.Now.AddMinutes(30), // value of time out property
+                            false,                      // Value of 'IsPersistent' property
+                            String.Empty,
+                            FormsAuthentication.FormsCookiePath
+                        );
 
-                    UserRepository _user_rep = new UserRepository();
-                    User loggedUser = _user_rep.FetchByEmail(Session["Email"].ToString());
-                    Session["userRole"] = loggedUser.userRole.RoleName;
-                    Session["userId"] = loggedUser.ID;
-                    _user_rep.CloseConnection();
-                    return RedirectToAction("Index", "Home");
+                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
+                        // Save logged user info
+                        Session["Email"] = LoginEmail;
+                        Session["userRole"] = loggedUser.userRole.RoleName;
+                        Session["userId"] = loggedUser.ID;
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
+                _rep.CloseConnection();
             }
             return View();
         }
 
         public ActionResult Login()
         {
+            Session.Clear();
             FormsAuthentication.SignOut();
             return View();
         }
@@ -96,6 +104,7 @@ namespace AppInventaire.Controllers
         [Authorize]
         public ActionResult Logout()
         {
+            Session.Clear();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
