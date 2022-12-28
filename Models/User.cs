@@ -28,6 +28,7 @@ namespace AppInventaire.Models
         // Password
         [Display(Name = "Mot De Passe")]
         [Required(ErrorMessage = "Un mot de passe valide est requis !")]
+        [MinLength(8, ErrorMessage = "Mot de passe trop courte !")]
         public string Password { get; set; }
 
         public Boolean IsActive { get; set; }
