@@ -18,6 +18,25 @@
     <link rel="stylesheet" href="~/Content/css/style.css" />
     @RenderSection("style", required: false)
 </head>
+
+
+@{
+    string column_class;
+    string hide_if_not_admin;
+    if (Session["userRole"].ToString() != "admin")
+    {
+        column_class = "col-md-4";
+        hide_if_not_admin = "d-none";
+    }
+    else
+    {
+        column_class = "col-md-3";
+        hide_if_not_admin = " ";
+    }
+    string final_class = column_class + " " + hide_if_not_admin;
+}
+
+
 <body class="sidebar-mini sidebar-collapse">
     <div class="wrapper">
         <!-- Navbar -->
@@ -90,11 +109,11 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item @hide_if_not_admin">
                             <a href="/User/Index" class="nav-link">
                                 <i class="fa-solid fa-circle-user nav-icon"></i>
                                 <p>
-                                   Utilisateurs
+                                    Utilisateurs
                                 </p>
                             </a>
                         </li>
@@ -159,7 +178,3 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-
-
-
-

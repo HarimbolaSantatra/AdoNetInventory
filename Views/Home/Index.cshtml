@@ -3,8 +3,6 @@
     ViewBag.Title = "Accueil";
 }
 
-@section style{}
-
 <style>
     .btn-action {
         width: 150px
@@ -22,8 +20,24 @@
     </div>
 </div>
 
+@{ 
+    string column_class;
+    string hide_if_not_admin;
+    if(Session["userRole"].ToString() != "admin")
+    {
+        column_class = "col-md-4";
+        hide_if_not_admin = "d-none";
+    }
+    else
+    {
+        column_class = "col-md-3";
+        hide_if_not_admin = " ";
+    }
+    string final_class = column_class + " " + hide_if_not_admin;
+}
+
 <div class="row">
-    <div class="col-md-3">
+    <div class="@final_class">
         <div class="small-box bg-info">
             <div class="inner">
                 <h3>Utilisateurs</h3>
@@ -35,7 +49,7 @@
             <a href="/User/Index" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="@column_class">
         <div class="small-box bg-primary">
             <div class="inner">
                 <h3>Ordinateurs</h3>
@@ -47,7 +61,7 @@
             <a href="/Computer/Index/" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="@column_class">
         <div class="small-box bg-success">
             <div class="inner">
                 <h3>Raspberry</h3>
@@ -59,7 +73,7 @@
             <a href="/Raspberry/Index" class="small-box-footer">Voir la liste <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="@column_class">
         <div class="small-box bg-warning">
             <div class="inner">
                 <h3>Accessoires</h3>
@@ -72,6 +86,3 @@
         </div>
     </div>
 </div>
-
-
-@section scripts{} 
