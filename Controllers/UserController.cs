@@ -76,17 +76,26 @@ namespace AppInventaire.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    string Passwd = Validation.StringOrNull(collection["Password"]);
-                    Password password_object = new Password(Passwd);
-                    if (password_object.CheckComplete())
+                    // Check old password
+                    if(collection["OldPassword"] != null && !String.IsNullOrWhiteSpace(collection["OldPassword"]))
                     {
-                        string FirstName = Validation.StringOrNull(collection["FirstName"]);
-                        string LastName = Validation.StringOrNull(collection["LastName"]);
-                        string Email = Validation.StringOrNull(collection["Email"]);
-                        int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
-                        _rep.EditUser(id, FirstName, LastName, Email, password_object.password_string, userRoleId);
-                        return RedirectToAction("Index");
-                    };
+                        string OldPassword = Validation.StringOrNull(collection["OldPassword"]);
+                        if(string.Equals(OldPassword, single_User.Password))
+                        {
+                            // Check new password
+                            string Passwd = Validation.StringOrNull(collection["Password"]);
+                            Password password_object = new Password(Passwd);
+                            if (password_object.CheckComplete())
+                            {
+                                string FirstName = Validation.StringOrNull(collection["FirstName"]);
+                                string LastName = Validation.StringOrNull(collection["LastName"]);
+                                string Email = Validation.StringOrNull(collection["Email"]);
+                                int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
+                                _rep.EditUser(id, FirstName, LastName, Email, password_object.password_string, userRoleId);
+                                return RedirectToAction("Index");
+                            };
+                        }
+                    }
                 }
             }
             return View(single_User);
