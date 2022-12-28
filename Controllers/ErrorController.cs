@@ -18,5 +18,10 @@ namespace AppInventaire.Controllers
         {
             return View();
         }
+        public ActionResult PasswordError(string message)
+        {
+            ViewBag.message = message;
+            return View();
+        }
     }
 }
