@@ -65,7 +65,6 @@ namespace AppInventaire.Controllers
             User single_User = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
-
                 if (collection["roleInput"] != null && !String.IsNullOrWhiteSpace(collection["roleInput"]))
                 {
                     RoleRepository _role_rep = new RoleRepository();
@@ -74,17 +73,18 @@ namespace AppInventaire.Controllers
                     return RedirectToAction("Edit", new { id = id });
                 }
 
-                if (ModelState.IsValid)
+                if (collection["Email"] != null && !String.IsNullOrWhiteSpace(collection["Email"]))
                 {
                     // Check old password
                     if(collection["OldPassword"] != null && !String.IsNullOrWhiteSpace(collection["OldPassword"]))
                     {
                         string OldPassword = Validation.StringOrNull(collection["OldPassword"]);
-                        if(string.Equals(OldPassword, single_User.Password))
+                        string hashedOldPassword = Operation.Sha1Hash(OldPassword);
+                        if(string.Equals(hashedOldPassword, single_User.Password))
                         {
-                            // Check new password
                             string Passwd = Validation.StringOrNull(collection["Password"]);
                             Password password_object = new Password(Passwd);
+                            // Check new password
                             if (password_object.CheckComplete())
                             {
                                 string FirstName = Validation.StringOrNull(collection["FirstName"]);
