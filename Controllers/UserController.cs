@@ -36,16 +36,19 @@ namespace AppInventaire.Controllers
                     _role_rep.AddRole(collection["roleInput"].ToString());
                     _role_rep.CloseConnection();
                 }
-
                 if (ModelState.IsValid)
                 {
-                    string FirstName = Validation.StringOrNull(collection["FirstName"]);
-                    string LastName = Validation.StringOrNull(collection["LastName"]);
-                    string Email = Validation.StringOrNull(collection["Email"]);
-                    string Password = Validation.StringOrNull(collection["Password"]);
-                    int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
-                    _rep.AddUser(FirstName, LastName, Email, Password, userRoleId);
-                    return RedirectToAction("Index");
+                    string Passwd = Validation.StringOrNull(collection["Password"]);
+                    Password password_object = new Password(Passwd);
+                    if(password_object.CheckComplete())
+                    {
+                        string FirstName = Validation.StringOrNull(collection["FirstName"]);
+                        string LastName = Validation.StringOrNull(collection["LastName"]);
+                        string Email = Validation.StringOrNull(collection["Email"]);
+                        int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
+                        _rep.AddUser(FirstName, LastName, Email, password_object.password_string, userRoleId);
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             return View(user_instance);
@@ -73,13 +76,17 @@ namespace AppInventaire.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    string FirstName = Validation.StringOrNull(collection["FirstName"]);
-                    string LastName = Validation.StringOrNull(collection["LastName"]);
-                    string Email = Validation.StringOrNull(collection["Email"]);
-                    string Password = Validation.StringOrNull(collection["Password"]);
-                    int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
-                    _rep.EditUser(id, FirstName, LastName, Email, Password, userRoleId);
-                    return RedirectToAction("Index");
+                    string Passwd = Validation.StringOrNull(collection["Password"]);
+                    Password password_object = new Password(Passwd);
+                    if (password_object.CheckComplete())
+                    {
+                        string FirstName = Validation.StringOrNull(collection["FirstName"]);
+                        string LastName = Validation.StringOrNull(collection["LastName"]);
+                        string Email = Validation.StringOrNull(collection["Email"]);
+                        int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
+                        _rep.EditUser(id, FirstName, LastName, Email, password_object.password_string, userRoleId);
+                        return RedirectToAction("Index");
+                    };
                 }
             }
             return View(single_User);
