@@ -94,28 +94,29 @@ namespace AppInventaire.Controllers
                 if (!String.IsNullOrWhiteSpace(collection["old_password"].ToString()) &&
                     !String.IsNullOrWhiteSpace(collection["new_password"].ToString()) &&
                     !String.IsNullOrWhiteSpace(collection["new_password_confirm"].ToString()))
-                {
-                    Password oldPassword = new Password(collection["old_password"].ToString());
-                    string HashedPassword = Operation.Sha1Hash(oldPassword.password_string);
-                    // Get user password
-                    string user_password_hashed = Operation.Sha1Hash(singleUser.Password);
-                    if (!String.Equals(user_password_hashed, HashedPassword))
+                { 
+                    Password oldPasswordInput = new Password(collection["old_password"].ToString());
+                    string hashedOldPassword = Operation.Sha1Hash(oldPasswordInput.password_string);
+                    if (!String.Equals(singleUser.Password, hashedOldPassword))
                     {
                         // If old password is not correct
-                        return RedirectToAction("PasswordError", "Error");
+                        string Message = "Ancien mot de passe incorrect";
+                        return RedirectToAction("PasswordError", "Error", new { message = Message }); 
                     }
                     
                     if(!String.Equals( collection["new_password"].ToString(), collection["new_password_confirm"].ToString() ))
                     {
-                        // If new password not confirmed
-                        return RedirectToAction("PasswordError", "Error");
+                        // If new password not confirmed 
+                        string Message = "Les deux nouveaux mot de passe ne sont pas similaires.";
+                        return RedirectToAction("PasswordError", "Error", new { message = Message }); 
                     }
 
                     Password newPassword = new Password(collection["new_password"].ToString());
                     if(!newPassword.CheckComplete())
                     {
-                        // Check Password validation
-                        return RedirectToAction("PasswordError", "Error");
+                        // Check Password validation 
+                        string Message = "Nouveau mot de passe de format invalide.";
+                        return RedirectToAction("PasswordError", "Error", new { message=Message }); 
                     }
                     _rep.EditPassword(id, newPassword.password_string);
                     _rep.CloseConnection();

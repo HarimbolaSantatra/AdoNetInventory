@@ -15,15 +15,16 @@ namespace AppInventaire.Utils
 
         
         public bool CheckSpecialChar()
-        { 
-            List<string> special_chars = new List<string>()
-            { "&","ç","$","ù","%", "~","@",
-                "#","+","£", "é", "§", "?", "!",
-                "-", "è", "_", "à", "=", "^"
-            };
-            return special_chars.Any(s => this.password_string.Contains(s));
+        {
+            string specialChar = @"\|!#$%&/()=?»«@£§€{}.-;'<>_,";
+            foreach (var item in specialChar)
+            {
+                if (this.password_string.Contains(item)) return true;
+            }
+
+            return false;
         }
-    
+
         public bool CheckLen()
         {
             if(this.password_string.Length >= 8)

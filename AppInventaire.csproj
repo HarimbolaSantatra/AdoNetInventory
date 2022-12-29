@@ -455,6 +455,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Results\" />
+    <Folder Include="Test\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

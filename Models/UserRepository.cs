@@ -134,12 +134,10 @@ namespace AppInventaire.Models
         }
 
         public void EditPassword(int id,string password)
-        {
-            string cmd_string = $"UPDATE User SET password=sha(@password) WHERE ID={id}";
-            MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
-
-            cmd.Parameters.AddWithValue("@password", password);
-
+        { 
+            string hashedPassword = Operation.Sha1Hash(password);
+            string cmd_string = $"UPDATE User SET password=\"{hashedPassword}\" WHERE ID={id}";
+            MySqlCommand cmd = new MySqlCommand(cmd_string, _con); 
             cmd.ExecuteNonQuery();
             CloseConnection();
         }

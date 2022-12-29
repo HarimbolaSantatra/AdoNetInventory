@@ -94,6 +94,11 @@ namespace AppInventaire.Utils
             return val;
         }
 
+        public static string EscapeQuotes(string val)
+        {
+            return val.Replace("\"", "\\\"");
+        }
+
         public static int ForceInRange(int input, int min, int max)
         {
             if (input > max)
