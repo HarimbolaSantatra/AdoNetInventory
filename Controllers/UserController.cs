@@ -50,7 +50,9 @@ namespace AppInventaire.Controllers
                         _rep.AddUser(FirstName, LastName, Email, password_object.password_string, userRoleId);
 
                         // Send Email to Human Ressource
-                        string role_name = user_instance.userRole.RoleName;
+                        RoleRepository _role_rep = new RoleRepository();
+                        string role_name = _role_rep.FetchSingle(userRoleId).RoleName;
+                        _role_rep.CloseConnection();
                         EmailSender emailSender = new EmailSender();
                         emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
 
