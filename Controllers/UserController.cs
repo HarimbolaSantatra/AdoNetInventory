@@ -137,13 +137,22 @@ namespace AppInventaire.Controllers
 
         public ActionResult Delete(int id)
         {
-            User single_User = _rep.FetchSingle(id);
+            User singleUser = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
                 _rep.DeleteUser(id);
+
+                // Send Email to Human Ressource
+                EmailSender emailSender = new EmailSender();
+                string firstName = singleUser.FirstName;
+                string lastName = singleUser.LastName;
+                string email = singleUser.Email;
+                string roleName = singleUser.userRole.RoleName;
+                emailSender.NotifyDeleteUser(firstName, lastName, email, roleName);
+
                 return RedirectToAction("Index");
             }
-            return View(single_User);
+            return View(singleUser);
         }
 
         public ActionResult PrintList(List<Computer> Users)
