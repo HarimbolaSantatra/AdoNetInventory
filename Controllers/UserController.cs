@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Utils;
+using AppInventaire.Services;
 
 namespace AppInventaire.Controllers
 {
@@ -47,6 +48,12 @@ namespace AppInventaire.Controllers
                         string Email = Validation.StringOrNull(collection["Email"]);
                         int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
                         _rep.AddUser(FirstName, LastName, Email, password_object.password_string, userRoleId);
+
+                        // Send Email to Human Ressource
+                        string role_name = user_instance.userRole.RoleName;
+                        EmailSender emailSender = new EmailSender();
+                        emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
+
                         return RedirectToAction("Index");
                     }
                 }
