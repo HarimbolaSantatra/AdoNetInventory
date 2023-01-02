@@ -9,7 +9,7 @@ namespace AppInventaire.Services
     {
         public void NotifyCreateUser(string firstName, string lastName, string email, string roleName)
         {
-            string Subject = "Ajout d'un nouveau utilisateur";
+            string Subject = "Ajout d'un nouveau utilisateur - AppInventaire";
             string Message = $@"
 Bonjour,
 

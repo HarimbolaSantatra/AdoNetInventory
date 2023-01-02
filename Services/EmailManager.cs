@@ -37,7 +37,7 @@ namespace AppInventaire.Services
             {
                 // We use MailKit.Net.Smtp for SmtpClient becauce System.Net.Mail's SmtpClient class is not recommended: 
                 // voir lien: https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-7.0
-                client.Connect(SmtpAddress, Port, false);
+                client.Connect(SmtpAddress, Port, true);
                 client.Authenticate(Sender.Address, Password);    // Code needed if authentication required
                 MimeMessage mimeMessage = (MimeMessage) Message;    // Convert System.Net.Mail.MailMessage to MimeKit.MimeMessage
                 client.Send(mimeMessage);
