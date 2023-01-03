@@ -54,22 +54,21 @@ namespace AppInventaire.Controllers
                         string role_name = _role_rep.FetchSingle(userRoleId).RoleName;
                         _role_rep.CloseConnection();
 
-                        // Get link to user detail page
+                        // EMAIL LINK
+                        string AdminEmail = "andrana@crystal-frame.fr";
                         UserRepository _user_rep = new UserRepository();
-                        User user = _user_rep.FetchByEmail(Email);
-                        Guid guid = Guid.NewGuid();
                         DetailsToken token = new DetailsToken()
                         {
-                            UserId = user.ID,
-                            TokenKey = guid.ToString(),
+                            UserId = _user_rep.FetchByEmail(AdminEmail).ID,
+                            AddedUserId = _user_rep.FetchByEmail(Email).ID,
+                            TokenKey = Guid.NewGuid().ToString(),
                             CreationDate = DateTime.Now,
-                            DetailsId = user.ID
                         };
                         TokenRepository _tok_rep = new TokenRepository();
-                        _tok_rep.Add(token.UserId, token.TokenKey, token.DetailsId);
+                        _tok_rep.Add(token.UserId, token.TokenKey, token.AddedUserId);
 
-                        // Send Email to Human Ressource
-                        EmailSender emailSender = new EmailSender();
+                        // Send Email to Admin
+                        EmailSender emailSender = new EmailSender("andrana@crystal-frame.fr", AdminEmail);
                         emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name, token);
 
                         return RedirectToAction("Index");
@@ -159,7 +158,7 @@ namespace AppInventaire.Controllers
                 _rep.DeleteUser(id);
 
                 // Send Email to Human Ressource
-                EmailSender emailSender = new EmailSender();
+                EmailSender emailSender = new EmailSender("andrana@crystal-frame.fr", "andrana@crystal-frame.fr");
                 string firstName = singleUser.FirstName;
                 string lastName = singleUser.LastName;
                 string email = singleUser.Email;

@@ -7,9 +7,9 @@ namespace AppInventaire.Models
 {
     public class DetailsToken
     {
-        public int UserId { get; set; }
+        public int UserId { get; set; }         // Owner of the token
+        public int AddedUserId { get; set; }    // ID of the new user
         public DateTime CreationDate { get; set; }
-        public int DetailsId { get; set; }
         public string TokenKey { get; set; }
         public DateTime ExpirationDate
         {

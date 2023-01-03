@@ -9,10 +9,18 @@ namespace AppInventaire.Services
 {
     public class EmailSender
     {
+        string receiverEmail;
+        string senderEmail;
+        public EmailSender(string sender_email, string receiver_email)
+        {
+            receiverEmail = receiver_email;
+            senderEmail = sender_email;
+        }
         public void NotifyCreateUser(string firstName, string lastName, string email, string roleName, DetailsToken token)
         {
-            string link = "https://localhost:44389/Token/VerifyToken/?token_key=";
-            link += token.TokenKey;
+            string link = "https://localhost:44389/Token/VerifyToken/";
+            link += token.UserId;
+            link += "?token_key=" + token.TokenKey;
             string Subject = "Ajout d'un nouveau utilisateur - AppInventaire";
             string Message = $@"
 <p> Bonjour, </p>
@@ -34,7 +42,7 @@ Merci !
 ";
             EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
             //emailManager.InitActor("andrana@crystal-frame.fr", "rvnjks2000@yahoo.fr", "$$SML99**md255");
-            emailManager.InitActor("andrana@crystal-frame.fr", "andrana@crystal-frame.fr", "$$SML99**md255");
+            emailManager.InitActor(senderEmail, receiverEmail, "$$SML99**md255");
             emailManager.Send(Subject, Message);
         }
 
@@ -53,7 +61,7 @@ Nous vous informons que l'utilisateur suivant a été supprimer du base de donn�
 Merci !
 ";
             EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
-            emailManager.InitActor("andrana@crystal-frame.fr", "andrana@crystal-frame.fr", "$$SML99**md255");
+            emailManager.InitActor(senderEmail, receiverEmail, "$$SML99**md255");
             emailManager.Send(Subject, Message);
         }
     }

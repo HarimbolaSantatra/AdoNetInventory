@@ -23,9 +23,9 @@ namespace AppInventaire.Models
                     DetailsToken current_token = new DetailsToken
                     {
                         UserId = int.Parse(reader["userid"].ToString()),
+                        AddedUserId = int.Parse(reader["added_user_id"].ToString()),
                         TokenKey = reader["token"].ToString(),
                         CreationDate = DateTime.Parse(reader["creation_date"].ToString()),
-                        DetailsId = int.Parse(reader["details_id"].ToString())
                     };
                     outputTokens.Add(current_token);
                 }
@@ -35,10 +35,10 @@ namespace AppInventaire.Models
             return outputTokens.Count == 0 ? null : outputTokens.First();
         }
 
-        public void Add(int userid, string token, int details_id)
+        public void Add(int userid, string token, int added_user_id)
         {
             string cmd_string = $"INSERT INTO token_details " +
-                $"VALUES ({userid}, \"{token}\", CURRENT_TIMESTAMP,  {details_id})";
+                $"VALUES ({userid}, {added_user_id}, \"{token}\", CURRENT_TIMESTAMP)";
 
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
             cmd.ExecuteNonQuery();
