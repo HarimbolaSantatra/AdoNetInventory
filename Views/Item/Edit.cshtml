@@ -27,7 +27,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Type, typeSelectList, "-- Choisir Type --",
+            @Html.DropDownListFor(model => model.Type, new SelectList(typeSelectList, "Value", "Text", 1), "-- Choisir Type --",
                 new { @class = "form-control" })
             @Html.Partial("_Modal_CreateType")
         </div>
@@ -38,7 +38,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --",
+                @Html.DropDownListFor(model => model.Brand, new SelectList(brandSelectList, "Value", "Text", 1), "-- Choisir Marque --",
                     new { @class = "form-control" })
                 @Html.Partial("_Modal_CreateBrand")
             </div>
