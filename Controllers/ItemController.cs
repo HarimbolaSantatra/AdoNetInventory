@@ -44,7 +44,7 @@ namespace AppInventaire.Controllers
         [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Create(Item item_instance, FormCollection collection)
         {
-            ItemRepository item_repo = new ItemRepository();
+            ItemRepository _item_repo = new ItemRepository();
 
             // Appeler la fonction AddItem pour ajouter un element dans la table MySql
             if(Request.HttpMethod == "POST") // Si qqch est entré sur la forme
@@ -72,7 +72,8 @@ namespace AppInventaire.Controllers
                     string serial_number = Validation.StringOrNull(collection["SerialNumber"]);
                     string quantity = Validation.StringOrNull(collection["Quantity"]);
                     string comment = Validation.StringOrNull(collection["Comment"]);
-                    item_repo.AddItem(type, brand, model, serial_number, quantity, comment);
+                    _item_repo.AddItem(type, brand, model, serial_number, quantity, comment);
+                    _item_repo.CloseConnection();
                     return RedirectToAction("Index");
                 }
             }
@@ -81,16 +82,14 @@ namespace AppInventaire.Controllers
 
         public ActionResult Details(int id)
         {
-            List<Item> items = _rep.Fetch();
-            Item single_item = items.Single(i => i.ID == id);
+            Item single_item = _rep.FetchSingle(id);
             return View(single_item);
         }
 
         [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Edit(Item item_instance, int id, FormCollection collection)
         {
-            List<Item> items = _rep.Fetch();
-            Item single_item = items.Single(i => i.ID == id);
+            Item single_item = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
 
@@ -110,14 +109,15 @@ namespace AppInventaire.Controllers
                 // Form validation
                 if (ModelState.IsValid && !brandInputValid && !typeInputValid)
                 {
-                    ItemRepository item_repo = new ItemRepository();
+                    ItemRepository _item_repo = new ItemRepository();
                     string type = Validation.StringOrNull(collection["Type"]);
                     string brand = Validation.StringOrNull(collection["Brand"]);
                     string model = Validation.StringOrNull(collection["Model"]);
                     string serial_number = Validation.StringOrNull(collection["SerialNumber"]);
                     string quantity = Validation.StringOrNull(collection["Quantity"]);
                     string comment = Validation.StringOrNull(collection["Comment"]);
-                    item_repo.EditItem(id, type, brand, model, serial_number, quantity, comment);
+                    _item_repo.EditItem(id, type, brand, model, serial_number, quantity, comment);
+                    _item_repo.CloseConnection();
                     return RedirectToAction("Index");
                 }
             }
@@ -127,12 +127,12 @@ namespace AppInventaire.Controllers
         [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            List<Item> items = _rep.Fetch();
-            Item single_item = items.Single(i => i.ID == id);
+            Item single_item = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
-                ItemRepository item_repo = new ItemRepository();
-                item_repo.DeleteItem(id);
+                ItemRepository _item_repo = new ItemRepository();
+                _item_repo.DeleteItem(id);
+                _item_repo.CloseConnection();
                 return RedirectToAction("Index");
             }
             return View(single_item);

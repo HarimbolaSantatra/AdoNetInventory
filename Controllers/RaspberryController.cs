@@ -79,8 +79,7 @@ namespace AppInventaire.Controllers
         [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            List<Raspberry> Raspberrys = _rep.Fetch();
-            Raspberry single_Raspberry = Raspberrys.Single(i => i.ID == id);
+            Raspberry single_Raspberry = _rep.FetchSingle(id);
             if (Request.HttpMethod == "POST")
             {
                 _rep.DeleteRaspberry(id);
