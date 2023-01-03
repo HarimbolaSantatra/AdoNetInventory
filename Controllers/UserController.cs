@@ -54,7 +54,7 @@ namespace AppInventaire.Controllers
                         string role_name = _role_rep.FetchSingle(userRoleId).RoleName;
                         _role_rep.CloseConnection();
 
-                        // EMAIL LINK
+                        // Fetch Users and Token in database
                         string AdminEmail = "andrana@crystal-frame.fr";
                         UserRepository _user_rep = new UserRepository();
                         DetailsToken token = new DetailsToken()
@@ -68,8 +68,11 @@ namespace AppInventaire.Controllers
                         _tok_rep.Add(token.UserId, token.TokenKey, token.AddedUserId);
 
                         // Send Email to Admin
-                        EmailSender emailSender = new EmailSender("andrana@crystal-frame.fr", AdminEmail);
+                        EmailSender emailSender = new EmailSender("andrana@crystal-frame.fr", AdminEmail, "$$SML99**md255");
                         emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name, token);
+
+                        _tok_rep.CloseConnection();
+                        _user_rep.CloseConnection();
 
                         return RedirectToAction("Index");
                     }
@@ -157,13 +160,11 @@ namespace AppInventaire.Controllers
             {
                 _rep.DeleteUser(id);
 
-                // Send Email to Human Ressource
-                EmailSender emailSender = new EmailSender("andrana@crystal-frame.fr", "andrana@crystal-frame.fr");
-                string firstName = singleUser.FirstName;
-                string lastName = singleUser.LastName;
-                string email = singleUser.Email;
-                string roleName = singleUser.userRole.RoleName;
-                emailSender.NotifyDeleteUser(firstName, lastName, email, roleName);
+                // Send Email
+                EmailSender emailSender = new EmailSender("andrana@crystal-frame.fr", "andrana@crystal-frame.fr", "$$SML99**md255");
+                emailSender.NotifyDeleteUser(
+                    singleUser.FirstName, singleUser.LastName, 
+                    singleUser.Email, singleUser.userRole.RoleName);
 
                 return RedirectToAction("Index");
             }

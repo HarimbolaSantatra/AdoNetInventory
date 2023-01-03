@@ -30,9 +30,16 @@ namespace AppInventaire.Services
             HttpContext.Current.Session["Email"] = Email;
             UserRepository _user_rep = new UserRepository();
             User loggedUser = _user_rep.FetchByEmail(Email);
-            _user_rep.CloseConnection();
             HttpContext.Current.Session["userRole"] = loggedUser.userRole.RoleName;
             HttpContext.Current.Session["userId"] = loggedUser.ID;
+            
+            _user_rep.CloseConnection();
+        }
+
+        public static void LogOut()
+        {
+            HttpContext.Current.Session.Clear();
+            FormsAuthentication.SignOut();
         }
     }
 }

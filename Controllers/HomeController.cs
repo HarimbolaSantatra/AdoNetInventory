@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Utils;
 using System.Web.Security;
+using AppInventaire.Services;
 
 namespace AppInventaire.Controllers
 {
@@ -16,15 +17,15 @@ namespace AppInventaire.Controllers
         [Authorize]
         public ActionResult Index(FormCollection collection)
         {
-            List<Search> searchResult = null;
             if(Request.HttpMethod == "POST")
             {
                 if (collection["searchInput"] != null && !String.IsNullOrWhiteSpace(collection["searchInput"]))
                 {
+                    // SEARCH
                     SearchRepository _rep = new SearchRepository();
                     string searchQuery = collection["searchInput"];
                     ViewBag.searchQuery = searchQuery;
-                    searchResult = _rep.FetchResult(searchQuery);
+                    List<Search> searchResult = _rep.FetchResult(searchQuery);
                     return View("Search", searchResult);
                 }
             }
@@ -54,24 +55,8 @@ namespace AppInventaire.Controllers
                     // Check if Password is true
                     if( String.Equals(loggedUser.Password, HashedPassword) )
                     {
-                        FormsAuthentication.SetAuthCookie(LoginEmail, false);
-
-                        // Create cookie ticket 
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-                            1,
-                            LoginEmail,
-                            DateTime.Now,
-                            DateTime.Now.AddMinutes(1), // value of time out property
-                            false,                      // Value of 'IsPersistent' property
-                            String.Empty,
-                            FormsAuthentication.FormsCookiePath
-                        );
-
-                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
-                        // Save logged user info
-                        Session["Email"] = LoginEmail;
-                        Session["userRole"] = loggedUser.userRole.RoleName;
-                        Session["userId"] = loggedUser.ID;
+                        LoginManager loginManager = new LoginManager();
+                        loginManager.LogUserByEmail(LoginEmail);
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -82,16 +67,14 @@ namespace AppInventaire.Controllers
 
         public ActionResult Login()
         {
-            Session.Clear();
-            FormsAuthentication.SignOut();
+            LoginManager.LogOut();
             return View();
         }
 
         [Authorize]
         public ActionResult Logout()
         {
-            Session.Clear();
-            FormsAuthentication.SignOut();
+            LoginManager.LogOut();
             return RedirectToAction("Index", "Home");
         }
     }
