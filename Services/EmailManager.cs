@@ -14,6 +14,7 @@ namespace AppInventaire.Services
         string Password;
         string SmtpAddress;
         int Port;
+
         public EmailManager(string smtpAddress, int port)
         {
             SmtpAddress = smtpAddress;
@@ -32,6 +33,7 @@ namespace AppInventaire.Services
             MailMessage Message = new MailMessage(Sender, Receiver);
             Message.Subject = subject;
             Message.Body = message;
+            Message.IsBodyHtml = true;
 
             using (var client = new MailKit.Net.Smtp.SmtpClient())
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime; // For pdf type file: MediaTypeNames.Application.Pdf
-using System.Web;
+using System.Web.Security;
 using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Utils;
@@ -49,12 +49,28 @@ namespace AppInventaire.Controllers
                         int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
                         _rep.AddUser(FirstName, LastName, Email, password_object.password_string, userRoleId);
 
-                        // Send Email to Human Ressource
+                        // Get RoleName
                         RoleRepository _role_rep = new RoleRepository();
                         string role_name = _role_rep.FetchSingle(userRoleId).RoleName;
                         _role_rep.CloseConnection();
+
+                        // Get link to user detail page
+                        UserRepository _user_rep = new UserRepository();
+                        User user = _user_rep.FetchByEmail(Email);
+                        Guid guid = Guid.NewGuid();
+                        DetailsToken token = new DetailsToken()
+                        {
+                            UserId = user.ID,
+                            TokenKey = guid.ToString(),
+                            CreationDate = DateTime.Now,
+                            DetailsId = user.ID
+                        };
+                        TokenRepository _tok_rep = new TokenRepository();
+                        _tok_rep.Add(token.UserId, token.TokenKey, token.DetailsId);
+
+                        // Send Email to Human Ressource
                         EmailSender emailSender = new EmailSender();
-                        emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
+                        emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name, token);
 
                         return RedirectToAction("Index");
                     }

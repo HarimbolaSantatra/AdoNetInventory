@@ -316,6 +316,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\RaspberryController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -329,6 +330,8 @@
     <Compile Include="Models\ItemBrand.cs" />
     <Compile Include="Models\ItemRepository.cs" />
     <Compile Include="Models\ItemType.cs" />
+    <Compile Include="Models\TokenRepository.cs" />
+    <Compile Include="Models\DetailsToken.cs" />
     <Compile Include="Models\Raspberry.cs" />
     <Compile Include="Models\RaspberryRepository.cs" />
     <Compile Include="Models\Role.cs" />
@@ -459,12 +462,14 @@
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\User\EditPassword.cshtml" />
     <Content Include="Views\Error\PasswordError.cshtml" />
+    <Content Include="Views\Error\LinkExpired.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Results\" />
     <Folder Include="Test\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

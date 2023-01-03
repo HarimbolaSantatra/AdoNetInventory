@@ -61,7 +61,7 @@ namespace AppInventaire.Controllers
                             1,
                             LoginEmail,
                             DateTime.Now,
-                            DateTime.Now.AddMinutes(30), // value of time out property
+                            DateTime.Now.AddMinutes(1), // value of time out property
                             false,                      // Value of 'IsPersistent' property
                             String.Empty,
                             FormsAuthentication.FormsCookiePath
