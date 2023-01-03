@@ -100,7 +100,7 @@ namespace AppInventaire.Controllers
             float[] float_param = new float[] { 1, 1, 2, 1, 2, 3, 3, 2 };
             PdfUtils.CreateTablePdf(RaspberryList, float_param);
 
-            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
+            return File(ProjectVar.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
         }
 
         [Authorize]
@@ -115,7 +115,7 @@ namespace AppInventaire.Controllers
 
             PdfUtils.GenerateDetails(value_list, fields);
 
-            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
+            return File(ProjectVar.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
         }
     }
 }

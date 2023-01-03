@@ -46,7 +46,7 @@ namespace AppInventaire.Utils
         {
 
             // A writer takes a destination file (location of saved PDF) as parameter
-            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var writer = new PdfWriter(ProjectVar.PDF_DEST);
             var pdf = new PdfDocument(writer);
 
             // Create a document
@@ -101,7 +101,7 @@ namespace AppInventaire.Utils
         {
 
             // A writer takes a destination file (location of saved PDF) as parameter
-            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var writer = new PdfWriter(ProjectVar.PDF_DEST);
             var pdf = new PdfDocument(writer);
 
             // Create a document
@@ -157,7 +157,7 @@ namespace AppInventaire.Utils
         {
 
             // A writer takes a destination file (location of saved PDF) as parameter
-            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var writer = new PdfWriter(ProjectVar.PDF_DEST);
             var pdf = new PdfDocument(writer);
 
             // Create a document
@@ -212,7 +212,7 @@ namespace AppInventaire.Utils
         {
 
             // A writer takes a destination file (location of saved PDF) as parameter
-            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var writer = new PdfWriter(ProjectVar.PDF_DEST);
             var pdf = new PdfDocument(writer);
 
             // Create a document
@@ -268,7 +268,7 @@ namespace AppInventaire.Utils
         {
 
             // A writer takes a destination file (location of saved PDF) as parameter
-            var writer = new PdfWriter(ProjectVariables.PDF_DEST);
+            var writer = new PdfWriter(ProjectVar.PDF_DEST);
             var pdf = new PdfDocument(writer);
 
             // Create a document
@@ -309,7 +309,7 @@ namespace AppInventaire.Utils
 
         public static Image GenerateSmartlightLogo(PageSize ps)
         {
-            string logo_dest = ProjectVariables.LOGO_DEST;
+            string logo_dest = ProjectVar.LOGO_DEST;
             float logo_width = ps.GetWidth() / 4;
             return new Image(ImageDataFactory.Create(logo_dest)).SetWidth(logo_width);
         }

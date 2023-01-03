@@ -149,7 +149,7 @@ namespace AppInventaire.Controllers
             float[] float_param = new float[] { 1, 1, 1, 1, 3, 2, 1, 5};
             PdfUtils.CreateTablePdf(ItemList, float_param);
 
-            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
+            return File(ProjectVar.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
         }
 
         public ActionResult PrintDetails(int id)
@@ -163,7 +163,7 @@ namespace AppInventaire.Controllers
             
             PdfUtils.GenerateDetails(value_list, fields);
 
-            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
+            return File(ProjectVar.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
         }
     }
 }

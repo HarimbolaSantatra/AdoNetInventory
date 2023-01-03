@@ -24,17 +24,19 @@ namespace AppInventaire.Services
             link += token.UserId;
             link += "?token_key=" + token.TokenKey;
             string Subject = "Ajout d'un nouveau utilisateur - AppInventaire";
-            string Message = ProjectVariables.CREATE_USER_EMAIL_MSG(firstName, lastName, email, roleName, link, token.ExpirationDate);
+            string Message = ProjectVar.CREATE_USER_EMAIL_MSG(firstName, lastName, email, roleName, link, token.ExpirationDate);
+
             EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
             //emailManager.InitActor("andrana@crystal-frame.fr", "rvnjks2000@yahoo.fr", "$$SML99**md255");
-            emailManager.InitActor(senderEmail, receiverEmail, "$$SML99**md255");
+            emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
             emailManager.Send(Subject, Message);
         }
 
         public void NotifyDeleteUser(string firstName, string lastName, string email, string roleName)
         {
             string Subject = "Suppression d'un utilisateur - AppInventaire";
-            string Message = ProjectVariables.DELETE_USER_EMAIL_MSG(firstName, lastName, email, roleName);
+            string Message = ProjectVar.DELETE_USER_EMAIL_MSG(firstName, lastName, email, roleName);
+
             EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
             emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
             emailManager.Send(Subject, Message);

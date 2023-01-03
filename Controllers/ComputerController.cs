@@ -121,7 +121,7 @@ namespace AppInventaire.Controllers
 
             PdfUtils.CreateTablePdf(ComputerList, new float[] {1, 1, 1, 2, 2, 3, 1, 3, 1 });
 
-            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
+            return File(ProjectVar.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
         }
 
         public ActionResult PrintDetails(int id)
@@ -135,7 +135,7 @@ namespace AppInventaire.Controllers
 
             PdfUtils.GenerateDetails(value_list, fields);
 
-            return File(ProjectVariables.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
+            return File(ProjectVar.PDF_DEST, MediaTypeNames.Application.Pdf, $"Detail");
         }
 
 

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AppInventaire.Utils
 {
-    public class ProjectVariables
+    public class ProjectVar
     {
         // Get absolute path
         // C:\Program Files (x86)\IIS Express: "E:\\Santatra\\ASP.NET\\AppInventaire\\Results\\iText.pdf"
@@ -50,5 +50,9 @@ Nous vous informons que l'utilisateur suivant a été supprimer du base de donn�
 Merci !
 ";
         }
+
+        public static string ADMIN_EMAIL_SMARTLIGHT = "rvnjks2000@yahoo.fr";
+        public static string ADMIN_EMAIL_ANDRANA = "andrana@crystal-frame.fr";
+        public static string ADMIN_PWD_ANDRANA = "$$SML99**md255";
     }
 }

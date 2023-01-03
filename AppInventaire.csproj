@@ -350,7 +350,7 @@
     <Compile Include="Utils\Password.cs" />
     <Compile Include="Utils\PdfUtils.cs" />
     <Compile Include="Utils\Validation.cs" />
-    <Compile Include="Utils\ProjectVariables.cs" />
+    <Compile Include="Utils\ProjectVar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
