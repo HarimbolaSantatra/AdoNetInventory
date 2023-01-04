@@ -70,7 +70,7 @@ namespace AppInventaire.Models
                 }
             }
             reader.Close();
-            return output.Count == 0 ? null : output.First();
+            return output == null ? new Raspberry() : output.First();
         }
 
         public void AddRaspberry(string version, string os, string screen, string client, string accessories, string comment)

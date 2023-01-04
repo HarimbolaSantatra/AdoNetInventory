@@ -70,7 +70,7 @@ namespace AppInventaire.Models
                 }
             }
             reader.Close();
-            return output.Count == 0 ? null : output.First();
+            return output == null ? new Computer() : output.First();
         }
 
         public List<ComputerBrand> FetchBrand()

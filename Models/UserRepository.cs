@@ -93,12 +93,7 @@ namespace AppInventaire.Models
                 _role_rep.CloseConnection();
             }
             reader.Close();
-
-            if (output == null)
-            {
-                return new User();
-            }
-            return output.Count == 0 ? null : output.First();
+            return output == null ? new User() : output.First();
         }
 
         public void AddUser(string firstname, string lastname, string email, string password, int role_id)
