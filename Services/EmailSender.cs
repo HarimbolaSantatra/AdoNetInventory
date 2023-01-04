@@ -52,7 +52,7 @@ namespace AppInventaire.Services
             // WORKING SOLUTION:
             string verifyTokenPath = "/Token/VerifyToken/";
             string tokenKeyPath = "?token_key=" + token.TokenKey;
-            string path = Path.Combine(ProjectVar.SERVER_BASE_URL + verifyTokenPath + tokenKeyPath);
+            string path = Path.Combine(ProjectVar.SERVER + verifyTokenPath + tokenKeyPath);
 
             string Subject = "Ajout d'un nouveau utilisateur - AppInventaire";
             string Message = ProjectVar.CREATE_USER_EMAIL_MSG(firstName, lastName, email, roleName, path, token.ExpirationDate);
