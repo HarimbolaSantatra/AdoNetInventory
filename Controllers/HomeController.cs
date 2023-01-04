@@ -29,7 +29,7 @@ namespace AppInventaire.Controllers
                     return View("Search", searchResult);
                 }
             }
-            
+
             return View();
         }
 

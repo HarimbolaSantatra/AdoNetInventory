@@ -7,13 +7,17 @@ using System.Linq;
 
 namespace AppInventaire.Utils
 {
+    /// <summary>
+    /// Contains all the constant project variable.
+    /// </summary>
     public class ProjectVar
     {
         // Get absolute path
-        // C:\Program Files (x86)\IIS Express: "E:\\Santatra\\ASP.NET\\AppInventaire\\Results\\iText.pdf"
+        // C:\Program Files (x86)\IIS Express || "E:\\Santatra\\ASP.NET\\AppInventaire\\Results\\iText.pdf"
         public static string PDF_DEST = HostingEnvironment.MapPath("\\Results\\temp_pdf.pdf");
         public static string LOGO_DEST = HostingEnvironment.MapPath("\\Content\\img\\logo_dark.png");
-        public static string BASE_DIR = HostingEnvironment.MapPath("https://localhost:44389/");
+        public static string SERVER_BASE_URL = Path.Combine(
+                HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority);
         public static string CREATE_USER_EMAIL_MSG(
             string firstName, string lastName, string email, string roleName, string link, DateTime expirationDate)
         {
@@ -31,7 +35,7 @@ namespace AppInventaire.Utils
 <p>
     Voir les informations de l'utilisateur: <a href=""{link}"">Lien</a> <br> 
     (Ce lien expire le {expirationDate})
-</p> 
+</p>
 
 Merci !
 ";
@@ -51,7 +55,7 @@ Merci !
 ";
         }
 
-        public static string ADMIN_EMAIL_SMARTLIGHT = "rvnjks2000@yahoo.fr";
+        public static string ADMIN_EMAIL_YAHOO = "rvnjks2000@yahoo.fr";
         public static string ADMIN_EMAIL_ANDRANA = "andrana@crystal-frame.fr";
         public static string ADMIN_PWD_ANDRANA = "$$SML99**md255";
     }

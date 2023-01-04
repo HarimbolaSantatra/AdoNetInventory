@@ -63,7 +63,7 @@ namespace AppInventaire.Models
                 _role_rep.CloseConnection();
             }
             reader.Close();
-            return output.First();
+            return (output == null) ? new User() : output.First();
         }
 
         public User FetchByEmail(string emailQuery) // MBOLA TSY METY
@@ -98,7 +98,7 @@ namespace AppInventaire.Models
             {
                 return new User();
             }
-            return output.First();
+            return output.Count == 0 ? null : output.First();
         }
 
         public void AddUser(string firstname, string lastname, string email, string password, int role_id)

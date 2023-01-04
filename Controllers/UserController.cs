@@ -54,27 +54,12 @@ namespace AppInventaire.Controllers
                         string role_name = _role_rep.FetchSingle(userRoleId).RoleName;
                         _role_rep.CloseConnection();
 
-                        // Fetch Users and Token in database
-                        UserRepository _user_rep = new UserRepository();
-                        DetailsToken token = new DetailsToken()
-                        {
-                            UserId = _user_rep.FetchByEmail(ProjectVar.ADMIN_EMAIL_ANDRANA).ID,
-                            AddedUserId = _user_rep.FetchByEmail(Email).ID,
-                            TokenKey = Guid.NewGuid().ToString(),
-                            CreationDate = DateTime.Now,
-                        };
-                        TokenRepository _tok_rep = new TokenRepository();
-                        _tok_rep.Add(token.UserId, token.TokenKey, token.AddedUserId);
-
                         // Send Email to Admin
                         EmailSender emailSender = new EmailSender(
-                            ProjectVar.ADMIN_EMAIL_ANDRANA, 
-                            ProjectVar.ADMIN_EMAIL_ANDRANA,
-                            ProjectVar.ADMIN_PWD_ANDRANA);
-                        emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name, token);
-
-                        _tok_rep.CloseConnection();
-                        _user_rep.CloseConnection();
+                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Sender
+                            ProjectVar.ADMIN_EMAIL_YAHOO,     // Receiver
+                            ProjectVar.ADMIN_PWD_ANDRANA);      // Sender password
+                        emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
 
                         return RedirectToAction("Index");
                     }
@@ -164,9 +149,9 @@ namespace AppInventaire.Controllers
 
                 // Send Email
                 EmailSender emailSender = new EmailSender(
-                            ProjectVar.ADMIN_EMAIL_ANDRANA,
-                            ProjectVar.ADMIN_EMAIL_ANDRANA,
-                            ProjectVar.ADMIN_PWD_ANDRANA);
+                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Sender
+                            ProjectVar.ADMIN_EMAIL_YAHOO,     // Receiver
+                            ProjectVar.ADMIN_PWD_ANDRANA);      // Sender password
                 emailSender.NotifyDeleteUser(
                     singleUser.FirstName, singleUser.LastName, 
                     singleUser.Email, singleUser.userRole.RoleName);
