@@ -36,9 +36,6 @@
     <div class="form-group">
         <div class="control-label col-md-2"> Rôle </div>
         <div class="col-md-10">
-            @*@Html.DropDownListFor(model => model.userRole, roleSelectList, "-- Choisir Rôle --",
-                new { @class = "form-control" }
-                )*@
             @Html.DropDownListFor(model => model.userRole, new SelectList(roleSelectList, "Value", "Text", 1), "-- Choisir Rôle --",
                 new { @class = "form-control" }
                 )

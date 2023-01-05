@@ -92,3 +92,7 @@ body {
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
+.fixed-table-toolbar div.search {
+    float: left !important;
+}
