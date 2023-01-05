@@ -24,14 +24,15 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <!-- TYPE -->
-    <div class="form-group">
-        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Type, typeSelectList, "-- Choisir Type --",
-                new { @class = "form-control" })
-            @Html.Partial("_Modal_CreateType")
-        </div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Type, typeSelectList, "-- Choisir Type --",
+            new { @class = "form-control" })
+        @Html.Partial("_Modal_CreateType")
     </div>
+    <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
+</div>
 
     <!-- BRAND -->
     <div class="form-group">

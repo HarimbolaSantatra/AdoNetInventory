@@ -21,15 +21,15 @@
 
 
     <!-- BRAND -->
-    <div class="form-group">
-        @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --",
-                new { @class = "form-control" }
-                )
-        </div>
-        <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
+<div class="form-group">
+    @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Brand, brandSelectList, "-- Choisir Marque --",
+            new { @class = "form-control" }
+            )
     </div>
+    <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
+</div>
     @Html.Partial("_Modal_CreateBrand")
 
     <div class="form-group">

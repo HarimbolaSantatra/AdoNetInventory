@@ -12,6 +12,7 @@ namespace AppInventaire.Models
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Veuillez entrer la version")]
+        [Display(Name = "Version")]
         public int Rasp_Version { get; set; }
 
         [Display(Name = "Système d'exploitation")]

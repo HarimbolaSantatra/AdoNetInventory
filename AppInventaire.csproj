@@ -469,7 +469,6 @@
     <Folder Include="Test\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Login\" />
-    <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -18,8 +18,8 @@ namespace AppInventaire.Models
         public string LastName { get; set; }
 
         [Display(Name = "Adresse Mail")]
-        [Required(ErrorMessage = "Veuillez entrer une adresse mail valide !")]
         [EmailAddress(ErrorMessage = "Une adresse mail est requis!")]
+        [Required(ErrorMessage = "Veuillez entrer une adresse mail valide !")]
         public string Email { get; set; }
 
         // Role: primary key
@@ -27,8 +27,8 @@ namespace AppInventaire.Models
         
         // Password
         [Display(Name = "Mot De Passe")]
-        [Required(ErrorMessage = "Un mot de passe valide est requis !")]
         [MinLength(8, ErrorMessage = "Mot de passe trop courte !")]
+        [Required(ErrorMessage = "Un mot de passe valide est requis !")]
         public string Password { get; set; }
 
         public Boolean IsActive { get; set; }
