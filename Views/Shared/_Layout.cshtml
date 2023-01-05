@@ -13,11 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" />
+
+    <!-- Bootstrap Table -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
+
     <!-- custom style-->
     <link rel="stylesheet" href="~/Content/css/adminlte.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
-    <!-- Bootstrap Table -->
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css">
     @RenderSection("style", required: false)
 </head>
 
@@ -181,6 +183,10 @@
             $('[data-toggle="tooltip"]').tooltip();
         })
     </script>
+
+    <!-- Custom Script -->
+    <script src="~/Scripts/Site.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
