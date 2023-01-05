@@ -13,12 +13,20 @@ namespace AppInventaire.Services
         string receiverEmail;
         string senderEmail;
         string senderPasswd;
-        public EmailSender(string sender_email, string receiver_email, string sender_password)
+        string copyRecipient;
+        /// <summary>
+        /// Initialize an EmailSender object.
+        /// </summary>
+        /// <param name="sender_email"> Sender </param>
+        /// <param name="receiver_email"> Receiver </param>
+        /// <param name="sender_password"> Sender's Password </param>
+        /// <param name="copy_receiver_email"> One CC Receiver. Do not set or let empty string if no copy receiver. </param>
+        public EmailSender(string sender_email, string receiver_email, string sender_password, string copy_receiver_email = "")
         {
             receiverEmail = receiver_email;
             senderEmail = sender_email;
             senderPasswd = sender_password;
-
+            copyRecipient = copy_receiver_email;
         }
         /// <summary>
         /// Send email to ovh.net to notify the creation of a new user.
@@ -58,8 +66,8 @@ namespace AppInventaire.Services
             string Message = ProjectVar.CREATE_USER_EMAIL_MSG(firstName, lastName, email, roleName, path, token.ExpirationDate);
 
             EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
-            //emailManager.InitActor("andrana@crystal-frame.fr", "rvnjks2000@yahoo.fr", "$$SML99**md255");
-            emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
+
+            emailManager.InitActor(senderEmail, receiverEmail, senderPasswd, copyRecipient);
             emailManager.Send(Subject, Message);
         }
 

@@ -58,7 +58,8 @@ namespace AppInventaire.Controllers
                         EmailSender emailSender = new EmailSender(
                             ProjectVar.ADMIN_EMAIL_ANDRANA,     // Sender
                             ProjectVar.ADMIN_EMAIL_YAHOO,     // Receiver
-                            ProjectVar.ADMIN_PWD_ANDRANA);      // Sender password
+                            ProjectVar.ADMIN_PWD_ANDRANA,
+                            ProjectVar.ADMIN_EMAIL_ANDRANA);      // Sender password
                         emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
 
                         return RedirectToAction("Index");

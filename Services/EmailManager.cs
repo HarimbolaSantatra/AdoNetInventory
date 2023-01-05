@@ -13,6 +13,7 @@ namespace AppInventaire.Services
         MailAddress Receiver;
         string Password;
         string SmtpAddress;
+        string CopyRecipient;
         int Port;
 
         public EmailManager(string smtpAddress, int port)
@@ -21,11 +22,12 @@ namespace AppInventaire.Services
             Port = port;
         }
 
-        public void InitActor(string senderAddress, string receiverAddress, string senderPassword)
+        public void InitActor(string senderAddress, string receiverAddress, string senderPassword, string copyRecipient)
         {
             Sender = new MailAddress(senderAddress);
             Receiver = new MailAddress(receiverAddress);
             Password = senderPassword;
+            CopyRecipient = copyRecipient;
         }
         
         public void Send(string subject, string message)
@@ -35,12 +37,19 @@ namespace AppInventaire.Services
             Message.Body = message;
             Message.IsBodyHtml = true;
 
+            // Add a copy recipient.
+            if (!String.IsNullOrWhiteSpace(CopyRecipient))
+            {
+                MailAddress copyAddr = new MailAddress(CopyRecipient);
+                Message.CC.Add(copyAddr);
+            };
+
             using (var client = new MailKit.Net.Smtp.SmtpClient())
             {
                 // We use MailKit.Net.Smtp for SmtpClient becauce System.Net.Mail's SmtpClient class is not recommended: 
                 // voir lien: https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-7.0
                 client.Connect(SmtpAddress, Port, true);
-                client.Authenticate(Sender.Address, Password);    // Code needed if authentication required
+                client.Authenticate(Sender.Address, Password);      // Code needed if authentication required
                 MimeMessage mimeMessage = (MimeMessage) Message;    // Convert System.Net.Mail.MailMessage to MimeKit.MimeMessage
                 client.Send(mimeMessage);
                 client.Disconnect(true);
