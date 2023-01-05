@@ -16,29 +16,29 @@ namespace AppInventaire.Models
         [Display(Name = "Modèle")]
         public string Model { get; set; }
 
-        [Display(Name = "Système d'exploitation")]
+        [Display(Name = "OS")]
         public string OS { get; set; }
 
         [Display(Name = "Nom de l'hôte")]
         public string Hostname { get; set; }
 
-        [Display(Name = "Processeur")]
+        [Display(Name = "CPU")]
         public string Processor { get; set; }
 
-        [Display(Name = "RAM (Go)")]
+        [Display(Name = "RAM(Go)")]
         public float? RamGB{ get; set; }
 
         [Display(Name = "Carte Graphique")]
         public string GraphCard{ get; set; }
 
-        [Display(Name = "Mémoire Carte Graphique(Go)")]
+        [Display(Name = "Mem(Go)")]
         public float? GraphCardGB{ get; set; }
 
         public static List<string> GetPropertiesInFrench()
         {
             return new List<string> {
                 "ID", "Marque", "Modèle", "OS", "Nom d'hôte",
-                "Processeur", "RAM (Go)", "Carte Graphique", "Mémoire CG (Go)"
+                "CPU", "RAM(Go)", "Carte Graphique", "Mem(Go)"
             };
         }
 

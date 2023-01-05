@@ -30,18 +30,18 @@
 </div>
 
 
-<table class="table">
+<table class="table" data-toggle="table" data-search="true">
     <thead class="thead-dark">
         <tr>
-            <th> ID </th>
-            <th> Nom de l'hôte </th>
-            <th> Marque </th>
-            <th> Modèle </th>
-            <th> Système d'exploitation</th>
-            <th> Processeur </th>
-            <th> RAM (Go)</th>
-            <th> Carte Graphique </th>
-            <th> Mémoire Carte Graphique (Go)</th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.ID) </th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.Hostname) </th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.Brand) </th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.Model) </th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.OS)</th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.Processor) </th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.RamGB)</th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.GraphCard) </th>
+            <th data-sortable="true"> @Html.DisplayNameFor(model => model.GraphCardGB)</th>
             <th></th>
         </tr>
     </thead>

@@ -25,7 +25,7 @@ namespace AppInventaire.Models
         [Display(Name = "Date de création")]
         public DateTime CreationDate { get; set; }
 
-        [Display(Name = "Quantité")]
+        [Display(Name = "Qté")]
         public int Quantity { get; set; }
 
         [Display(Name = "Commentaire")]

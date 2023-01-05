@@ -375,6 +375,7 @@
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\step.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\datatables.min.css" />
     <Content Include="Content\img\logo_dark.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -408,6 +409,7 @@
     <Content Include="Scripts\bootstrap.min.js.map" />
     <None Include="Properties\PublishProfiles\AppInv1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
