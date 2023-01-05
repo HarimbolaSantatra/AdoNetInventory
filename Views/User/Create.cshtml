@@ -1,6 +1,7 @@
 ﻿@model AppInventaire.Models.User
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Ajouter";
 
     List<SelectListItem> roleSelectList = Model.GetRoleSelectListItems();
@@ -27,7 +28,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = 
+                new { @class = "form-control" },
+            })
         </div>
     </div>
 
@@ -45,7 +48,6 @@
         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -54,7 +56,9 @@
         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-            <small id="brandHelp" class="form-text text-muted"> Champ Requis </small>
+            <small id="brandHelp" class="form-text text-muted">
+                Au moins 8 caractère. A inclure: caractère spécial, majuscule, minuscule, chiffre.
+            </small>
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
     </div>

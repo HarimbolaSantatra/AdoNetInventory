@@ -22,7 +22,7 @@ namespace AppInventaire.Services
             Port = port;
         }
 
-        public void InitActor(string senderAddress, string receiverAddress, string senderPassword, string copyRecipient)
+        public void InitActor(string senderAddress, string receiverAddress, string senderPassword, string copyRecipient="")
         {
             Sender = new MailAddress(senderAddress);
             Receiver = new MailAddress(receiverAddress);
