@@ -330,6 +330,7 @@
     <Compile Include="Models\ItemBrand.cs" />
     <Compile Include="Models\ItemRepository.cs" />
     <Compile Include="Models\ItemType.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\TokenRepository.cs" />
     <Compile Include="Models\DetailsToken.cs" />
     <Compile Include="Models\Raspberry.cs" />
