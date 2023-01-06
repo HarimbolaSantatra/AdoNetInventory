@@ -28,6 +28,8 @@ namespace AppInventaire.Services
             senderPasswd = sender_password;
             copyRecipient = copy_receiver_email;
         }
+
+
         /// <summary>
         /// Send email to ovh.net to notify the creation of a new user.
         /// </summary>
@@ -58,7 +60,7 @@ namespace AppInventaire.Services
             // HttpContext.Current.Server.MapPath("~\\Content\\img");
             // HttpContext.Current.Request.UserHostAddress + ("\\Content\\img");
             // WORKING SOLUTION:
-            string verifyTokenPath = "/Token/VerifyToken/";
+            string verifyTokenPath = "/Token/UserDetails/";
             string tokenKeyPath = "?token_key=" + token.TokenKey;
             string path = Path.Combine(ProjectVar.SERVER + verifyTokenPath + tokenKeyPath);
 

@@ -345,6 +345,7 @@
     <Compile Include="Services\EmailManager.cs" />
     <Compile Include="Services\EmailSender.cs" />
     <Compile Include="Services\LoginManager.cs" />
+    <Compile Include="Services\TokenManager.cs" />
     <Compile Include="Utils\AuthorizeCustomAttribute.cs" />
     <Compile Include="Utils\ModelUtils.cs" />
     <Compile Include="Utils\Operation.cs" />
@@ -466,6 +467,7 @@
     <Content Include="Views\User\EditPassword.cshtml" />
     <Content Include="Views\Error\PasswordError.cshtml" />
     <Content Include="Views\Error\LinkExpired.cshtml" />
+    <Content Include="Views\Home\NewPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

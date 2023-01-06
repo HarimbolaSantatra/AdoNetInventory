@@ -34,7 +34,7 @@ namespace AppInventaire.Models
 
         public DetailsToken FetchSingleDetails(string token_key)
         {
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM token_details WHERE token=\"{token_key}\"", _con);
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM token WHERE token=\"{token_key}\"", _con);
             MySqlDataReader reader = cmd.ExecuteReader();
 
             List<DetailsToken> outputTokens = null;

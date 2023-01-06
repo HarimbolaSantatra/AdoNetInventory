@@ -10,27 +10,17 @@ namespace AppInventaire.Controllers
 {
     public class TokenController : Controller
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"> ID of the owner of the token. Must be an admin. </param>
-        /// <param name="token_key"> Unique Key </param>
-        /// <returns> Redirect to the request page or to login page </returns>
-        public ActionResult VerifyToken(string token_key)
+
+        public ActionResult UserDetails(string token_key)
         {
             TokenRepository _tok_rep = new TokenRepository();
             DetailsToken token = _tok_rep.FetchSingleDetails(token_key);
+            _tok_rep.CloseConnection();
 
-            // if token is expired or token doesn't exist
-            if(token.isExpired() || token == null)
-            {
-                _tok_rep.Delete(token.TokenKey);
-                Session.Clear();
-                return RedirectToAction("Login", "Home");
-            }
+            if (!TokenManager.Verify(token)) return RedirectToAction("Login", "Home");
 
             // is no User is logged in
-            if(String.IsNullOrWhiteSpace(System.Web.HttpContext.Current.User.Identity.Name))
+            if (String.IsNullOrWhiteSpace(System.Web.HttpContext.Current.User.Identity.Name))
             {
                 // connect as the owner of the ticker and redirect to detail page
                 UserRepository _user_rep = new UserRepository();
@@ -41,6 +31,11 @@ namespace AppInventaire.Controllers
             }
 
             return RedirectToAction("Details", "User", new { id = token.AddedUserId });
+        }
+
+        public ActionResult ForgotPassword(User user)
+        {
+            return RedirectToAction("NewPassword", "Home", new { id = user.ID});
         }
     }
 }
