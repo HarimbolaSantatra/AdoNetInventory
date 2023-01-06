@@ -351,6 +351,7 @@
     <Compile Include="Utils\PdfUtils.cs" />
     <Compile Include="Utils\Validation.cs" />
     <Compile Include="Utils\ProjectVar.cs" />
+    <Compile Include="Utils\PasswordCustomAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />

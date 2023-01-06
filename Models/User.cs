@@ -2,8 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Linq;
-using System.Security.Principal;
+using AppInventaire.Utils;
 
 namespace AppInventaire.Models
 {
@@ -29,7 +28,7 @@ namespace AppInventaire.Models
         [Display(Name = "Mot De Passe")]
         [MinLength(8, ErrorMessage = "Mot de passe trop courte !")]
         [Required(ErrorMessage = "Champ Requis !")]
-        [
+        [PasswordCustom]
         public string Password { get; set; }
 
         public Boolean IsActive { get; set; }
