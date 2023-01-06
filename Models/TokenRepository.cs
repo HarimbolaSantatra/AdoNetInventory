@@ -8,8 +8,31 @@ namespace AppInventaire.Models
 {
     public class TokenRepository : BaseRepository
     {
+        public Token FetchSingle(string token_key)
+        {
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM token WHERE token=\"{token_key}\"", _con);
+            MySqlDataReader reader = cmd.ExecuteReader();
 
-        public DetailsToken FetchSingle(string token_key)
+            List<Token> outputTokens = null;
+            if (reader.HasRows)
+            {
+                outputTokens = new List<Token>();
+                while (reader.Read())
+                {
+                    Token current_token = new Token
+                    {
+                        UserId = int.Parse(reader["userid"].ToString()),
+                        TokenKey = reader["token"].ToString(),
+                        CreationDate = DateTime.Parse(reader["creation_date"].ToString()),
+                    };
+                    outputTokens.Add(current_token);
+                }
+            }
+            reader.Close();
+            return (outputTokens == null) ? new Token() : outputTokens.First();
+        }
+
+        public DetailsToken FetchSingleDetails(string token_key)
         {
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM token_details WHERE token=\"{token_key}\"", _con);
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -31,8 +54,7 @@ namespace AppInventaire.Models
                 }
             }
             reader.Close();
-
-            return outputTokens.Count == 0 ? null : outputTokens.First();
+            return (outputTokens == null) ? new DetailsToken() : outputTokens.First();
         }
 
         public void Add(int userid, string token, int added_user_id)

@@ -19,7 +19,7 @@ namespace AppInventaire.Controllers
         public ActionResult VerifyToken(string token_key)
         {
             TokenRepository _tok_rep = new TokenRepository();
-            DetailsToken token = _tok_rep.FetchSingle(token_key);
+            DetailsToken token = _tok_rep.FetchSingleDetails(token_key);
 
             // if token is expired or token doesn't exist
             if(token.isExpired() || token == null)
