@@ -20,7 +20,7 @@ namespace AppInventaire.Utils
             if (value == null) return ValidationResult.Success;
 
             // Create a password object
-            Password password = new Password(value.ToString());
+            PasswordUtils password = new PasswordUtils(value.ToString());
 
             if (!password.CheckCase())
             {

@@ -23,5 +23,10 @@ namespace AppInventaire.Controllers
             ViewBag.message = message;
             return View();
         }
+
+        public ActionResult LinkExpired()
+        {
+            return View();
+        }
     }
 }

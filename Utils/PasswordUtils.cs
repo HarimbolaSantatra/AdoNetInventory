@@ -5,10 +5,10 @@ using System.Web;
 
 namespace AppInventaire.Utils
 {
-    public class Password
+    public class PasswordUtils
     {
         public string password_string;
-        public Password(string password)
+        public PasswordUtils(string password)
         {
             this.password_string = password.Trim(); // Remove leading and trailing whitespace
         }
@@ -53,6 +53,11 @@ namespace AppInventaire.Utils
                 return true;
             }
             return false;
+        }
+
+        public static bool CheckConfirm(string password1, string password2)
+        {
+            return String.Equals(password1, password2);
         }
     }
 

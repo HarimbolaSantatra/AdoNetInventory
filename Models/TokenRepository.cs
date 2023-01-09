@@ -54,16 +54,28 @@ namespace AppInventaire.Models
                 }
             }
             reader.Close();
+            CloseConnection();
             return (outputTokens == null) ? new DetailsToken() : outputTokens.First();
         }
 
         public void Add(int userid, string token, int added_user_id)
         {
-            string cmd_string = $"INSERT INTO token_details " +
+            string cmd_string = $"INSERT INTO token " +
                 $"VALUES ({userid}, {added_user_id}, \"{token}\", CURRENT_TIMESTAMP)";
 
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
             cmd.ExecuteNonQuery();
+            CloseConnection();
+        }
+
+        public void Add(int userid, string token)
+        {
+            string cmd_string = $"INSERT INTO token(userid, token, creation_date) " +
+                $"VALUES ({userid}, \"{token}\", CURRENT_TIMESTAMP)";
+
+            MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
+            cmd.ExecuteNonQuery();
+            CloseConnection();
         }
 
         public void Delete(string token_key)

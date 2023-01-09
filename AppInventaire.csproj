@@ -330,6 +330,7 @@
     <Compile Include="Models\ItemBrand.cs" />
     <Compile Include="Models\ItemRepository.cs" />
     <Compile Include="Models\ItemType.cs" />
+    <Compile Include="Models\NewPasswordViewModel.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\TokenRepository.cs" />
     <Compile Include="Models\DetailsToken.cs" />
@@ -349,7 +350,7 @@
     <Compile Include="Utils\AuthorizeCustomAttribute.cs" />
     <Compile Include="Utils\ModelUtils.cs" />
     <Compile Include="Utils\Operation.cs" />
-    <Compile Include="Utils\Password.cs" />
+    <Compile Include="Utils\PasswordUtils.cs" />
     <Compile Include="Utils\PdfUtils.cs" />
     <Compile Include="Utils\Validation.cs" />
     <Compile Include="Utils\ProjectVar.cs" />
@@ -467,7 +468,8 @@
     <Content Include="Views\User\EditPassword.cshtml" />
     <Content Include="Views\Error\PasswordError.cshtml" />
     <Content Include="Views\Error\LinkExpired.cshtml" />
-    <Content Include="Views\Home\NewPassword.cshtml" />
+    <Content Include="Views\User\NewPassword.cshtml" />
+    <Content Include="Views\User\ForgotPassEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

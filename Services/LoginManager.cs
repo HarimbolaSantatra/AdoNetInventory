@@ -10,36 +10,36 @@ namespace AppInventaire.Services
 {
     public class LoginManager
     {
-        public void LogUserByEmail(string Email)
-        {
-            FormsAuthentication.SetAuthCookie(Email, false);
-            // Create cookie ticket 
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-                1,
-                Email,
-                DateTime.Now,
-                DateTime.Now.AddMinutes(1), // value of time out property
-                false,                      // Value of 'IsPersistent' property
-                String.Empty,               // User Data
-                FormsAuthentication.FormsCookiePath
-            );
-
-            string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
-
-            // Save logged user info
-            HttpContext.Current.Session["Email"] = Email;
-            UserRepository _user_rep = new UserRepository();
-            User loggedUser = _user_rep.FetchByEmail(Email);
-            HttpContext.Current.Session["userRole"] = loggedUser.userRole.RoleName;
-            HttpContext.Current.Session["userId"] = loggedUser.ID;
-            
-            _user_rep.CloseConnection();
-        }
-
         public static void LogOut()
         {
             HttpContext.Current.Session.Clear();
             FormsAuthentication.SignOut();
+        }
+
+        public static void LogUserIfNotLogged(User user)
+        {
+            // if no User is logged in
+            if (String.IsNullOrWhiteSpace(System.Web.HttpContext.Current.User.Identity.Name))
+            {
+                FormsAuthentication.SetAuthCookie(user.Email, false);
+                // Create cookie ticket 
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                    1,
+                    user.Email,
+                    DateTime.Now,
+                    DateTime.Now.AddMinutes(1), // value of time out property
+                    false,                      // Value of 'IsPersistent' property
+                    String.Empty,               // User Data
+                    FormsAuthentication.FormsCookiePath
+                );
+
+                string encryptedTicket = FormsAuthentication.Encrypt(ticket);   // Encrypt ticket
+
+                // Save logged user info
+                HttpContext.Current.Session["Email"] = user.Email;
+                HttpContext.Current.Session["userRole"] = user.userRole.RoleName;
+                HttpContext.Current.Session["userId"] = user.ID;
+            }
         }
     }
 }

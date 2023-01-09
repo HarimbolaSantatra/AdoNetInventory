@@ -5,37 +5,39 @@ using System.Web;
 using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Services;
+using AppInventaire.Utils;
 
 namespace AppInventaire.Controllers
 {
     public class TokenController : Controller
     {
-
         public ActionResult UserDetails(string token_key)
         {
             TokenRepository _tok_rep = new TokenRepository();
             DetailsToken token = _tok_rep.FetchSingleDetails(token_key);
             _tok_rep.CloseConnection();
-
             if (!TokenManager.Verify(token)) return RedirectToAction("Login", "Home");
 
-            // is no User is logged in
-            if (String.IsNullOrWhiteSpace(System.Web.HttpContext.Current.User.Identity.Name))
-            {
-                // connect as the owner of the ticker and redirect to detail page
-                UserRepository _user_rep = new UserRepository();
-                User tokenOwner = _user_rep.FetchSingle(token.UserId);
-                _user_rep.CloseConnection();
-                LoginManager loginManager = new LoginManager();
-                loginManager.LogUserByEmail(tokenOwner.Email);
-            }
+            // connect as the owner of the ticker
+            UserRepository _user_rep = new UserRepository();
+            User tokenOwner = _user_rep.FetchSingle(token.UserId);
+            LoginManager.LogUserIfNotLogged(tokenOwner);
 
             return RedirectToAction("Details", "User", new { id = token.AddedUserId });
         }
 
-        public ActionResult ForgotPassword(User user)
+        public ActionResult NewPassword(string token_key)
         {
-            return RedirectToAction("NewPassword", "Home", new { id = user.ID});
+            TokenRepository _tok_rep = new TokenRepository();
+            DetailsToken token = _tok_rep.FetchSingleDetails(token_key);
+            if (!TokenManager.Verify(token)) return RedirectToAction("LinkExpired", "Error");
+
+            // connect as the owner of the ticket
+            UserRepository _user_rep = new UserRepository();
+            User tokenOwner = _user_rep.FetchSingle(token.UserId);
+            LoginManager.LogUserIfNotLogged(tokenOwner);
+
+            return RedirectToAction("NewPassword", "User");
         }
     }
 }

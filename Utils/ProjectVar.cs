@@ -19,6 +19,9 @@ namespace AppInventaire.Utils
         public static string SERVER_BASE_URL = Path.Combine(
                 HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority);
         public static string SERVER = "http://37.187.143.160:8301/";
+        public static string ADMIN_EMAIL_YAHOO = "rvnjks2000@yahoo.fr";
+        public static string ADMIN_EMAIL_ANDRANA = "andrana@crystal-frame.fr";
+        public static string ADMIN_PWD_ANDRANA = "$$SML99**md255";
         public static string CREATE_USER_EMAIL_MSG(
             string firstName, string lastName, string email, string roleName, string link, DateTime expirationDate)
         {
@@ -41,6 +44,7 @@ namespace AppInventaire.Utils
 Merci !
 ";
         }
+
         public static string DELETE_USER_EMAIL_MSG(string firstName, string lastName, string email, string roleName)
         {
             return $@"
@@ -56,8 +60,21 @@ Merci !
 ";
         }
 
-        public static string ADMIN_EMAIL_YAHOO = "rvnjks2000@yahoo.fr";
-        public static string ADMIN_EMAIL_ANDRANA = "andrana@crystal-frame.fr";
-        public static string ADMIN_PWD_ANDRANA = "$$SML99**md255";
+        public static string RESET_PWD_MSG(string link, DateTime expirationDate)
+        {
+            return $@"
+<p> Bonjour, </p>
+
+<p> Veuillez visiter le lien suivant pour réinitialiser votre mot de passe : <a href=""{link}"">Lien</a> 
+    <br> 
+    (Ce lien expire le {expirationDate})
+</p>
+<p>
+    Pour annuler cette opération, veuillez ignorer cette email.
+</p>
+
+Merci !
+";
+        }
     }
 }

@@ -10,8 +10,7 @@ using AppInventaire.Services;
 
 namespace AppInventaire.Controllers
 {
-    [Authorize]
-    [AuthorizeCustom(Roles = "Admin")]
+    
     public class UserController : Controller
     {
         UserRepository _rep = new UserRepository();
@@ -21,12 +20,16 @@ namespace AppInventaire.Controllers
             UserRepository _rep = new UserRepository();
         }
 
+        [Authorize]
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Index()
         {
             List<User> Users = _rep.Fetch();
             return View(Users);
         }
 
+        [Authorize]
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Create(User user_instance, FormCollection collection)
         {
             if (Request.HttpMethod == "POST")
@@ -40,7 +43,7 @@ namespace AppInventaire.Controllers
                 if (ModelState.IsValid)
                 {
                     string Passwd = Validation.StringOrNull(collection["Password"]);
-                    Password password_object = new Password(Passwd);
+                    PasswordUtils password_object = new PasswordUtils(Passwd);
                     if(password_object.CheckComplete())
                     {
                         string FirstName = Validation.StringOrNull(collection["FirstName"]);
@@ -69,12 +72,15 @@ namespace AppInventaire.Controllers
             return View(user_instance);
         }
 
+        [Authorize]
         public ActionResult Details(int id)
         {
             User single_User = _rep.FetchSingle(id);
             return View(single_User);
         }
 
+        [Authorize]
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Edit(User user_instance, int id, FormCollection collection)
         {
             User single_User = _rep.FetchSingle(id);
@@ -110,7 +116,7 @@ namespace AppInventaire.Controllers
                     !String.IsNullOrWhiteSpace(collection["new_password"].ToString()) &&
                     !String.IsNullOrWhiteSpace(collection["new_password_confirm"].ToString()))
                 { 
-                    Password oldPasswordInput = new Password(collection["old_password"].ToString());
+                    PasswordUtils oldPasswordInput = new PasswordUtils(collection["old_password"].ToString());
                     string hashedOldPassword = Operation.Sha1Hash(oldPasswordInput.password_string);
                     if (!String.Equals(singleUser.Password, hashedOldPassword))
                     {
@@ -126,7 +132,7 @@ namespace AppInventaire.Controllers
                         return RedirectToAction("PasswordError", "Error", new { message = Message }); 
                     }
 
-                    Password newPassword = new Password(collection["new_password"].ToString());
+                    PasswordUtils newPassword = new PasswordUtils(collection["new_password"].ToString());
                     if(!newPassword.CheckComplete())
                     {
                         // Check Password validation 
@@ -141,6 +147,65 @@ namespace AppInventaire.Controllers
             return View();
         }
 
+
+        public ActionResult ForgotPassEmail()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ForgotPassEmail(FormCollection collection)
+        {
+            var LoginEmail = collection["inputEmail"].ToString();
+            if (!(String.IsNullOrWhiteSpace(LoginEmail)))
+            {
+                UserRepository _user_rep = new UserRepository();
+                Token token = new Token()
+                {
+                    UserId = _user_rep.FetchByEmail(LoginEmail).ID,
+                    TokenKey = Guid.NewGuid().ToString(),
+                    CreationDate = DateTime.Now,
+                };
+                TokenRepository _tok_rep = new TokenRepository();
+                _tok_rep.Add(token.UserId, token.TokenKey);
+
+                EmailSender emailSender = new EmailSender(
+                    ProjectVar.ADMIN_EMAIL_ANDRANA, 
+                    LoginEmail, 
+                    ProjectVar.ADMIN_PWD_ANDRANA);
+                emailSender.ForgetPassword(token);
+                return RedirectToAction("Login", "Home");
+            }
+            return View();
+        }
+
+        public ActionResult NewPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewPassword(NewPasswordViewModel newPassVM, FormCollection collection)
+        {
+            string email = collection["email"];
+            string newPassword = collection["newPassword"];
+
+            if (ModelState.IsValid)
+            {
+                // Save new password
+                PasswordUtils NewPassword = new PasswordUtils(newPassword);
+                string HashedPassword = Operation.Sha1Hash(NewPassword.password_string);
+                UserRepository _user_rep = new UserRepository();
+                User user = _user_rep.FetchByEmail(email);
+                _user_rep.EditPassword(user.ID, HashedPassword);
+
+                // Disconnect user and Redirect to login
+                return RedirectToAction("Login", "Home");
+            }
+            return View();
+        }
+
+        [Authorize]
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             User singleUser = _rep.FetchSingle(id);
@@ -162,6 +227,8 @@ namespace AppInventaire.Controllers
             return View(singleUser);
         }
 
+        [Authorize]
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult PrintList(List<Computer> Users)
         {
             List<User> UserList = _rep.Fetch();
@@ -173,6 +240,8 @@ namespace AppInventaire.Controllers
             return File(ProjectVar.PDF_DEST, MediaTypeNames.Application.Pdf, $"Liste");
         }
 
+        [Authorize]
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult PrintDetails(int id)
         {
             User user= _rep.FetchSingle(id);

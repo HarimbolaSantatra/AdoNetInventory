@@ -63,6 +63,7 @@ namespace AppInventaire.Models
                 _role_rep.CloseConnection();
             }
             reader.Close();
+            CloseConnection();
             return (output == null) ? new User() : output.First();
         }
 
@@ -93,6 +94,7 @@ namespace AppInventaire.Models
                 _role_rep.CloseConnection();
             }
             reader.Close();
+            CloseConnection();
             return output == null ? new User() : output.First();
         }
 

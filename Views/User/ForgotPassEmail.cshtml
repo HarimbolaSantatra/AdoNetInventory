@@ -1,10 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "APP IVENTAIRE";
+    ViewBag.Title = "Mot de Passe oublié";
     Layout = "~/Views/Shared/_Layout_login.cshtml";
 }
-
-@section style{}
 
 <div class="login-box">
     <div class="login-logo">
@@ -12,7 +10,7 @@
     </div>
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Connectez-vous pour démarrer votre session</p>
+            <p class="login-box-msg">Entrez votre adresse mail</p>
             @using (@Html.BeginForm())
             {
                 <div class="input-group mb-3">
@@ -23,28 +21,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control form-control-lg" placeholder="Mot de passe" id="inputPassword" name="inputPassword">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
-                </div>
                 <div class="social-auth-links text-center mb-3">
                     <button type="submit" class="btn btn-block btn-primary btn-lg">
-                        <i class="fa-solid fa-circle-right mr-2"></i> Connexion
+                        <i class="fa-solid fa-circle-right mr-2"></i> Confirmer
                     </button>
                 </div>
             }
-        <p class="login-box-msg text-center">
-            @Html.ActionLink("Mot de passe oublié ?", "ForgotPassEmail", new { controller = "User" }, new { @class = "" })
-        </p>
         </div>
     </div>
 </div>
-
-@section scripts{}
 
 
 

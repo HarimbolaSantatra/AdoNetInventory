@@ -52,8 +52,6 @@ namespace AppInventaire.Services
             };
             TokenRepository _tok_rep = new TokenRepository();
             _tok_rep.Add(token.UserId, token.TokenKey, token.AddedUserId);
-            _user_rep.CloseConnection();
-            _tok_rep.CloseConnection();
 
             // TRIED SOLUTION: the following solution doesn't work because the link in the email is modified
             // HostingEnvironment.MapPath("~\\Content\\img");
@@ -95,6 +93,20 @@ namespace AppInventaire.Services
 <p> Visitez lien réel: <a href=""{path}""> ici </a> </p>
 ";
             
+            EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
+            emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
+            emailManager.Send(Subject, Message);
+        }
+
+        public void ForgetPassword(Token token)
+        {
+            string verifyTokenPath = "/Token/NewPassword/";
+            string tokenKeyPath = "?token_key=" + token.TokenKey;
+            string path = Path.Combine(ProjectVar.SERVER + verifyTokenPath + tokenKeyPath);
+
+            string Subject = "Réinitialisation du mot de passe - AppInventaire";
+            string Message = ProjectVar.RESET_PWD_MSG(path, token.ExpirationDate);
+
             EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
             emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
             emailManager.Send(Subject, Message);

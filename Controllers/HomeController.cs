@@ -55,8 +55,7 @@ namespace AppInventaire.Controllers
                     // Check if Password is true
                     if( String.Equals(loggedUser.Password, HashedPassword) )
                     {
-                        LoginManager loginManager = new LoginManager();
-                        loginManager.LogUserByEmail(LoginEmail);
+                        LoginManager.LogUserIfNotLogged(loggedUser);
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -78,28 +77,5 @@ namespace AppInventaire.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        public ActionResult NewPassword(FormCollection collection, int id)
-        {
-            if (!String.IsNullOrWhiteSpace(collection["Email"].ToString()) &&
-                !String.IsNullOrWhiteSpace(collection["newPassword"].ToString()) &&
-                !String.IsNullOrWhiteSpace(collection["newPasswordConfirm"].ToString())
-                )
-            {
-                Password newPassword = new Password(collection["newPassword"].ToString());
-                string hashedOldPassword = Operation.Sha1Hash(newPassword.password_string);
-                if (!newPassword.CheckComplete())
-                {
-                    // Check Password validation 
-                    string Message = "Nouveau mot de passe de format invalide.";
-                    return RedirectToAction("PasswordError", "Error", new { message = Message });
-                }
-                UserRepository rep = new UserRepository();
-                rep.EditPassword(id, newPassword.password_string);
-                rep.CloseConnection();
-                return RedirectToAction("Login", "Home");
-            }
-            return View();
-        }
     }
 }
