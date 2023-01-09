@@ -1,12 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Mot de Passe oublié";
+    ViewBag.Title = "Récupération de mot de passe";
     Layout = "~/Views/Shared/_Layout_login.cshtml";
 }
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#">APP. INVENTAIRE </a>
+        <a href="#"> Récupération </a>
     </div>
     <div class="card">
         <div class="card-body login-card-body">
@@ -14,7 +14,7 @@
             @using (@Html.BeginForm())
             {
                 <div class="input-group mb-3">
-                    <input type="text" id="inputEmail" class="form-control form-control-lg" name="inputEmail" placeholder="Identifiant">
+                    <input type="text" id="inputEmail" class="form-control form-control-lg" name="inputEmail" placeholder="exemple@gmail.com">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -27,6 +27,9 @@
                     </button>
                 </div>
             }
+            <p class="login-box-msg text-center">
+                @Html.ActionLink("Se connecter", "Login", new { controller = "Home" }, new { @class = "" })
+            </p>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ namespace AppInventaire.Controllers
     
     public class UserController : Controller
     {
-        UserRepository _rep = new UserRepository();
+        UserRepository _rep;
 
         public UserController()
         {
@@ -156,6 +156,8 @@ namespace AppInventaire.Controllers
         public ActionResult ForgotPassEmail(FormCollection collection)
         {
             var LoginEmail = collection["inputEmail"].ToString();
+
+            // Create a new  token
             if (!(String.IsNullOrWhiteSpace(LoginEmail)))
             {
                 UserRepository _user_rep = new UserRepository();
@@ -186,8 +188,15 @@ namespace AppInventaire.Controllers
         [HttpPost]
         public ActionResult NewPassword(NewPasswordViewModel newPassVM, FormCollection collection)
         {
-            string email = collection["email"];
-            string newPassword = collection["newPassword"];
+            string email = collection["Email"];
+            string newPassword = collection["ConfirmPassword"];
+
+            // check if input email is the one logged
+            string loggedUserEmail = System.Web.HttpContext.Current.User.Identity.Name;
+            if (!String.Equals(email, loggedUserEmail))
+            {
+                ModelState.AddModelError("0", "Echec de confirmation de votre adresse mail !")
+            }
 
             if (ModelState.IsValid)
             {

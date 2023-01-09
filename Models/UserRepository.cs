@@ -63,7 +63,6 @@ namespace AppInventaire.Models
                 _role_rep.CloseConnection();
             }
             reader.Close();
-            CloseConnection();
             return (output == null) ? new User() : output.First();
         }
 
@@ -94,7 +93,6 @@ namespace AppInventaire.Models
                 _role_rep.CloseConnection();
             }
             reader.Close();
-            CloseConnection();
             return output == null ? new User() : output.First();
         }
 
@@ -112,7 +110,6 @@ namespace AppInventaire.Models
             cmd.Parameters.AddWithValue("@role_id", role_id);
 
             cmd.ExecuteNonQuery();
-            CloseConnection();
         }
 
         public void EditUser(int id, string firstname, string lastname, string email, int role_id)
@@ -127,7 +124,6 @@ namespace AppInventaire.Models
             cmd.Parameters.AddWithValue("@role_id", role_id);
 
             cmd.ExecuteNonQuery();
-            CloseConnection();
         }
 
         public void EditPassword(int id,string password)
@@ -136,14 +132,12 @@ namespace AppInventaire.Models
             string cmd_string = $"UPDATE User SET password=\"{hashedPassword}\" WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con); 
             cmd.ExecuteNonQuery();
-            CloseConnection();
         }
 
         public void DeleteUser(int id)
         {
             MySqlCommand cmd = new MySqlCommand($"DELETE FROM User WHERE ID={id}", _con);
             cmd.ExecuteNonQuery();
-            CloseConnection();
         }
     }
 }

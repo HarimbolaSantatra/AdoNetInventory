@@ -102,7 +102,7 @@ namespace AppInventaire.Services
         {
             string verifyTokenPath = "/Token/NewPassword/";
             string tokenKeyPath = "?token_key=" + token.TokenKey;
-            string path = Path.Combine(ProjectVar.SERVER + verifyTokenPath + tokenKeyPath);
+            string path = Path.Combine(ProjectVar.SERVER_BASE_URL + verifyTokenPath + tokenKeyPath);
 
             string Subject = "Réinitialisation du mot de passe - AppInventaire";
             string Message = ProjectVar.RESET_PWD_MSG(path, token.ExpirationDate);

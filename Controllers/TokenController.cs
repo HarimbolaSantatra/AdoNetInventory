@@ -29,7 +29,7 @@ namespace AppInventaire.Controllers
         public ActionResult NewPassword(string token_key)
         {
             TokenRepository _tok_rep = new TokenRepository();
-            DetailsToken token = _tok_rep.FetchSingleDetails(token_key);
+            Token token = _tok_rep.FetchSingle(token_key);
             if (!TokenManager.Verify(token)) return RedirectToAction("LinkExpired", "Error");
 
             // connect as the owner of the ticket

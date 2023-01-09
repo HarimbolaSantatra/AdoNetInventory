@@ -18,7 +18,7 @@ namespace AppInventaire.Utils
         public static string LOGO_DEST = HostingEnvironment.MapPath("\\Content\\img\\logo_dark.png");
         public static string SERVER_BASE_URL = Path.Combine(
                 HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority);
-        public static string SERVER = "http://37.187.143.160:8301/";
+        public static string SERVER = "http://37.187.143.160:8301";
         public static string ADMIN_EMAIL_YAHOO = "rvnjks2000@yahoo.fr";
         public static string ADMIN_EMAIL_ANDRANA = "andrana@crystal-frame.fr";
         public static string ADMIN_PWD_ANDRANA = "$$SML99**md255";
