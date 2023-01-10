@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime; // For pdf type file: MediaTypeNames.Application.Pdf
-using System.Web.Security;
+using System.Web;
 using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Utils;
@@ -60,12 +60,14 @@ namespace AppInventaire.Controllers
                         // Send Email to Admin
                         EmailSender emailSender = new EmailSender(
                             ProjectVar.ADMIN_EMAIL_ANDRANA,     // Sender
-                            ProjectVar.ADMIN_EMAIL_YAHOO,     // Receiver
+                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Receiver
                             ProjectVar.ADMIN_PWD_ANDRANA,
                             ProjectVar.ADMIN_EMAIL_ANDRANA);      // Sender password
                         emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
 
-                        return RedirectToAction("Index");
+                        // Launch AJAX request to the page to enable Javascript confirmation popup
+                        return Json("hello");
+                        //return RedirectToAction("Index");
                     }
                 }
             }
@@ -228,7 +230,7 @@ namespace AppInventaire.Controllers
                 // Send Email
                 EmailSender emailSender = new EmailSender(
                             ProjectVar.ADMIN_EMAIL_ANDRANA,     // Sender
-                            ProjectVar.ADMIN_EMAIL_YAHOO,     // Receiver
+                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Receiver
                             ProjectVar.ADMIN_PWD_ANDRANA);      // Sender password
                 emailSender.NotifyDeleteUser(
                     singleUser.FirstName, singleUser.LastName, 

@@ -346,6 +346,7 @@
     <Compile Include="Services\EmailManager.cs" />
     <Compile Include="Services\EmailSender.cs" />
     <Compile Include="Services\LoginManager.cs" />
+    <Compile Include="Services\ScriptManager.cs" />
     <Compile Include="Services\TokenManager.cs" />
     <Compile Include="Utils\AuthorizeCustomAttribute.cs" />
     <Compile Include="Utils\ModelUtils.cs" />
@@ -425,6 +426,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-2.4.4.min.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -470,6 +472,7 @@
     <Content Include="Views\User\NewPassword.cshtml" />
     <Content Include="Views\User\ForgotPassEmail.cshtml" />
     <Content Include="Views\Home\Message.cshtml" />
+    <Content Include="Views\Shared\_Modal_Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
