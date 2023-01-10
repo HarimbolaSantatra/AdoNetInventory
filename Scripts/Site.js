@@ -1,21 +1,32 @@
 ﻿// Show the popup
 $(document).ready(function () {
-    $('#createUserSuccess').modal('toggle');
+  
+    function checkFunc() {
+        // data is the json file
+        if (data)
+            if (data.error == '0'){
+                // No error
+                successFunc();
+            }
+    };
 
-    function successFunc(data, status) {
-        //confirm("Press a button!");
-        confirm(data);
+    function successFunc() {
+        $('#createUserSuccess').modal('toggle');
     }
     function errorFunc() {
-        alert('error');
+        $('#createUserSuccess').modal('toggle');
+        var text = $('#createUserSuccess');
     }
-    var serviceURL = '/User/Create';
-    successFunc("Samori Touré");
-    $.ajax({
-        url: serviceURL,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: successFunc,
-        error: errorFunc
-    });
-}
+    
+    $('#createUserBtn').click(function () {
+        var serviceURL = '/User/Create';
+        $.ajax({
+            url: serviceURL,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: successFunc,
+            error: errorFunc
+        });
+        return 0
+    })
+});

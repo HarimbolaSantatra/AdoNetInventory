@@ -1,22 +1,18 @@
-﻿Button trigger modal
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
-<!-- Modal -->
+﻿<!-- Modal -->
 <div class="modal fade" id="createUserSuccess" tabindex="-1" role="dialog" aria-labelledby="createUserSuccessLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createUserSuccessLabel"> @ViewBag.ModalTitle </h5>
+                <h5 class="modal-title" id="createUserSuccessLabel"> Ajout réussi </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                @ViewBag.ModalMessage
+            <div class="modal-body" id="modalMessage">
+                Ajout réussi ! L'administrateur a été notifié !
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                @Html.ActionLink("Valider", "Index", "User", new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>

@@ -65,9 +65,8 @@ namespace AppInventaire.Controllers
                             ProjectVar.ADMIN_EMAIL_ANDRANA);      // Sender password
                         emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
 
-                        // Launch AJAX request to the page to enable Javascript confirmation popup
-                        return Json("hello");
-                        //return RedirectToAction("Index");
+                        // Return Json object with no error. (For the popup)
+                        return Json(" { error : 0 } ");
                     }
                 }
             }
