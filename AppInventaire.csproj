@@ -469,6 +469,7 @@
     <Content Include="Views\Error\LinkExpired.cshtml" />
     <Content Include="Views\User\NewPassword.cshtml" />
     <Content Include="Views\User\ForgotPassEmail.cshtml" />
+    <Content Include="Views\Home\Message.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

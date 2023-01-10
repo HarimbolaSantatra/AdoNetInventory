@@ -77,5 +77,12 @@ namespace AppInventaire.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Message(string mk)
+        {
+            // mk : message key
+            ViewBag.message = ProjectVar._messages[mk];
+            return View();
+        }
+
     }
 }

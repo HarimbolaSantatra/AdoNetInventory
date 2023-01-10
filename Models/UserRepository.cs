@@ -100,7 +100,7 @@ namespace AppInventaire.Models
         {
             // string that begin with @ are SqlParameter
             string cmd_string = $"INSERT INTO User(firstname, lastname, email, password, role_id) " +
-                $"VALUES (@firstname, @lastname, @email, sha(@password), @role_id)";
+                $"VALUES (@firstname, @lastname, @email, @password, @role_id)";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
 
             cmd.Parameters.AddWithValue("@firstname", firstname);
@@ -126,10 +126,9 @@ namespace AppInventaire.Models
             cmd.ExecuteNonQuery();
         }
 
-        public void EditPassword(int id,string password)
+        public void EditPassword(int id, string password)
         { 
-            string hashedPassword = Operation.Sha1Hash(password);
-            string cmd_string = $"UPDATE User SET password=\"{hashedPassword}\" WHERE ID={id}";
+            string cmd_string = $"UPDATE User SET password=\"{password}\" WHERE ID={id}";
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con); 
             cmd.ExecuteNonQuery();
         }

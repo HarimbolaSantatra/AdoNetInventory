@@ -54,7 +54,6 @@ namespace AppInventaire.Models
                 }
             }
             reader.Close();
-            CloseConnection();
             return (outputTokens == null) ? new DetailsToken() : outputTokens.First();
         }
 
@@ -65,7 +64,6 @@ namespace AppInventaire.Models
 
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
             cmd.ExecuteNonQuery();
-            CloseConnection();
         }
 
         public void Add(int userid, string token)
@@ -75,7 +73,6 @@ namespace AppInventaire.Models
 
             MySqlCommand cmd = new MySqlCommand(cmd_string, _con);
             cmd.ExecuteNonQuery();
-            CloseConnection();
         }
 
         public void Delete(string token_key)

@@ -8,9 +8,11 @@ namespace AppInventaire.Utils
     public class PasswordUtils
     {
         public string password_string;
+        public string hashed;
         public PasswordUtils(string password)
         {
             this.password_string = password.Trim(); // Remove leading and trailing whitespace
+            this.hashed = Operation.Sha1Hash(this.password_string);
         }
 
         

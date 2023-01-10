@@ -12,6 +12,7 @@ namespace AppInventaire.Utils
     /// </summary>
     public class ProjectVar
     {
+        // ----------------- PATH -----------------
         // Get absolute path
         // C:\Program Files (x86)\IIS Express || "E:\\Santatra\\ASP.NET\\AppInventaire\\Results\\iText.pdf"
         public static string PDF_DEST = HostingEnvironment.MapPath("\\Results\\temp_pdf.pdf");
@@ -19,6 +20,10 @@ namespace AppInventaire.Utils
         public static string SERVER_BASE_URL = Path.Combine(
                 HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority);
         public static string SERVER = "http://37.187.143.160:8301";
+
+
+
+        // ----------------- EMAIL -----------------
         public static string ADMIN_EMAIL_YAHOO = "rvnjks2000@yahoo.fr";
         public static string ADMIN_EMAIL_ANDRANA = "andrana@crystal-frame.fr";
         public static string ADMIN_PWD_ANDRANA = "$$SML99**md255";
@@ -70,11 +75,19 @@ Merci !
     (Ce lien expire le {expirationDate})
 </p>
 <p>
-    Pour annuler cette opération, veuillez ignorer cette email.
+    Si vous n'êtes pas à l'origine de l'opération ou vous voulez l'annuler, veuillez ignorer cette email.
 </p>
 
 Merci !
 ";
         }
+
+
+        // ----------------- Message -----------------
+        public static Dictionary<string, string> _messages = new Dictionary<string, string>
+        {
+            { "passwd_changed",  "Mot de passe changé! Veuillez vous reconnecter." },
+            { "email_sent",  "Email de confirmation envoyé. Veuillez vérifier votre boîte de réception !" },
+        };
     }
 }

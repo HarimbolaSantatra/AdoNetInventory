@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Message";
+    Layout = "~/Views/Shared/_Layout_login.cshtml";
+}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"> Nouveau mot de passe </a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body login-card-body">
+        @ViewBag.message
+        <p class="login-box-msg">
+            @Html.ActionLink("Se connecter", "Login", new { controller = "Home" }, new { @class = "" })
+        </p>
+    </div>
+</div>
+
+
+

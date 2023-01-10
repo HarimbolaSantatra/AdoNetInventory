@@ -13,11 +13,11 @@ namespace AppInventaire.Controllers
     
     public class UserController : Controller
     {
-        UserRepository _rep;
+        UserRepository _rep = new UserRepository();
 
         public UserController()
         {
-            UserRepository _rep = new UserRepository();
+            
         }
 
         [Authorize]
@@ -107,6 +107,8 @@ namespace AppInventaire.Controllers
             return View(single_User);
         }
 
+        [Authorize]
+        [AuthorizeCustom(Roles = "Admin")]
         public ActionResult EditPassword(int id, FormCollection collection)
         {
             User singleUser = _rep.FetchSingle(id);
@@ -139,14 +141,13 @@ namespace AppInventaire.Controllers
                         string Message = "Nouveau mot de passe de format invalide.";
                         return RedirectToAction("PasswordError", "Error", new { message=Message }); 
                     }
-                    _rep.EditPassword(id, newPassword.password_string);
+                    _rep.EditPassword(id, newPassword.hashed);
                     _rep.CloseConnection();
                     return RedirectToAction("Index", "Home");
                 }
             }
             return View();
         }
-
 
         public ActionResult ForgotPassEmail()
         {
@@ -175,7 +176,9 @@ namespace AppInventaire.Controllers
                     LoginEmail, 
                     ProjectVar.ADMIN_PWD_ANDRANA);
                 emailSender.ForgetPassword(token);
-                return RedirectToAction("Login", "Home");
+
+                // Confirm to user
+                return RedirectToAction("Message", "Home", new { mk = "email_sent" });
             }
             return View();
         }
@@ -195,20 +198,20 @@ namespace AppInventaire.Controllers
             string loggedUserEmail = System.Web.HttpContext.Current.User.Identity.Name;
             if (!String.Equals(email, loggedUserEmail))
             {
-                ModelState.AddModelError("0", "Echec de confirmation de votre adresse mail !")
+                ModelState.AddModelError("CustomError", "Echec de confirmation de votre adresse mail !");
             }
 
             if (ModelState.IsValid)
             {
                 // Save new password
                 PasswordUtils NewPassword = new PasswordUtils(newPassword);
-                string HashedPassword = Operation.Sha1Hash(NewPassword.password_string);
                 UserRepository _user_rep = new UserRepository();
                 User user = _user_rep.FetchByEmail(email);
-                _user_rep.EditPassword(user.ID, HashedPassword);
+                _user_rep.EditPassword(user.ID, NewPassword.hashed);
 
                 // Disconnect user and Redirect to login
-                return RedirectToAction("Login", "Home");
+                LoginManager.LogOut();
+                return RedirectToAction("Message", "Home", new { mk = "passwd_changed" });
             }
             return View();
         }

@@ -13,13 +13,13 @@ namespace AppInventaire.Controllers
     {
         public ActionResult UserDetails(string token_key)
         {
-            TokenRepository _tok_rep = new TokenRepository();
-            DetailsToken token = _tok_rep.FetchSingleDetails(token_key);
-            _tok_rep.CloseConnection();
-            if (!TokenManager.Verify(token)) return RedirectToAction("Login", "Home");
+            if (!TokenManager.VerifyToken(token_key)) return RedirectToAction("Login", "Home");
 
             // connect as the owner of the ticker
             UserRepository _user_rep = new UserRepository();
+            TokenRepository _tok_rep = new TokenRepository();
+            DetailsToken token = _tok_rep.FetchSingleDetails(token_key);
+            _tok_rep.CloseConnection();
             User tokenOwner = _user_rep.FetchSingle(token.UserId);
             LoginManager.LogUserIfNotLogged(tokenOwner);
 
@@ -28,13 +28,14 @@ namespace AppInventaire.Controllers
 
         public ActionResult NewPassword(string token_key)
         {
-            TokenRepository _tok_rep = new TokenRepository();
-            Token token = _tok_rep.FetchSingle(token_key);
-            if (!TokenManager.Verify(token)) return RedirectToAction("LinkExpired", "Error");
+            if (!TokenManager.VerifyToken(token_key)) return RedirectToAction("LinkExpired", "Error");
 
             // connect as the owner of the ticket
+            TokenRepository _tok_rep = new TokenRepository();
+            Token token = _tok_rep.FetchSingle(token_key);
             UserRepository _user_rep = new UserRepository();
             User tokenOwner = _user_rep.FetchSingle(token.UserId);
+            _tok_rep.CloseConnection(); _user_rep.CloseConnection();
             LoginManager.LogUserIfNotLogged(tokenOwner);
 
             return RedirectToAction("NewPassword", "User");
