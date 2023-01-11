@@ -207,7 +207,7 @@ namespace AppInventaire.Controllers
 
                 // Delete used token
                 TokenRepository _tk_rep = new TokenRepository();
-                _tk_rep.DeletePossByUser(user);
+                _tk_rep.DeleteByOwner(user);
                 _tk_rep.CloseConnection();
 
                 // Disconnect user and Redirect to login

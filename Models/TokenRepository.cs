@@ -29,7 +29,14 @@ namespace AppInventaire.Models
                 }
             }
             reader.Close();
-            return (outputTokens == null) ? new Token() : outputTokens.First();
+            // if there's many token, fetch the last and delete other
+            if (outputTokens == null) return new Token();
+            if (outputTokens.Count > 1)
+            {
+                DateTime lastTokenCreateDate = outputTokens.Last().CreationDate;
+                outputTokens.RemoveAll(item => item.CreationDate < lastTokenCreateDate);
+            }
+            return outputTokens.Last();
         }
 
         public DetailsToken FetchSingleDetails(string token_key)
@@ -85,7 +92,7 @@ namespace AppInventaire.Models
         /// Delete every token possessed by a User
         /// </summary>
         /// <param name="user"> User object</param>
-        public void DeletePossByUser(User user)
+        public void DeleteByOwner(User user)
         {
             MySqlCommand cmd = new MySqlCommand($"DELETE FROM token WHERE userid=\"{user.ID}\"", _con);
             cmd.ExecuteNonQuery();
@@ -94,7 +101,7 @@ namespace AppInventaire.Models
         /// Delete every token possessed by a User
         /// </summary>
         /// <param name="userId"> ID of the User </param>
-        public void DeletePossByUser(int userId)
+        public void DeleteByOwner(int userId)
         {
             MySqlCommand cmd = new MySqlCommand($"DELETE FROM token WHERE userid=\"{userId}\"", _con);
             cmd.ExecuteNonQuery();

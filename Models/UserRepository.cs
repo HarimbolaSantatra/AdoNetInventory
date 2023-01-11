@@ -66,7 +66,7 @@ namespace AppInventaire.Models
             return (output == null) ? new User() : output.First();
         }
 
-        public User FetchByEmail(string emailQuery) // MBOLA TSY METY
+        public User FetchByEmail(string emailQuery)
         {
             MySqlCommand cmd = new MySqlCommand($"SELECT * FROM User WHERE email=@searchQuery", _con);
             cmd.Parameters.AddWithValue("@searchQuery", emailQuery);
@@ -94,6 +94,14 @@ namespace AppInventaire.Models
             }
             reader.Close();
             return output == null ? new User() : output.First();
+        }
+
+        public User FetchByToken(string tokenKey)
+        {
+            TokenRepository _tok_rep = new TokenRepository();
+            Token token = _tok_rep.FetchSingle(tokenKey);
+            _tok_rep.CloseConnection();
+            return FetchSingle(token.UserId);
         }
 
         public void AddUser(string firstname, string lastname, string email, string password, int role_id)

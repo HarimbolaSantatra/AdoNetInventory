@@ -41,5 +41,13 @@ namespace AppInventaire.Services
                 HttpContext.Current.Session["userId"] = user.ID;
             }
         }
+
+        public static void LogTokenOwner(string token_key)
+        {
+            UserRepository _user_rep = new UserRepository();
+            User tokenOwner = _user_rep.FetchByToken(token_key);
+            _user_rep.CloseConnection();
+            LogUserIfNotLogged(tokenOwner);
+        }
     }
 }
