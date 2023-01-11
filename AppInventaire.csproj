@@ -318,6 +318,7 @@
     <Compile Include="Controllers\RaspberryController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="CustomAttribute\CorrectEmailCustomAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -330,7 +331,7 @@
     <Compile Include="Models\ItemBrand.cs" />
     <Compile Include="Models\ItemRepository.cs" />
     <Compile Include="Models\ItemType.cs" />
-    <Compile Include="Models\NewPasswordViewModel.cs" />
+    <Compile Include="Models\NewPassword.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\TokenRepository.cs" />
     <Compile Include="Models\DetailsToken.cs" />
@@ -348,14 +349,14 @@
     <Compile Include="Services\LoginManager.cs" />
     <Compile Include="Services\ScriptManager.cs" />
     <Compile Include="Services\TokenManager.cs" />
-    <Compile Include="Utils\AuthorizeCustomAttribute.cs" />
+    <Compile Include="CustomAttribute\AuthorizeCustomAttribute.cs" />
     <Compile Include="Utils\ModelUtils.cs" />
     <Compile Include="Utils\Operation.cs" />
     <Compile Include="Utils\PasswordUtils.cs" />
     <Compile Include="Utils\PdfUtils.cs" />
     <Compile Include="Utils\Validation.cs" />
     <Compile Include="Utils\ProjectVar.cs" />
-    <Compile Include="Utils\PasswordCustomAttribute.cs" />
+    <Compile Include="CustomAttribute\PasswordCustomAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using System.Web;
-using System.Web.Security;
 using System.Web.Routing;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using AppInventaire.Models;
 
-namespace AppInventaire.Utils
+namespace AppInventaire.CustomAttribute
 {
     public class AuthorizeCustomAttribute : AuthorizeAttribute
     {

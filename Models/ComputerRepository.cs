@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using AppInventaire.Utils;
+using AppInventaire.CustomAttribute;
 
 namespace AppInventaire.Models
 {

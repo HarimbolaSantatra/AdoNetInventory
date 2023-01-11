@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Utils;
+using AppInventaire.CustomAttribute;
 
 namespace AppInventaire.Controllers
 {

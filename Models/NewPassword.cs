@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using AppInventaire.Utils;
+using AppInventaire.CustomAttribute;
 
 namespace AppInventaire.Models
 {
-    public class NewPasswordViewModel
+    public class NewPassword
     {
+        string LoggedUserEmail = HttpContext.Current.Session["Email"].ToString();
         [Display(Name = "Adresse Mail")]
         [EmailAddress(ErrorMessage = "L'adresse mail n'est pas valide !")]
         [Required(ErrorMessage = "Champ Requis !")]
+        [CorrectEmailCustom]
         public string Email { get; set; }
 
         [Display(Name = "Mot De Passe")]

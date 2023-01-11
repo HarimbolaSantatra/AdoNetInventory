@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using AppInventaire.Utils;
+using AppInventaire.CustomAttribute;
 
 namespace AppInventaire.Models
 {

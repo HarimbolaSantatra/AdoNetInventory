@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mime; // For pdf type file: MediaTypeNames.Application.Pdf
-using System.Web;
 using System.Web.Mvc;
 using AppInventaire.Models;
 using AppInventaire.Utils;
+using AppInventaire.CustomAttribute;
 using AppInventaire.Services;
 
 namespace AppInventaire.Controllers
@@ -184,23 +183,18 @@ namespace AppInventaire.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult NewPassword()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult NewPassword(NewPasswordViewModel newPassVM, FormCollection collection)
+        [Authorize]
+        public ActionResult NewPassword(NewPassword newPass, FormCollection collection)
         {
             string email = collection["Email"];
             string newPassword = collection["ConfirmPassword"];
-
-            // check if input email is the one logged
-            string loggedUserEmail = System.Web.HttpContext.Current.User.Identity.Name;
-            if (!String.Equals(email, loggedUserEmail))
-            {
-                ModelState.AddModelError("CustomError", "Echec de confirmation de votre adresse mail !");
-            }
 
             if (ModelState.IsValid)
             {

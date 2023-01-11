@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using AppInventaire.Utils;
 
-namespace AppInventaire.Utils
+namespace AppInventaire.CustomAttribute
 {
     /// <summary>
     /// Implement a custom passwrd validation for User Model
