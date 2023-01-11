@@ -58,10 +58,10 @@ namespace AppInventaire.Controllers
 
                         // Send Email to Admin
                         EmailSender emailSender = new EmailSender(
-                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Sender
-                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Receiver
-                            ProjectVar.ADMIN_PWD_ANDRANA,
-                            ProjectVar.ADMIN_EMAIL_ANDRANA);      // Sender password
+                            ProjectVar.SENDER_EMAIL,     // Sender
+                            ProjectVar.ADMIN_EMAIL,     // Receiver
+                            ProjectVar.SENDER_PWD,      // Sender password
+                            ProjectVar.CC_EMAIL);      // CC
                         emailSender.NotifyCreateUser(FirstName, LastName, Email, role_name);
 
                         // Return Json object with no error. (For the popup)
@@ -172,9 +172,9 @@ namespace AppInventaire.Controllers
                 _tok_rep.Add(token.UserId, token.TokenKey);
 
                 EmailSender emailSender = new EmailSender(
-                    ProjectVar.ADMIN_EMAIL_ANDRANA, 
-                    LoginEmail, 
-                    ProjectVar.ADMIN_PWD_ANDRANA);
+                    ProjectVar.SENDER_EMAIL,    // Sender
+                    LoginEmail,                 // Receiver
+                    ProjectVar.SENDER_PWD);     // Sender password
                 emailSender.ForgetPassword(token);
 
                 // Confirm to user
@@ -228,9 +228,9 @@ namespace AppInventaire.Controllers
 
                 // Send Email
                 EmailSender emailSender = new EmailSender(
-                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Sender
-                            ProjectVar.ADMIN_EMAIL_ANDRANA,     // Receiver
-                            ProjectVar.ADMIN_PWD_ANDRANA);      // Sender password
+                            ProjectVar.SENDER_EMAIL,     // Sender
+                            ProjectVar.ADMIN_EMAIL,     // Receiver
+                            ProjectVar.SENDER_PWD);      // Sender password
                 emailSender.NotifyDeleteUser(
                     singleUser.FirstName, singleUser.LastName, 
                     singleUser.Email, singleUser.userRole.RoleName);

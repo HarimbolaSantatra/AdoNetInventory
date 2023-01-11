@@ -23,10 +23,19 @@ namespace AppInventaire.Utils
 
 
 
-        // ----------------- EMAIL -----------------
+        // ----------------- EMAIL ADDRESS -----------------
         public static string ADMIN_EMAIL_YAHOO = "rvnjks2000@yahoo.fr";
         public static string ADMIN_EMAIL_ANDRANA = "andrana@crystal-frame.fr";
         public static string ADMIN_PWD_ANDRANA = "$$SML99**md255";
+
+        public static string SENDER_EMAIL = ADMIN_EMAIL_ANDRANA;
+        public static string SENDER_PWD = ADMIN_PWD_ANDRANA;
+        public static string ADMIN_EMAIL = ADMIN_EMAIL_ANDRANA;
+        public static string CC_EMAIL = ADMIN_EMAIL_ANDRANA;
+
+
+
+        // ----------------- EMAIL MESSAGE -----------------
         public static string CREATE_USER_EMAIL_MSG(
             string firstName, string lastName, string email, string roleName, string link, DateTime expirationDate)
         {
@@ -83,7 +92,8 @@ Merci !
         }
 
 
-        // ----------------- Message -----------------
+
+        // ----------------- Home Message Dictionary -----------------
         public static Dictionary<string, string> _messages = new Dictionary<string, string>
         {
             { "passwd_changed",  "Mot de passe changé! Veuillez vous reconnecter." },
