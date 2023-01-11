@@ -49,7 +49,7 @@ namespace AppInventaire.Controllers
                         string LastName = Validation.StringOrNull(collection["LastName"]);
                         string Email = Validation.StringOrNull(collection["Email"]);
                         int userRoleId = Validation.IntOrDefault(collection["userRole"], 1);
-                        _rep.AddUser(FirstName, LastName, Email, password_object.password_string, userRoleId);
+                        _rep.AddUser(FirstName, LastName, Email, password_object.hashed, userRoleId);
 
                         // Get RoleName
                         RoleRepository _role_rep = new RoleRepository();
@@ -119,8 +119,7 @@ namespace AppInventaire.Controllers
                     !String.IsNullOrWhiteSpace(collection["new_password_confirm"].ToString()))
                 { 
                     PasswordUtils oldPasswordInput = new PasswordUtils(collection["old_password"].ToString());
-                    string hashedOldPassword = Operation.Sha1Hash(oldPasswordInput.password_string);
-                    if (!String.Equals(singleUser.Password, hashedOldPassword))
+                    if (!String.Equals(singleUser.Password, oldPasswordInput.hashed))
                     {
                         // If old password is not correct
                         string Message = "Ancien mot de passe incorrect";
