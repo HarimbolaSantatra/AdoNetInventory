@@ -203,6 +203,12 @@ namespace AppInventaire.Controllers
                 UserRepository _user_rep = new UserRepository();
                 User user = _user_rep.FetchByEmail(email);
                 _user_rep.EditPassword(user.ID, NewPassword.hashed);
+                _user_rep.CloseConnection();
+
+                // Delete used token
+                TokenRepository _tk_rep = new TokenRepository();
+                _tk_rep.DeletePossByUser(user);
+                _tk_rep.CloseConnection();
 
                 // Disconnect user and Redirect to login
                 LoginManager.LogOut();

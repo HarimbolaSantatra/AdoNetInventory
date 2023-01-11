@@ -77,7 +77,26 @@ namespace AppInventaire.Models
 
         public void Delete(string token_key)
         {
-            MySqlCommand cmd = new MySqlCommand($"DELETE FROM token_details WHERE token=\"{token_key}\"", _con);
+            MySqlCommand cmd = new MySqlCommand($"DELETE FROM token WHERE token=\"{token_key}\"", _con);
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Delete every token possessed by a User
+        /// </summary>
+        /// <param name="user"> User object</param>
+        public void DeletePossByUser(User user)
+        {
+            MySqlCommand cmd = new MySqlCommand($"DELETE FROM token WHERE userid=\"{user.ID}\"", _con);
+            cmd.ExecuteNonQuery();
+        }
+        /// <summary>
+        /// Delete every token possessed by a User
+        /// </summary>
+        /// <param name="userId"> ID of the User </param>
+        public void DeletePossByUser(int userId)
+        {
+            MySqlCommand cmd = new MySqlCommand($"DELETE FROM token WHERE userid=\"{userId}\"", _con);
             cmd.ExecuteNonQuery();
         }
     }
