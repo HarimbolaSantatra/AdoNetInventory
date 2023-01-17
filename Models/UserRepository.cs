@@ -146,5 +146,16 @@ namespace AppInventaire.Models
             MySqlCommand cmd = new MySqlCommand($"DELETE FROM User WHERE ID={id}", _con);
             cmd.ExecuteNonQuery();
         }
+
+        public bool CheckIfExist(int id)
+        {
+            User user = FetchSingle(id);
+            return (!String.IsNullOrWhiteSpace(user.FirstName));
+        }
+        public bool CheckIfExist(string email)
+        {
+            User user = FetchByEmail(email);
+            return (!String.IsNullOrWhiteSpace(user.FirstName));
+        }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
-
+using AppInventaire.Utils;
 using MailKit.Net.Smtp;
 using MimeKit;
+using AppInventaire.Models;
 
 namespace AppInventaire.Services
 {

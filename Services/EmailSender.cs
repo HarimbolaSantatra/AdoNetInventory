@@ -65,7 +65,7 @@ namespace AppInventaire.Services
             string Subject = "Ajout d'un nouveau utilisateur - AppInventaire";
             string Message = ProjectVar.CREATE_USER_EMAIL_MSG(firstName, lastName, email, roleName, path, token.ExpirationDate);
 
-            EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
+            EmailManager emailManager = new EmailManager(ProjectVar.OVH_ADR, ProjectVar.OVH_PORT);
 
             emailManager.InitActor(senderEmail, receiverEmail, senderPasswd, copyRecipient);
             emailManager.Send(Subject, Message);
@@ -76,7 +76,7 @@ namespace AppInventaire.Services
             string Subject = "Suppression d'un utilisateur - AppInventaire";
             string Message = ProjectVar.DELETE_USER_EMAIL_MSG(firstName, lastName, email, roleName);
 
-            EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
+            EmailManager emailManager = new EmailManager(ProjectVar.OVH_ADR, ProjectVar.OVH_PORT);
             emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
             emailManager.Send(Subject, Message);
         }
@@ -93,7 +93,7 @@ namespace AppInventaire.Services
 <p> Visitez lien réel: <a href=""{path}""> ici </a> </p>
 ";
             
-            EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
+            EmailManager emailManager = new EmailManager(ProjectVar.OVH_ADR, ProjectVar.OVH_PORT);
             emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
             emailManager.Send(Subject, Message);
         }
@@ -107,7 +107,7 @@ namespace AppInventaire.Services
             string Subject = "Réinitialisation du mot de passe - AppInventaire";
             string Message = ProjectVar.RESET_PWD_MSG(path, token.ExpirationDate);
 
-            EmailManager emailManager = new EmailManager("ssl0.ovh.net", 465);
+            EmailManager emailManager = new EmailManager(ProjectVar.OVH_ADR, ProjectVar.OVH_PORT);
             emailManager.InitActor(senderEmail, receiverEmail, senderPasswd);
             emailManager.Send(Subject, Message);
         }

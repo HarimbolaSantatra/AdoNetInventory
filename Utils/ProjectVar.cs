@@ -20,7 +20,8 @@ namespace AppInventaire.Utils
         public static string SERVER_BASE_URL = Path.Combine(
                 HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority);
         public static string SERVER = "http://37.187.143.160:8301";
-
+        public static string OVH_ADR = "ssl0.ovh.net";
+        public static int OVH_PORT = 465;
 
 
         // ----------------- EMAIL ADDRESS -----------------
@@ -98,6 +99,7 @@ Merci !
         {
             { "passwd_changed",  "Mot de passe changé! Veuillez vous reconnecter." },
             { "email_sent",  "Email de confirmation envoyé. Veuillez vérifier votre boîte de réception !" },
+            { "email_no_exist",  "L'adresse mail n'existe pas. Veuillez réessayer !" },
         };
     }
 }

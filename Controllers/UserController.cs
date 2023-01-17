@@ -160,10 +160,17 @@ namespace AppInventaire.Controllers
             // Create a new  token
             if (!(String.IsNullOrWhiteSpace(LoginEmail)))
             {
-                UserRepository _user_rep = new UserRepository();
+                UserRepository user_rep = new UserRepository();
+
+                // Verify if email exist
+                if (!user_rep.CheckIfExist(LoginEmail))
+                {
+                    return RedirectToAction("Message", "Home", new { mk = "email_no_exist" });
+                }
+
                 Token token = new Token()
                 {
-                    UserId = _user_rep.FetchByEmail(LoginEmail).ID,
+                    UserId = user_rep.FetchByEmail(LoginEmail).ID,
                     TokenKey = Guid.NewGuid().ToString(),
                     CreationDate = DateTime.Now,
                 };
